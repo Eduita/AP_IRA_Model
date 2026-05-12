@@ -11,7 +11,6 @@ from __future__ import annotations
 import importlib
 import sys
 from pathlib import Path
-from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -81,7 +80,7 @@ class SimulationRunner:
         self._aeo22_data, self._aeo23_data = self._load_aeo_data()
 
     @classmethod
-    def from_config(cls, config_path: Path) -> "SimulationRunner":
+    def from_config(cls, config_path: Path) -> SimulationRunner:
         project_root = config_path.parent.parent
         config = _load_config(config_path)
         config = _resolve_paths(config, project_root)
@@ -95,8 +94,10 @@ class SimulationRunner:
 
     def run(self) -> dict[str, pd.DataFrame]:
         """Run the full Monte Carlo simulation and return collected DataFrames."""
-        print(f"[{get_current_est_time()}] Starting simulation: "
-              f"{self.n_simulations} sims × {len(self.scenarios)} scenarios × {len(self.time_horizons)} time horizons")
+        print(
+            f"[{get_current_est_time()}] Starting simulation: "
+            f"{self.n_simulations} sims × {len(self.scenarios)} scenarios × {len(self.time_horizons)} time horizons"
+        )
 
         # Output collectors
         npv_rows, npv_np_rows, cac_rows, ci_rows, tc_rows = [], [], [], [], []
@@ -130,11 +131,24 @@ class SimulationRunner:
                     meta = (time, scenario, sim)
 
                     if results.get("npv"):
-                        npv_rows.append((*meta, *[results["npv"].get(t) for t in self.technologies]))
-                        npv_np_rows.append((*meta, *[results["npv_no_policy"].get(t) for t in self.technologies]))
+                        npv_rows.append(
+                            (*meta, *[results["npv"].get(t) for t in self.technologies])
+                        )
+                        npv_np_rows.append(
+                            (*meta, *[results["npv_no_policy"].get(t) for t in self.technologies])
+                        )
 
                     if results.get("cac"):
-                        cac_rows.append((*meta, *[results["cac"].get(t) for t in self.technologies if t != "AP SMR"]))
+                        cac_rows.append(
+                            (
+                                *meta,
+                                *[
+                                    results["cac"].get(t)
+                                    for t in self.technologies
+                                    if t != "AP SMR"
+                                ],
+                            )
+                        )
 
                     if results.get("carbon_intensity"):
                         for tech in self.technologies:
@@ -144,10 +158,20 @@ class SimulationRunner:
                     if results.get("tax_credits"):
                         for tech in [t for t in self.technologies if t != "AP SMR"]:
                             tc = results["tax_credits"].get(tech, {})
-                            tc_rows.append((time, scenario, sim, tech, tc.get("45V", 0), tc.get("45Q", 0),
-                                            tc.get("45Y", 0), tc.get("48E", 0)))
+                            tc_rows.append(
+                                (
+                                    time,
+                                    scenario,
+                                    sim,
+                                    tech,
+                                    tc.get("45V", 0),
+                                    tc.get("45Q", 0),
+                                    tc.get("45Y", 0),
+                                    tc.get("48E", 0),
+                                )
+                            )
 
-                    msg = f"\r  [{time}] {scenario} sim {sim+1}/{self.n_simulations}"
+                    msg = f"\r  [{time}] {scenario} sim {sim + 1}/{self.n_simulations}"
                     sys.stdout.write(msg)
                     sys.stdout.flush()
 
@@ -160,18 +184,36 @@ class SimulationRunner:
         dfs: dict[str, pd.DataFrame] = {}
 
         if npv_rows:
-            dfs["NPV"] = pd.DataFrame(npv_rows, columns=["time", "scenario", "simulation"] + tech_cols)
-            dfs["NPV_no_policy"] = pd.DataFrame(npv_np_rows, columns=["time", "scenario", "simulation"] + tech_cols)
+            dfs["NPV"] = pd.DataFrame(
+                npv_rows, columns=["time", "scenario", "simulation"] + tech_cols
+            )
+            dfs["NPV_no_policy"] = pd.DataFrame(
+                npv_np_rows, columns=["time", "scenario", "simulation"] + tech_cols
+            )
 
         if cac_rows:
-            dfs["CAC"] = pd.DataFrame(cac_rows, columns=["time", "scenario", "simulation"] + non_smr_cols)
+            dfs["CAC"] = pd.DataFrame(
+                cac_rows, columns=["time", "scenario", "simulation"] + non_smr_cols
+            )
 
         if ci_rows:
-            dfs["CI"] = pd.DataFrame(ci_rows, columns=["time", "scenario", "simulation", "technology"] + ci_years)
+            dfs["CI"] = pd.DataFrame(
+                ci_rows, columns=["time", "scenario", "simulation", "technology"] + ci_years
+            )
 
         if tc_rows:
             dfs["TaxCredits"] = pd.DataFrame(
-                tc_rows, columns=["time", "scenario", "simulation", "technology", "45V", "45Q", "45Y", "48E"]
+                tc_rows,
+                columns=[
+                    "time",
+                    "scenario",
+                    "simulation",
+                    "technology",
+                    "45V",
+                    "45Q",
+                    "45Y",
+                    "48E",
+                ],
             )
 
         timestamp = get_current_est_time().replace(":", "-").replace(" ", "_")

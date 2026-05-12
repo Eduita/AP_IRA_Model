@@ -39,9 +39,7 @@ def merged_results(
         context.log.debug(f"Merged partition: {partition_key}")
 
     result = {
-        sheet: pd.concat(frames, ignore_index=True)
-        for sheet, frames in buckets.items()
-        if frames
+        sheet: pd.concat(frames, ignore_index=True) for sheet, frames in buckets.items() if frames
     }
 
     for sheet, df in result.items():

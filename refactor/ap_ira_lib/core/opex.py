@@ -35,7 +35,9 @@ class MIOPEX:
         self.maintenance = None
 
     def calculate_labor_costs(self) -> float:
-        operators_per_day = self.mi_opex_inputs["hours_perday_perprocessingstep"] * self.processing_steps / 8
+        operators_per_day = (
+            self.mi_opex_inputs["hours_perday_perprocessingstep"] * self.processing_steps / 8
+        )
         operator_shifts_per_week = operators_per_day * 7
         operators = operator_shifts_per_week / 5
         wage_per_week_per_operator = 40 * self.hourly_pay_per_operator
@@ -44,16 +46,19 @@ class MIOPEX:
         )
 
         supervision = annual_cost_of_labor * self.heuristics_factors["supervision"]
-        maintenance = self.final_capex[self.technology]["FCI"] * self.heuristics_factors["maintenance"]
+        maintenance = (
+            self.final_capex[self.technology]["FCI"] * self.heuristics_factors["maintenance"]
+        )
         self.maintenance = maintenance
         operating_supplies = maintenance * self.heuristics_factors["operating_supplies"]
         laboratory_charges = annual_cost_of_labor * self.heuristics_factors["laboratory_charges"]
         patents_and_royalties = (
-            self.final_capex[self.technology]["CAPEX"] * self.heuristics_factors["patents_and_royalties"]
+            self.final_capex[self.technology]["CAPEX"]
+            * self.heuristics_factors["patents_and_royalties"]
         )
         overhead_costs = (
-            (annual_cost_of_labor + supervision + maintenance) * self.heuristics_factors["overhead"]
-        )
+            annual_cost_of_labor + supervision + maintenance
+        ) * self.heuristics_factors["overhead"]
         self.operating_labor = annual_cost_of_labor
         self.total_labor_costs = (
             annual_cost_of_labor
@@ -67,13 +72,22 @@ class MIOPEX:
         return self.total_labor_costs
 
     def fixed_charges(self) -> float:
-        financing = self.mi_opex_inputs["fixed_charges"]["Financing Costs"] * self.final_capex[self.technology]["CAPEX"]
-        rent = self.mi_opex_inputs["fixed_charges"]["Rent"] * self.capex_inputs["Land Cost"]
-        insurance = self.mi_opex_inputs["fixed_charges"]["Insurance"] * self.final_capex[self.technology]["FCI"]
-        local_property_taxes = (
-            self.mi_opex_inputs["fixed_charges"]["Local Property Taxes"] * self.final_capex[self.technology]["FCI"]
+        financing = (
+            self.mi_opex_inputs["fixed_charges"]["Financing Costs"]
+            * self.final_capex[self.technology]["CAPEX"]
         )
-        administrative_costs = self.mi_opex_inputs["fixed_charges"]["Administrative Costs"] * self.operating_labor
+        rent = self.mi_opex_inputs["fixed_charges"]["Rent"] * self.capex_inputs["Land Cost"]
+        insurance = (
+            self.mi_opex_inputs["fixed_charges"]["Insurance"]
+            * self.final_capex[self.technology]["FCI"]
+        )
+        local_property_taxes = (
+            self.mi_opex_inputs["fixed_charges"]["Local Property Taxes"]
+            * self.final_capex[self.technology]["FCI"]
+        )
+        administrative_costs = (
+            self.mi_opex_inputs["fixed_charges"]["Administrative Costs"] * self.operating_labor
+        )
         return financing + rent + insurance + local_property_taxes + administrative_costs
 
     def get_start_up_costs(self) -> float:
@@ -88,7 +102,8 @@ class MIOPEX:
         elif self.technology == "AP AEC":
             return (
                 self.bfw_requirements[self.technology] * self.mi_opex_inputs["BFW cost"]
-                + self.bfw_requirements["AP AEC osmosis"] * self.mi_opex_inputs["AEC BFW cost reverse osmosis"]
+                + self.bfw_requirements["AP AEC osmosis"]
+                * self.mi_opex_inputs["AEC BFW cost reverse osmosis"]
             )
         else:
             return (

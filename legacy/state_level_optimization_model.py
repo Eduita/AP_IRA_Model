@@ -1,15 +1,25 @@
+import os
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from pulp import LpProblem, LpVariable, lpSum, LpMinimize, LpStatus
-import os
-import matplotlib.pyplot as plt
+from pulp import LpMinimize, LpProblem, LpStatus, LpVariable, lpSum
 
 
-def optimize_energy_system(COST_wind, COST_battery, EFF, D, num_time_periods, CF_t, monthly_aggregation=False, yearly_aggregation=False):
+def optimize_energy_system(
+    COST_wind,
+    COST_battery,
+    EFF,
+    D,
+    num_time_periods,
+    CF_t,
+    monthly_aggregation=False,
+    yearly_aggregation=False,
+):
 
     print(CF_t)
 
-    problem = LpProblem(str(np.random.uniform(0,1)), LpMinimize)
+    problem = LpProblem(str(np.random.uniform(0, 1)), LpMinimize)
 
     # Create decision variables
     w = LpVariable("w", lowBound=0.01)
@@ -54,20 +64,34 @@ def optimize_energy_system(COST_wind, COST_battery, EFF, D, num_time_periods, CF
     optimal_w_t = [w_t_var.value() for w_t_var in w_t]
 
     # Calculate wind supply curtailment
-    wind_supply_curtailment = [CF_t[t] * w.value() - optimal_w_t[t] for t in range(num_time_periods)]
+    wind_supply_curtailment = [
+        CF_t[t] * w.value() - optimal_w_t[t] for t in range(num_time_periods)
+    ]
     d_t = [d_t[t].value() for t in range(num_time_periods)]
 
     if monthly_aggregation:
-        wind_supply_curtailment = [sum(wind_supply_curtailment[month_start:month_start + hours]) for month_start, hours
-                                   in zip(range(0, num_time_periods, 730),
-                                          [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744])]
-        d_t = [sum(d_t[month_start:month_start + hours]) for month_start, hours
-                                   in zip(range(0, num_time_periods, 730),
-                                          [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744])]
+        wind_supply_curtailment = [
+            sum(wind_supply_curtailment[month_start : month_start + hours])
+            for month_start, hours in zip(
+                range(0, num_time_periods, 730),
+                [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744],
+            )
+        ]
+        d_t = [
+            sum(d_t[month_start : month_start + hours])
+            for month_start, hours in zip(
+                range(0, num_time_periods, 730),
+                [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744],
+            )
+        ]
 
-        CF_t = [sum(CF_t[month_start:month_start + hours]) for month_start, hours
-                                   in zip(range(0, num_time_periods, 730),
-                                          [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744])]
+        CF_t = [
+            sum(CF_t[month_start : month_start + hours])
+            for month_start, hours in zip(
+                range(0, num_time_periods, 730),
+                [744, 672, 744, 720, 744, 720, 744, 744, 720, 744, 720, 744],
+            )
+        ]
 
     elif yearly_aggregation:
         total_yearly_curtailment = sum(wind_supply_curtailment)
@@ -76,13 +100,10 @@ def optimize_energy_system(COST_wind, COST_battery, EFF, D, num_time_periods, CF
 
         total_yearly_discharge = sum(d_t)
         average_monthly_discharge = total_yearly_discharge / 12
-        d_t = [ average_monthly_discharge for _ in range(12)]
+        d_t = [average_monthly_discharge for _ in range(12)]
 
         total_yearly_capacity = sum(CF_t)
         average_monthly_discharge = total_yearly_capacity / 12
         CF_t = [average_monthly_discharge for _ in range(12)]
 
-
-
-    return w.value(), b.value(), wind_supply_curtailment, d_t, [w.value()*i for i in CF_t]
-
+    return w.value(), b.value(), wind_supply_curtailment, d_t, [w.value() * i for i in CF_t]

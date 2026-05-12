@@ -1,6 +1,5 @@
 """Carbon intensity calculator for ammonia production technologies."""
 
-import numpy as np
 import pandas as pd
 
 
@@ -46,14 +45,19 @@ class CarbonIntensity:
         natural_gas_demand_kwh_yearly = natural_gas_demand_mmbtu_yearly * 293.071
 
         carbon_capture_rate_complement = (
-            self.carbon_intensity["stack"][self.technology] / self.carbon_intensity["stack"]["AP SMR"]
+            self.carbon_intensity["stack"][self.technology]
+            / self.carbon_intensity["stack"]["AP SMR"]
             if self.technology == "AP CCS"
             else 1
         )
         self.natural_gas_carbon_emissions = (
-            natural_gas_demand_kwh_yearly * self.carbon_intensity["natural gas"] * carbon_capture_rate_complement
+            natural_gas_demand_kwh_yearly
+            * self.carbon_intensity["natural gas"]
+            * carbon_capture_rate_complement
         )
-        self.natural_gas_intensity_kg_h2 = self.natural_gas_carbon_emissions / hydrogen_production_kg_yearly
+        self.natural_gas_intensity_kg_h2 = (
+            self.natural_gas_carbon_emissions / hydrogen_production_kg_yearly
+        )
 
         biomass_carbon_emissions = (
             self.biomass_requirement * self.carbon_intensity["biomass"] * 1000
@@ -71,8 +75,12 @@ class CarbonIntensity:
         elif self.scenario in ["C", "D"]:
             return 0.0
         else:
-            raise ValueError(f"Invalid scenario: {self.scenario}. Must be one of ['A', 'B', 'C', 'D']")
-        electricity_carbon_intensity = (data[t] * list(self.carbon_intensity["electricity"].values())).sum()
+            raise ValueError(
+                f"Invalid scenario: {self.scenario}. Must be one of ['A', 'B', 'C', 'D']"
+            )
+        electricity_carbon_intensity = (
+            data[t] * list(self.carbon_intensity["electricity"].values())
+        ).sum()
         return self._convert_electricity_intensity(electricity_carbon_intensity)
 
     def natural_gas_emissions(self) -> float:

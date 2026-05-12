@@ -3,30 +3,35 @@
 
 # In[12]:
 
-import numpy as np
-import seaborn as sns
-import pandas as pd
-import matplotlib.pyplot as plt
 import ast
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+
 # from PPA_models import LCOE_dataset
 
 # PPA_data = LCOE_dataset
 year = 2023
-matching = 'monthly'
+matching = "monthly"
 CBAM = False
 
-print('running', year, matching, CBAM)
-if matching == 'monthly':
+print("running", year, matching, CBAM)
+if matching == "monthly":
     NPV_low = -800
-elif matching == 'hourly':
+elif matching == "hourly":
     NPV_low = -2000
 else:
     NPV_low = -400
 # Specify the path to your Excel file
 # excel_file_path = f"{year}_v8{'_CBAM' if CBAM else ''}{'_'+matching}.xlsx"
-all_data_file_path = f"TC_FINAL_alldata_v12{'_CBAM' if CBAM else ''}{'_'+matching}.xlsx"
-figure_ending_name = f"TC_FINAL_alldata_v12{'_CBAM' if CBAM else ''}{'_'+matching}" #"default" is the base case
+all_data_file_path = f"TC_FINAL_alldata_v12{'_CBAM' if CBAM else ''}{'_' + matching}.xlsx"
+figure_ending_name = (
+    f"TC_FINAL_alldata_v12{'_CBAM' if CBAM else ''}{'_' + matching}"  # "default" is the base case
+)
 # time_varying_filepath = r"2023 US Data AP renewE0 TIME VARYING CI Python.xlsx"
+
 
 def load_excel_sheets(file_path):
     # Load the Excel file
@@ -39,18 +44,20 @@ def load_excel_sheets(file_path):
     for sheet_name in xls.sheet_names:
         # Read the sheet into a DataFrame
         df = pd.read_excel(file_path, sheet_name=sheet_name)
-        
+
         # Store the DataFrame in the dictionary
         dataframes[sheet_name] = df
 
     return dataframes
 
+
 # allData = load_excel_sheets(excel_file_path)
+
 
 def clean_and_prepare_data(filepath, sheet_names, technologies):
     """
     This function reads an Excel file, renames columns, sets multi-index, and returns a dictionary of prepared dataframes.
-    
+
     Parameters:
     filepath (str): The file path of the Excel file.
     sheet_names (list): A list of sheet names to be read.
@@ -75,10 +82,12 @@ def clean_and_prepare_data(filepath, sheet_names, technologies):
     # Rename columns and set index for each sheet
     for name in sheet_names:
         sheets[name].columns = [convert_column_name(col) for col in sheets[name].columns]
-        sheets[name].set_index('Index', inplace=True)
+        sheets[name].set_index("Index", inplace=True)
 
     # Create a multi-index by repeating the list of technologies the appropriate number of times
-    tech_index = pd.MultiIndex.from_product([technologies, range(0, 50)], names=['Technology', 'Index'])
+    tech_index = pd.MultiIndex.from_product(
+        [technologies, range(0, 50)], names=["Technology", "Index"]
+    )
 
     # Assign the multi-index to the DataFrames
     for name in sheet_names:
@@ -86,96 +95,122 @@ def clean_and_prepare_data(filepath, sheet_names, technologies):
 
     return sheets
 
-columns = ['AP_CCS_NPV', 'AP_BH2S_NPV', 'AP_AEC_NPV']
-def compare_policy_scenarios_subplot(with_policy_df, no_policy_df, column_names, reference, ax, title, show_legend, bottom, left):
+
+columns = ["AP_CCS_NPV", "AP_BH2S_NPV", "AP_AEC_NPV"]
+
+
+def compare_policy_scenarios_subplot(
+    with_policy_df, no_policy_df, column_names, reference, ax, title, show_legend, bottom, left
+):
     """
     Function to compare the policy scenarios and plot them.
     """
     # Create a copy of the dataframes to avoid the SettingWithCopyWarning
     no_policy_df = no_policy_df.copy()
     with_policy_df = with_policy_df.copy()
-    
+
     # Add a 'Scenario' column to each DataFrame
-    no_policy_df['Scenario'] = 'No Policy'
-    with_policy_df['Scenario'] = 'IRA'
-    
+    no_policy_df["Scenario"] = "No Policy"
+    with_policy_df["Scenario"] = "IRA"
+
     # Add legend only if show_legend is True
     if show_legend:
-        legend = ax.legend(facecolor='white', edgecolor='black', bbox_to_anchor=(1, 0.8))
+        legend = ax.legend(facecolor="white", edgecolor="black", bbox_to_anchor=(1, 0.8))
         legend.get_frame().set_linewidth(0)
-    
+
     # Calculate the quartiles and Interquartile Range (IQR)
     q1 = reference.quantile(0.25)
     q2 = reference.quantile(0.5)
     q3 = reference.quantile(0.75)
-    iqr = q3-q1
-    q0 = q1-1.5*iqr
-    q5 = q3+1.5*iqr
-    
+    iqr = q3 - q1
+    q0 = q1 - 1.5 * iqr
+    q5 = q3 + 1.5 * iqr
+
     # Add a 'Scenario' column to each DataFrame
-    no_policy_df['Scenario'] = 'No Policy'
-    with_policy_df['Scenario'] = 'IRA'
-    
+    no_policy_df["Scenario"] = "No Policy"
+    with_policy_df["Scenario"] = "IRA"
+
     # Combine the two DataFrames
     combined_df = pd.concat([no_policy_df, with_policy_df])
-    
+
     # Melt the dataframe to long format
-    melted_df = pd.melt(combined_df, id_vars='Scenario', value_vars=column_names,
-                        var_name='Column', value_name='Value')
-    
+    melted_df = pd.melt(
+        combined_df,
+        id_vars="Scenario",
+        value_vars=column_names,
+        var_name="Column",
+        value_name="Value",
+    )
+
     # Create the boxplot
-    boxplot = sns.boxplot(data=melted_df, x='Column', y='Value', hue='Scenario', palette=('gray','pink'), showfliers=False, width=0.5, ax=ax)
-        
+    boxplot = sns.boxplot(
+        data=melted_df,
+        x="Column",
+        y="Value",
+        hue="Scenario",
+        palette=("gray", "pink"),
+        showfliers=False,
+        width=0.5,
+        ax=ax,
+    )
+
     ax.get_legend().remove()
-        
+
     # Set labels and title
     if not left:
-        ax.set_ylabel(r'')
+        ax.set_ylabel(r"")
     else:
-        ax.set_ylabel(r'NPV [$\frac{2023\$}{Tonne \ NH_3}$]', fontweight='bold')
-        
-    ax.set_xlabel('')
-    
+        ax.set_ylabel(r"NPV [$\frac{2023\$}{Tonne \ NH_3}$]", fontweight="bold")
+
+    ax.set_xlabel("")
+
     # Add horizontal lines for quartiles
-    ax.axhline(y=q1, color='gray', linestyle='--', linewidth=2, alpha=0.25)
-    ax.axhline(y=q2, color='gray', linestyle='--', linewidth=2, alpha=0.25)
-    ax.axhline(y=q3, color='gray', linestyle='--', linewidth=2, alpha=0.25)
-    ax.axhline(y=q0, color='gray', linestyle='--', linewidth=2, alpha=0.25)
-    ax.axhline(y=q5, color='gray', linestyle='--', linewidth=2, alpha=0.25)
-    
+    ax.axhline(y=q1, color="gray", linestyle="--", linewidth=2, alpha=0.25)
+    ax.axhline(y=q2, color="gray", linestyle="--", linewidth=2, alpha=0.25)
+    ax.axhline(y=q3, color="gray", linestyle="--", linewidth=2, alpha=0.25)
+    ax.axhline(y=q0, color="gray", linestyle="--", linewidth=2, alpha=0.25)
+    ax.axhline(y=q5, color="gray", linestyle="--", linewidth=2, alpha=0.25)
+
     # Add filled areas between quartiles
     x = np.linspace(ax.get_xlim()[0], ax.get_xlim()[1], 100)
     y1 = np.full_like(x, q2)
     y2 = np.full_like(x, q3)
-    ax.fill_between(x, y1, y2, color='gray', alpha=0.1, edgecolor='black', hatch='////')
+    ax.fill_between(x, y1, y2, color="gray", alpha=0.1, edgecolor="black", hatch="////")
     y1 = np.full_like(x, q1)
-    ax.fill_between(x, y1, y2, color='gray', alpha=0.1, edgecolor='black', hatch='////')
-    
+    ax.fill_between(x, y1, y2, color="gray", alpha=0.1, edgecolor="black", hatch="////")
+
     # Rotate x-axis labels if needed
     if not bottom:
-        ax.set_xticklabels(['','',''])
+        ax.set_xticklabels(["", "", ""])
     else:
-        ax.set_xticklabels([ 'AP CCS', 'AP BH2S', 'AP AEC'], fontweight='bold', rotation=45)
-        
-    
+        ax.set_xticklabels(["AP CCS", "AP BH2S", "AP AEC"], fontweight="bold", rotation=45)
+
     # Add annotation
-    ax.annotate('AP SMR', xy=(0.5, 3), xytext=(-.5*0.95, 1.05*q5), color='gray')
+    ax.annotate("AP SMR", xy=(0.5, 3), xytext=(-0.5 * 0.95, 1.05 * q5), color="gray")
     # ax.grid(axis='y', color='black', alpha=0.5, linestyle='dotted')
-    ax.set_title(title, fontweight ='bold')
+    ax.set_title(title, fontweight="bold")
     # ax.minorticks_on()
     # ax.tick_params(axis='x', which='both', bottom=False, top=False)
 
     if show_legend:
         handles, labels = ax.get_legend_handles_labels()
-        ax.legend(handles=handles[0:], labels=labels[0:], loc='lower left', facecolor='white', edgecolor='black')
+        ax.legend(
+            handles=handles[0:],
+            labels=labels[0:],
+            loc="lower left",
+            facecolor="white",
+            edgecolor="black",
+        )
         # ax.legend_.set_bbox_to_anchor((3.88,0.53))
-    
-    ax.set_ylim(-800,275)
-    ax.set_xlim(-0.5,2.5)
-    # ax.yaxis.set_label_coords(-0.1, 0.5)  
 
-technologies = ['AP', 'AP_CCS', 'AP_BH2S', 'AP_AEC']
+    ax.set_ylim(-800, 275)
+    ax.set_xlim(-0.5, 2.5)
+    # ax.yaxis.set_label_coords(-0.1, 0.5)
+
+
+technologies = ["AP", "AP_CCS", "AP_BH2S", "AP_AEC"]
 from matplotlib.patches import Patch
+
 
 def plot_stacked_bar_subplot(data, technologies, ax, show_legend, bottom, left, isGrid=False):
     # Define helper function to calculate error ranges
@@ -190,16 +225,25 @@ def plot_stacked_bar_subplot(data, technologies, ax, show_legend, bottom, left, 
     shift = 0.2
 
     # Define color and label for each CI subcategory
-    ci_subcategories = ['SMR', 'Electricity LCA', 'NG LCA', 'Biomass LCA']
-    colors = ['gray', '#ff7f00', '#4daf4a', '#a65628']  # Set color palette to closely match the reference image
+    ci_subcategories = ["SMR", "Electricity LCA", "NG LCA", "Biomass LCA"]
+    colors = [
+        "gray",
+        "#ff7f00",
+        "#4daf4a",
+        "#a65628",
+    ]  # Set color palette to closely match the reference image
 
     # Iterate over the different technologies
     for i, tech in enumerate(technologies):
         # Define data
-        y1 = data[f'{tech}_STACK_CI'] if f'{tech}_STACK_CI' in data.columns else np.zeros(len(data))
-        y2 = data[f'{tech}_NG_CI'] if f'{tech}_NG_CI' in data.columns else np.zeros(len(data))
-        y3 = data[f'{tech}_BIO_CI'] if f'{tech}_BIO_CI' in data.columns else np.zeros(len(data))
-        y4 = data[f'{tech}_E_CI_2026'] if f'{tech}_E_CI_2026' in data.columns else np.zeros(len(data))
+        y1 = data[f"{tech}_STACK_CI"] if f"{tech}_STACK_CI" in data.columns else np.zeros(len(data))
+        y2 = data[f"{tech}_NG_CI"] if f"{tech}_NG_CI" in data.columns else np.zeros(len(data))
+        y3 = data[f"{tech}_BIO_CI"] if f"{tech}_BIO_CI" in data.columns else np.zeros(len(data))
+        y4 = (
+            data[f"{tech}_E_CI_2026"]
+            if f"{tech}_E_CI_2026" in data.columns
+            else np.zeros(len(data))
+        )
 
         # Calculate means
         y1_mean = y1.mean()
@@ -214,45 +258,82 @@ def plot_stacked_bar_subplot(data, technologies, ax, show_legend, bottom, left, 
         y4_err = ranges(y4)
 
         # Create stacked bar plots with a shift depending on the technology
-        ax.bar(i, y1_mean, color=colors[0], width=width, edgecolor='black', yerr=y1_err, capsize=4)
-        ax.bar(i+shift, y4_mean, bottom=y1_mean, color=colors[1], width=width, edgecolor='black', yerr=y4_err, capsize=4)
-        ax.bar(i+shift*2, y2_mean, bottom=y1_mean+y4_mean, color=colors[2], width=width, edgecolor='black', yerr=y2_err, capsize=4)
-        ax.bar(i+shift*3, y3_mean, bottom=y1_mean+y2_mean+y4_mean, color=colors[3], width=width, edgecolor='black', yerr=y3_err, capsize=4)
+        ax.bar(i, y1_mean, color=colors[0], width=width, edgecolor="black", yerr=y1_err, capsize=4)
+        ax.bar(
+            i + shift,
+            y4_mean,
+            bottom=y1_mean,
+            color=colors[1],
+            width=width,
+            edgecolor="black",
+            yerr=y4_err,
+            capsize=4,
+        )
+        ax.bar(
+            i + shift * 2,
+            y2_mean,
+            bottom=y1_mean + y4_mean,
+            color=colors[2],
+            width=width,
+            edgecolor="black",
+            yerr=y2_err,
+            capsize=4,
+        )
+        ax.bar(
+            i + shift * 3,
+            y3_mean,
+            bottom=y1_mean + y2_mean + y4_mean,
+            color=colors[3],
+            width=width,
+            edgecolor="black",
+            yerr=y3_err,
+            capsize=4,
+        )
 
     # Set x ticks and labels
-    ax.set_xticks([i+shift*1.5 for i in range(len(technologies))])  # Position at the center of the groups
-    
+    ax.set_xticks(
+        [i + shift * 1.5 for i in range(len(technologies))]
+    )  # Position at the center of the groups
+
     if not bottom:
-        ax.set_xticklabels(['','','',''])
+        ax.set_xticklabels(["", "", "", ""])
     else:
-        ax.set_xticklabels(['AP SMR', 'AP CCS', 'AP BH2S', 'AP AEC'], rotation=45, fontweight='bold')
-       
+        ax.set_xticklabels(
+            ["AP SMR", "AP CCS", "AP BH2S", "AP AEC"], rotation=45, fontweight="bold"
+        )
+
     ax2 = ax.twinx()
     # Set labels and limits
     if left:
-        ax2.set_ylabel(r'Carbon Intensity [$\frac{kgCO_2 \ eq}{Kg \ H_2}$]', rotation=270, fontweight='bold')
+        ax2.set_ylabel(
+            r"Carbon Intensity [$\frac{kgCO_2 \ eq}{Kg \ H_2}$]", rotation=270, fontweight="bold"
+        )
         ax2.yaxis.set_label_coords(1.25, 0.5)
-        
+
     if isGrid:
-        ax2.set_ylim(-1,25)
+        ax2.set_ylim(-1, 25)
     else:
-        ax2.set_ylim(-1,11)
+        ax2.set_ylim(-1, 11)
     # ax.axhline(y=0, color='black', linestyle='-', linewidth=1)
     # ax.axhline(y=4, color='black', linestyle='-', linewidth=0.5)
-    ax.axhline(y=0, color='black', linestyle='-', linewidth=1, alpha=0.25)
-    ax.tick_params(axis='y', which='both', left=False, right=False, labelleft=False)
-    
-    
+    ax.axhline(y=0, color="black", linestyle="-", linewidth=1, alpha=0.25)
+    ax.tick_params(axis="y", which="both", left=False, right=False, labelleft=False)
+
     # Create custom legend
-    legend_elements = [Patch(facecolor=colors[i], edgecolor='black', label=ci_subcategories[i]) for i in range(len(ci_subcategories))]
+    legend_elements = [
+        Patch(facecolor=colors[i], edgecolor="black", label=ci_subcategories[i])
+        for i in range(len(ci_subcategories))
+    ]
     if show_legend:
-        ax.legend(handles=legend_elements, loc='upper right', facecolor='white', edgecolor='black')
+        ax.legend(handles=legend_elements, loc="upper right", facecolor="white", edgecolor="black")
         # ax.legend_.set_bbox_to_anchor((1,1))
 
     # Add a text annotation
     # ax.text(4.5,4.3, 'IRA 45V Threshold', ha='center', va='center', fontweight='bold', fontsize=9)
-    
-import matplotlib.ticker as ticker   
+
+
+import matplotlib.ticker as ticker
+
 # def plot_sheet_subplot(sheet, colors, ax, alpha=0.2, show_legend=False, left=False, top=False):
 #     """
 #     This function plots the mean values of each technology over time with error bands into a subplot.
@@ -363,53 +444,74 @@ import matplotlib.ticker as ticker
 # # In[15]:
 #
 
+
 def scatter_plot_with_multiple_lines(scenario_names, dataframes, scenario_labels, fontsize):
     # Create a new figure with a 2x2 grid of subplots
     fig, axs = plt.subplots(2, 2, figsize=(14, 11), sharey=True)
-    sns.set(style='ticks')
+    sns.set(style="ticks")
     # Variables to plot
-    variables = [('AP_CCS_NPV', 'AP_CCS_CAC'), ('AP_BH2S_NPV', 'AP_BH2S_CAC'), ('AP_AEC_NPV', 'AP_AEC_CAC')]
-    legend_labels = ['AP CCS', 'AP BH2S', 'AP AEC']
-    
+    variables = [
+        ("AP_CCS_NPV", "AP_CCS_CAC"),
+        ("AP_BH2S_NPV", "AP_BH2S_CAC"),
+        ("AP_AEC_NPV", "AP_AEC_CAC"),
+    ]
+    legend_labels = ["AP CCS", "AP BH2S", "AP AEC"]
+
     # For each scenario
     for scenario_name, scenario_label, ax in zip(scenario_names, scenario_labels, axs.flatten()):
         # Get the DataFrame for the scenario
         df = dataframes[scenario_name]
-        
+
         # For each pair of variables
         for i, ((y_var, x_var), legend_label) in enumerate(zip(variables, legend_labels)):
             # Get the X and Y data from the DataFrame
             x_data = df[x_var]
             y_data = df[y_var]
-            
+
             # Create a scatter plot for each X and Y pair
-            color = ['blue', 'orange', 'green'][i]
-            marker = ['o','^','X'][i]
-            ax.scatter(x_data, y_data, label=legend_label, color=color, s=30, alpha=0.2, edgecolor=color, linewidths=0, marker=marker)
-        
+            color = ["blue", "orange", "green"][i]
+            marker = ["o", "^", "X"][i]
+            ax.scatter(
+                x_data,
+                y_data,
+                label=legend_label,
+                color=color,
+                s=30,
+                alpha=0.2,
+                edgecolor=color,
+                linewidths=0,
+                marker=marker,
+            )
+
         # Set labels and title
-        ax.set_xlabel(r'Carbon Abatement Cost [$\mathbf{\frac{2023\$}{Tonne \ CO_2}}$]',fontsize=fontsize, fontweight='bold')
-        ax.set_ylabel(r'NPV [$\mathbf{\frac{2023\$}{Tonne \ NH_3}}$]',fontsize=fontsize, fontweight='bold')
+        ax.set_xlabel(
+            r"Carbon Abatement Cost [$\mathbf{\frac{2023\$}{Tonne \ CO_2}}$]",
+            fontsize=fontsize,
+            fontweight="bold",
+        )
+        ax.set_ylabel(
+            r"NPV [$\mathbf{\frac{2023\$}{Tonne \ NH_3}}$]", fontsize=fontsize, fontweight="bold"
+        )
         # ax.axhline(y=0, color='black', linestyle='--', linewidth=0.5)
-        ax.set_xlim(0,250)
-        ax.set_ylim(NPV_low*0.8, 500)
-        ax.set_title(scenario_label, fontweight='bold',fontsize=fontsize)
-        
+        ax.set_xlim(0, 250)
+        ax.set_ylim(NPV_low * 0.8, 500)
+        ax.set_title(scenario_label, fontweight="bold", fontsize=fontsize)
+
         # Create the legend
         if ax is axs[0, 1]:  # only create the legend for the last subplot
-            legend = ax.legend(frameon=True, edgecolor='black',fontsize=fontsize, framealpha=0)
+            legend = ax.legend(frameon=True, edgecolor="black", fontsize=fontsize, framealpha=0)
             legend.get_frame().set_linewidth(0)
             # Adjust the legend position
             # legend.set_bbox_to_anchor((1.05, 0.5))
             for i in range(len(legend.legendHandles)):
                 legend.legendHandles[i]._sizes = [75]
                 legend.legendHandles[i].set_alpha(1)
-        if ax is axs[0,1] or ax is axs[1,1]:
+        if ax is axs[0, 1] or ax is axs[1, 1]:
             ax.set_ylabel("")
-        
-        if ax is axs[0,0] or ax is axs[0,1]:
+
+        if ax is axs[0, 0] or ax is axs[0, 1]:
             ax.set_xlabel("")
-        
+
         # ax.axvline(x=70, linestyle='-', color='gray')
         # ax.axvline(x=4, linestyle='-', color='gray')
         # ax.axvline(x=28, linestyle='-', color='gray')
@@ -419,23 +521,48 @@ def scatter_plot_with_multiple_lines(scenario_names, dataframes, scenario_labels
         # ax.text(27,500, 'Korea 2020', ha='center', va='center', rotation=90, fontweight='bold')
         # ax.text(31, 500, 'Canada 2021', ha='center', va='center', rotation=90, fontweight='bold')
         # ax.text(3, 500, 'China 2021', ha='center', va='center', rotation=90, fontweight='bold')
-        ax.fill_betweenx(ax.get_ylim(), 18, 20, color='gray', alpha=0.2)
-        ax.text(15, -50, 'California 2020-2022', ha='center', va='center', rotation=90, fontweight='bold')
-        
-        ax.fill_betweenx(ax.get_ylim(), 190, 230, color='gray', alpha=0.2)
-        ax.text(200, -50, '2020-2030 SC of Carbon (2.0% Discount)', ha='center', va='center', rotation=90, fontweight='bold')
-        
-        ax.fill_betweenx(ax.get_ylim(), 110, 140, color='gray', alpha=0.2)
-        ax.text(125, -50, '2020-2030 SC of Carbon (2.5% Discount)', ha='center', va='center', rotation=90, fontweight='bold')
-        
-        ax.fill_betweenx(ax.get_ylim(), 30, 89, color='gray', alpha=0.2)
-        ax.text(60, -50, 'EU 2020-2022', ha='center', va='center', rotation=90, fontweight='bold')
-        
+        ax.fill_betweenx(ax.get_ylim(), 18, 20, color="gray", alpha=0.2)
+        ax.text(
+            15,
+            -50,
+            "California 2020-2022",
+            ha="center",
+            va="center",
+            rotation=90,
+            fontweight="bold",
+        )
+
+        ax.fill_betweenx(ax.get_ylim(), 190, 230, color="gray", alpha=0.2)
+        ax.text(
+            200,
+            -50,
+            "2020-2030 SC of Carbon (2.0% Discount)",
+            ha="center",
+            va="center",
+            rotation=90,
+            fontweight="bold",
+        )
+
+        ax.fill_betweenx(ax.get_ylim(), 110, 140, color="gray", alpha=0.2)
+        ax.text(
+            125,
+            -50,
+            "2020-2030 SC of Carbon (2.5% Discount)",
+            ha="center",
+            va="center",
+            rotation=90,
+            fontweight="bold",
+        )
+
+        ax.fill_betweenx(ax.get_ylim(), 30, 89, color="gray", alpha=0.2)
+        ax.text(60, -50, "EU 2020-2022", ha="center", va="center", rotation=90, fontweight="bold")
+
         ax.grid(False)
     plt.tight_layout()
-    plt.savefig("CAC/CACNPV main {}_{}.png".format(year,figure_ending_name), dpi=400)
+    plt.savefig("CAC/CACNPV main {}_{}.png".format(year, figure_ending_name), dpi=400)
 
     plt.close()
+
 
 # # Call the function with the scenario names and labels
 # scenario_names = ['1A', '1B', '1C', '1D']
@@ -589,13 +716,14 @@ def scatter_plot_with_multiple_lines(scenario_names, dataframes, scenario_labels
 # # Call the function to create the plot
 # create_box_plot()
 
+
 # Define the function to plot the average electricity price
 def plot_average_electricity_price(file_path, x_low, x_high):
     # Read the data from the Excel file
-    data = pd.read_excel('TC_FINAL_alldata_v12_monthly.xlsx', sheet_name='El')
-    sns.set_style('ticks')
+    data = pd.read_excel("TC_FINAL_alldata_v12_monthly.xlsx", sheet_name="El")
+    sns.set_style("ticks")
     # Filter the data for time 2023
-    new_data_2023 = data[data['time'] == 2023]
+    new_data_2023 = data[data["time"] == 2023]
 
     # print(new_data_2023)
     # Function to convert the string of numbers (with brackets) to a list of floats
@@ -604,17 +732,19 @@ def plot_average_electricity_price(file_path, x_low, x_high):
         return [float(x) for x in value[1:-1].split() if x]
 
     # Apply the conversion to the "Grid Electricity" column
-    new_data_2023['Grid Electricity'] = new_data_2023['Grid Electricity'].apply(string_to_float_list)
+    new_data_2023["Grid Electricity"] = new_data_2023["Grid Electricity"].apply(
+        string_to_float_list
+    )
 
     # print(new_data_2023)
     # Function to calculate the average values for a given scenario and column
     def calculate_average_values(data, scenario, column_name):
-        scenario_data = data[data['scenario'] == scenario]
+        scenario_data = data[data["scenario"] == scenario]
         avg_values = [sum(x) / len(x) for x in zip(*scenario_data[column_name])]
         print(avg_values)
         return avg_values
 
-    def fill_between_horizontal(x_values, y1, y2, color='gray', label=None, alpha=0.5):
+    def fill_between_horizontal(x_values, y1, y2, color="gray", label=None, alpha=0.5):
         """
         Fills the area between two horizontal values y1 and y2 over the given x_values range.
 
@@ -626,23 +756,23 @@ def plot_average_electricity_price(file_path, x_low, x_high):
         - label: Label for the filled area. Default is None.
         - alpha: Opacity of the filled area. Default is 0.5.
         """
-        plt.text(2025+45*y2, (y2-y1)/2+y2, label, fontsize=12, color='black')
+        plt.text(2025 + 45 * y2, (y2 - y1) / 2 + y2, label, fontsize=12, color="black")
         plt.fill_between(x_values, y1, y2, color=color, alpha=alpha)
 
     # Calculate the average "Grid Electricity" values for scenario A
     # average_grid_electricity_A = calculate_average_values(new_data_2023, 'A', 'Grid Electricity')
 
     # Calculate the average "Grid Electricity" values for scenario B
-    average_grid_electricity_B = calculate_average_values(new_data_2023, 'B', 'Grid Electricity')
+    average_grid_electricity_B = calculate_average_values(new_data_2023, "B", "Grid Electricity")
     # print(average_grid_electricity_B)
     # Horizontal lines and labels
     horizontal_lines = [
-        (0.105, '2026 Scenario D PPA IRA'),
-        (0.115, '2026 Scenario D PPA No Policy'),
-        (0.0871, '2033 Scenario D PPA IRA'),
-        (0.0966, '2033 Scenario D PPA No Policy')
+        (0.105, "2026 Scenario D PPA IRA"),
+        (0.115, "2026 Scenario D PPA No Policy"),
+        (0.0871, "2033 Scenario D PPA IRA"),
+        (0.0966, "2033 Scenario D PPA No Policy"),
     ]
-    horizontal_line_colors = ['red', 'green', 'blue', 'purple']
+    horizontal_line_colors = ["red", "green", "blue", "purple"]
 
     # Define x-axis values as years starting from January 2023
     x_values = [2023 + i / 12 for i in range(len(average_grid_electricity_B))]
@@ -650,12 +780,12 @@ def plot_average_electricity_price(file_path, x_low, x_high):
     # Plot the mean values for scenarios A and B with distinct colors
     plt.figure(figsize=(12, 9))
     # plt.plot(x_values, average_grid_electricity_A, label='Scenario A AEO 2023', color='black')
-    plt.plot(x_values, average_grid_electricity_B, label='Scenario A AEO 2023', color='gray')
+    plt.plot(x_values, average_grid_electricity_B, label="Scenario A AEO 2023", color="gray")
 
     policies = [True, False]
-    times = [2023,2030]
-    bounds = ['low', 'high']
-    matchings = ['hourly', 'monthly', 'yearly']
+    times = [2023, 2030]
+    bounds = ["low", "high"]
+    matchings = ["hourly", "monthly", "yearly"]
 
     # PPAs = {
     #     2023: {
@@ -775,35 +905,35 @@ def plot_average_electricity_price(file_path, x_low, x_high):
     # for i, (value, label) in enumerate(horizontal_lines):
     #     plt.axhline(y=value, color=horizontal_line_colors[i], linestyle='--', label=label)
 
-    plt.ylabel('Average Electricity Price [$/kWh]', fontsize=20)
-    plt.xlabel('Year', fontsize=20)
+    plt.ylabel("Average Electricity Price [$/kWh]", fontsize=20)
+    plt.xlabel("Year", fontsize=20)
     plt.xlim(2023, 2023 + 516 / 12)
-    plt.ylim(x_low,x_high)
-    plt.title('Average Electricity Price Over Time', fontsize=20)
+    plt.ylim(x_low, x_high)
+    plt.title("Average Electricity Price Over Time", fontsize=20)
     plt.legend(loc="upper left", framealpha=1)
     plt.grid(True)
     # plt.show()
     plt.savefig(f"other/electricity_prices{x_low},{x_high}.png", dpi=400)
-    plt.tick_params(axis='both',labelsize=20)
+    plt.tick_params(axis="both", labelsize=20)
 
 
 # Test the function with the provided file
 plot_average_electricity_price(all_data_file_path, 0.06, 0.1)
 
 
-
 def string_to_float_list(value):
     # If the value is a string and contains tuples, use literal_eval to extract the values
-    if isinstance(value, str) and ('(' in value or '[' in value):
+    if isinstance(value, str) and ("(" in value or "[" in value):
         value = value.replace("(", "[").replace(")", "]")
         tuples_list = ast.literal_eval(value)
         return [float(x[0]) if isinstance(x, (tuple, list)) else float(x) for x in tuples_list]
     return value
 
+
 def plot_columns(file_path):
     # Read the data from the Excel file
-    data = pd.read_excel(file_path, sheet_name='CAPEX_OPEX')
-    
+    data = pd.read_excel(file_path, sheet_name="CAPEX_OPEX")
+
     # Define a list of columns to be plotted
     columns_to_plot = ["AP_SMR_OPEX", "AP_CCS_OPEX", "AP_BH2S_OPEX", "AP_AEC_OPEX"]
 
@@ -814,12 +944,12 @@ def plot_columns(file_path):
     # Define scenarios and time periods
     scenarios = ["A", "B", "C", "D"]
     time_periods = [2023, 2030]
-    colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'orange']
+    colors = ["b", "g", "r", "c", "m", "y", "k", "orange"]
 
     # Create subplots
     fig, axes = plt.subplots(2, 2, figsize=(18, 12))
     axes = axes.flatten()
-    
+
     # Iterate through the columns and plot the data
     for i, column in enumerate(columns_to_plot):
         ax = axes[i]
@@ -827,8 +957,8 @@ def plot_columns(file_path):
         for time_period in time_periods:
             for scenario in scenarios:
                 # Filter data by scenario and time
-                filtered_data = data[(data['scenario'] == scenario) & (data['time'] == time_period)]
-            
+                filtered_data = data[(data["scenario"] == scenario) & (data["time"] == time_period)]
+
                 # Calculate the average values for each time step
                 average_values = [-sum(x) / len(x) for x in zip(*filtered_data[column])]
 
@@ -836,29 +966,25 @@ def plot_columns(file_path):
                 x_values = [i for i in range(len(average_values))]
 
                 # Plot the mean values for each scenario and time
-                label = f'{time_period} Scenario {scenario}'
-                ax.plot(x_values, average_values, label=label if column == "AP_CCS_OPEX" else "", color=colors[color_idx])
+                label = f"{time_period} Scenario {scenario}"
+                ax.plot(
+                    x_values,
+                    average_values,
+                    label=label if column == "AP_CCS_OPEX" else "",
+                    color=colors[color_idx],
+                )
                 color_idx += 1
 
-        ax.set_ylabel(column.replace("_", " ")+ "[$/Tonne NH3]")
+        ax.set_ylabel(column.replace("_", " ") + "[$/Tonne NH3]")
         ax.grid(False)
 
     # Add legend to the second plot
     axes[1].legend(loc="lower left", framealpha=0.5)
 
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig('Other/OPEX_over_time_{}.png'.format(figure_ending_name), dpi=400)
+    plt.savefig("Other/OPEX_over_time_{}.png".format(figure_ending_name), dpi=400)
+
 
 # Test the function with the provided file
 file_path = all_data_file_path  # Replace with the correct path
 plot_columns(file_path)
-
-
-
-
-
-
-
-
-
-

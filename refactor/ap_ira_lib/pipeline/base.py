@@ -13,6 +13,7 @@ class SimContext:
 
     Grows as stages run — each stage reads from ``data`` and writes new keys.
     """
+
     scenario: str
     start_month: int
     time: int

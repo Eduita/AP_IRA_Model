@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any
 
 import numpy as np
 import pandas as pd
 
-from ap_ira_lib.core.capex import CAPEX
 from ap_ira_lib.core.carbon_intensity import CarbonIntensity
 from ap_ira_lib.core.dcf import StochasticDCF
 from ap_ira_lib.core.opex import MIOPEX
@@ -19,7 +17,7 @@ from ap_ira_lib.io.excel import (
     back_calculate_depreciable_capital_factor,
     calculate_battery_and_turbine_cost,
     calculate_electrode_cost,
-    calculate_final_CAPEX,
+    calculate_final_capex,
 )
 from ap_ira_lib.pipeline.base import SimContext, Stage
 
@@ -36,6 +34,7 @@ _EXCLUDE_FROM_DEPRECIATION = [
 # ------------------------------------------------------------------ #
 # Stage 1 — Parameter sampling
 # ------------------------------------------------------------------ #
+
 
 class ParameterSamplingStage(Stage):
     """Load JSON parameters and draw stochastic samples for this simulation."""
@@ -60,6 +59,7 @@ class ParameterSamplingStage(Stage):
 # ------------------------------------------------------------------ #
 # Stage 2 — Location & renewable capacity setup
 # ------------------------------------------------------------------ #
+
 
 class LocationSetupStage(Stage):
     """Assign wind/battery/solar capacity from optimization results for each technology."""
@@ -110,9 +110,15 @@ class LocationSetupStage(Stage):
             else:
                 row_high = get_row("AP AEC high")
                 row_low = get_row("AP AEC low")
-                capex_inputs["wind_capacity"][tech] = aec_interp(row_low["wind_capacity"], row_high["wind_capacity"])
-                capex_inputs["battery_capacity"][tech] = aec_interp(row_low["battery_capacity"], row_high["battery_capacity"])
-                capex_inputs["solar_capacity"][tech] = aec_interp(row_low["solar capacity"], row_high["solar capacity"])
+                capex_inputs["wind_capacity"][tech] = aec_interp(
+                    row_low["wind_capacity"], row_high["wind_capacity"]
+                )
+                capex_inputs["battery_capacity"][tech] = aec_interp(
+                    row_low["battery_capacity"], row_high["battery_capacity"]
+                )
+                capex_inputs["solar_capacity"][tech] = aec_interp(
+                    row_low["solar capacity"], row_high["solar capacity"]
+                )
                 curtailment[tech] = aec_interp(row_low["curtailment"], row_high["curtailment"])
                 discharge[tech] = aec_interp(row_low["demand"], row_high["demand"])
                 total_gen[tech] = aec_interp(row_low["total_gen"], row_high["total_gen"])
@@ -128,6 +134,7 @@ class LocationSetupStage(Stage):
 # ------------------------------------------------------------------ #
 # Stage 3 — Engineering derived quantities
 # ------------------------------------------------------------------ #
+
 
 class EngineeringSetupStage(Stage):
     """Derive AEC hydrogen requirement, operating hours, biomass, and depreciable factor."""
@@ -146,7 +153,8 @@ class EngineeringSetupStage(Stage):
 
         elec["AP AEC"] = (
             eng["AP AEC H2_req"],
-            eng["AP AEC H2_req"] + (408305790 + 3900560.592) / (365 * 24 * fin["availability"]) / 1000,
+            eng["AP AEC H2_req"]
+            + (408305790 + 3900560.592) / (365 * 24 * fin["availability"]) / 1000,
         )
 
         back_calculate_depreciable_capital_factor(capex_inputs, _EXCLUDE_FROM_DEPRECIATION)
@@ -161,6 +169,7 @@ class EngineeringSetupStage(Stage):
 # Stage 4 — Carbon intensity & market setup
 # ------------------------------------------------------------------ #
 
+
 class CarbonIntensitySetupStage(Stage):
     """Compute stack emissions, natural gas CI, and PPA pricing."""
 
@@ -171,7 +180,9 @@ class CarbonIntensitySetupStage(Stage):
         self.ppa_file = Path(self.config["ppa_file"])
         self._ppa_data: pd.DataFrame | None = None
         self.times: list[int] = self.config.get("times", [2023, 2030])
-        self.matching_types: list[str] = self.config.get("matching_types", ["yearly", "monthly", "hourly"])
+        self.matching_types: list[str] = self.config.get(
+            "matching_types", ["yearly", "monthly", "hourly"]
+        )
         self.policies: list[bool] = [True, False]
 
     def _get_ppa_data(self) -> pd.DataFrame:
@@ -189,7 +200,9 @@ class CarbonIntensitySetupStage(Stage):
         ap_smr_lower = 0.243 * ngcc_eff * 13.4 / 0.28
         ap_smr_upper = 0.527 * ngcc_eff * 13.4 / 0.28
         ci["stack"]["AP SMR"] = float(np.random.uniform(ap_smr_lower, ap_smr_upper))
-        ci["stack"]["AP CCS"] = ci["stack"]["AP SMR"] * (1 - params["engineering_inputs"]["CCS capture rate"])
+        ci["stack"]["AP CCS"] = ci["stack"]["AP SMR"] * (
+            1 - params["engineering_inputs"]["CCS capture rate"]
+        )
 
         # Natural gas CI
         ci["natural gas"] = (float(np.random.uniform(0.01, 7.9)) / 1000) * ngcc_eff
@@ -198,14 +211,20 @@ class CarbonIntensitySetupStage(Stage):
         ppa_data = self._get_ppa_data()
 
         def get_ppa_row(time: int, matching: str, policy: bool) -> pd.Series:
-            mask = (ppa_data["time"] == time) & (ppa_data["policy"] == policy) & (ppa_data["matching"] == matching)
+            mask = (
+                (ppa_data["time"] == time)
+                & (ppa_data["policy"] == policy)
+                & (ppa_data["matching"] == matching)
+            )
             subset = ppa_data[mask]
             return subset.iloc[int(rand_loc * len(subset))]
 
         market_inputs = params["Market_inputs"]
         market_inputs["PPA_pricing"] = {
-            t: {m: {p: get_ppa_row(t, m, p)["LCOE"] / 1000 for p in self.policies}
-                for m in self.matching_types}
+            t: {
+                m: {p: get_ppa_row(t, m, p)["LCOE"] / 1000 for p in self.policies}
+                for m in self.matching_types
+            }
             for t in self.times
         }
         market_inputs["PPA_pricing_for_C"] = {
@@ -220,6 +239,7 @@ class CarbonIntensitySetupStage(Stage):
 # Stage 5 — CAPEX calculation
 # ------------------------------------------------------------------ #
 
+
 class CAPEXStage(Stage):
     """Calculate CAPEX for each technology."""
 
@@ -230,7 +250,6 @@ class CAPEXStage(Stage):
         capex_inputs = params["CAPEX_inputs"]
         basic_eq = params["basic_equipment_costs"]
         elec = params["electricity_requirements"]
-        biomass_requirement = ctx.data["biomass_requirement"]
 
         final_capex: dict = {}
         battery_turbine: dict = {}
@@ -241,13 +260,11 @@ class CAPEXStage(Stage):
             battery_turbine[tech] = bt
 
             elec_cost = (
-                calculate_electrode_cost(ctx.time, elec, capex_inputs)
-                if tech == "AP AEC"
-                else 0.0
+                calculate_electrode_cost(ctx.time, elec, capex_inputs) if tech == "AP AEC" else 0.0
             )
             electrode_costs[tech] = elec_cost
 
-            final_capex[tech] = calculate_final_CAPEX(
+            final_capex[tech] = calculate_final_capex(
                 tech, ctx.scenario, bt, elec_cost, basic_eq, capex_inputs
             )
 
@@ -261,6 +278,7 @@ class CAPEXStage(Stage):
 # ------------------------------------------------------------------ #
 # Stage 6 — OPEX calculation
 # ------------------------------------------------------------------ #
+
 
 class OPEXStage(Stage):
     """Calculate MI_OPEX for each technology."""
@@ -302,7 +320,13 @@ class OPEXStage(Stage):
             if ctx.scenario == "C" and tech != "AP SMR":
                 wind_kw = capex_inputs["wind_capacity"][tech] * 1000
                 battery_kw = capex_inputs["battery_capacity"][tech] * 1000
-                battery_opex = mi_inputs["Battery OPEX"] * battery_kw / capex_inputs["Battery roundtrip eff"] / 12 / 4
+                battery_opex = (
+                    mi_inputs["Battery OPEX"]
+                    * battery_kw
+                    / capex_inputs["Battery roundtrip eff"]
+                    / 12
+                    / 4
+                )
                 wind_opex = mi_inputs["Wind OPEX"] * wind_kw / 12
                 final_mi_opex[tech] = {
                     "MI_OPEX": labor + fixed + misc + utilities + wind_opex + battery_opex,
@@ -320,6 +344,7 @@ class OPEXStage(Stage):
 # ------------------------------------------------------------------ #
 # Stage 7 — DCF simulation
 # ------------------------------------------------------------------ #
+
 
 class DCFStage(Stage):
     """Run StochasticDCF for each technology and collect output metrics."""
@@ -339,7 +364,7 @@ class DCFStage(Stage):
         return StochasticDCF(
             technology=technology,
             start=ctx.start_month,
-            L=ctx.L,
+            lifetime=ctx.L,
             sim=ctx.sim_index,
             policy=ctx.policy,
             scenario=ctx.scenario,
@@ -366,7 +391,9 @@ class DCFStage(Stage):
     def run(self, ctx: SimContext) -> dict[str, Any]:
         params = ctx.data["params"]
         results: dict[str, Any] = {
-            "npv": {}, "npv_no_policy": {}, "cac": {},
+            "npv": {},
+            "npv_no_policy": {},
+            "cac": {},
             "carbon_intensity": {tech: [] for tech in ctx.technologies},
             "tax_credits": {},
         }
@@ -377,11 +404,11 @@ class DCFStage(Stage):
             dcf_np.policy = False
 
             if self.outputs_enabled.get("npv", True):
-                results["npv"][tech] = dcf.calculate_NPV()
-                results["npv_no_policy"][tech] = dcf_np.calculate_NPV()
+                results["npv"][tech] = dcf.calculate_npv()
+                results["npv_no_policy"][tech] = dcf_np.calculate_npv()
 
             if self.outputs_enabled.get("cac", True) and tech != "AP SMR":
-                results["cac"][tech] = dcf.CAC_updated()
+                results["cac"][tech] = dcf.cac_updated()
 
             if self.outputs_enabled.get("carbon_intensity", True):
                 ci_calc = CarbonIntensity(
@@ -396,7 +423,9 @@ class DCFStage(Stage):
                     aeo22_data=ctx.data["aeo22_data"],
                     aeo23_data=ctx.data["aeo23_data"],
                 )
-                results["carbon_intensity"][tech] = [ci_calc.total_emissions(m) for m in self.ci_months]
+                results["carbon_intensity"][tech] = [
+                    ci_calc.total_emissions(m) for m in self.ci_months
+                ]
 
             if self.outputs_enabled.get("tax_credits", True) and tech != "AP SMR":
                 results["tax_credits"][tech] = dcf.separate_total_support()

@@ -1,17 +1,20 @@
-import pandas as pd
-import numpy as np
-from optimization import *
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from optimization import *
 
 # Constants
 DATA = pd.read_excel(ROOT_DIR + OUTPUT_FILENAME)
+
+
 # Functions
 def towns_total_cost(df):
 
     # Group by 'town' and sum the costs for each town
-    total_cost_by_town = df.groupby('town')['cost'].sum().sort_values()
+    total_cost_by_town = df.groupby("town")["cost"].sum().sort_values()
 
     # Return closest 75th percentile town
+
 
 def top_10_expensive_towns_total_cost(df):
     """
@@ -24,10 +27,10 @@ def top_10_expensive_towns_total_cost(df):
     DataFrame: A DataFrame containing the top 10 cheapest towns.
     """
     # Group by 'town' and sum the costs for each town
-    total_cost_by_town = df.groupby('town')['cost'].sum().sort_values(ascending=False).head(10)
+    total_cost_by_town = df.groupby("town")["cost"].sum().sort_values(ascending=False).head(10)
 
     # Filter the original dataframe to include only the towns from the top 10 cheapest list
-    top_10_towns_filtered = df[df['town'].isin(total_cost_by_town.index)]
+    top_10_towns_filtered = df[df["town"].isin(total_cost_by_town.index)]
 
     return top_10_towns_filtered
 
@@ -42,8 +45,9 @@ def convert_string_to_list(df):
     Returns:
     DataFrame: A DataFrame with string lists converted to actual lists.
     """
+
     def _try_eval(value):
-        if isinstance(value, str) and value.startswith('[') and value.endswith(']'):
+        if isinstance(value, str) and value.startswith("[") and value.endswith("]"):
             try:
                 return eval(value)
             except Exception:
@@ -51,13 +55,14 @@ def convert_string_to_list(df):
         return value
 
     for column in df.columns:
-        if df[column].dtype == object:
-            df[column] = df[column].apply(_try_eval)
+        df[column] = df[column].apply(_try_eval)
     return df
+
 
 CLEANED_DATA = convert_string_to_list(DATA)
 # Exclude all rows with the town called 'Pryor'
-CLEANED_DATA = CLEANED_DATA[~CLEANED_DATA['town'].isin(['Pryor'])]
+CLEANED_DATA = CLEANED_DATA[~CLEANED_DATA["town"].isin(["Pryor"])]
+
 
 def get_generation_data(year, matching, technology, grouped_data=CLEANED_DATA):
     """
@@ -72,11 +77,11 @@ def get_generation_data(year, matching, technology, grouped_data=CLEANED_DATA):
     Returns:
     tuple: A tuple containing the indices of the min and max cost rows.
     """
-    grouped_data = grouped_data.groupby(['year', 'matching', 'technology'])
+    grouped_data = grouped_data.groupby(["year", "matching", "technology"])
     try:
         group = grouped_data.get_group((year, matching, technology))
-        idx_min = group['cost'].idxmin()
-        idx_max = group['cost'].idxmax()
+        idx_min = group["cost"].idxmin()
+        idx_max = group["cost"].idxmax()
         return group.loc[idx_min], group.loc[idx_max]
     except KeyError:
         print("Group not found for the specified year, matching, and technology.")
@@ -96,17 +101,17 @@ def get_closest_quantile_data(year, matching, technology, grouped_data=CLEANED_D
     Returns:
     tuple: A tuple containing the rows closest to Q1, median, and Q3 cost.
     """
-    grouped_data = grouped_data.groupby(['year', 'matching', 'technology'])
+    grouped_data = grouped_data.groupby(["year", "matching", "technology"])
 
     try:
         group = grouped_data.get_group((year, matching, technology))
-        q1 = group['cost'].quantile(0.25)
-        median = group['cost'].median()
-        q3 = group['cost'].quantile(0.75)
+        q1 = group["cost"].quantile(0.25)
+        median = group["cost"].median()
+        q3 = group["cost"].quantile(0.75)
 
-        idx_closest_q1 = (group['cost'] - q1).abs().idxmin()
-        idx_closest_median = (group['cost'] - median).abs().idxmin()
-        idx_closest_q3 = (group['cost'] - q3).abs().idxmin()
+        idx_closest_q1 = (group["cost"] - q1).abs().idxmin()
+        idx_closest_median = (group["cost"] - median).abs().idxmin()
+        idx_closest_q3 = (group["cost"] - q3).abs().idxmin()
 
         return group.loc[idx_closest_q1], group.loc[idx_closest_q3], group.loc[idx_closest_median]
     except KeyError:
@@ -115,14 +120,15 @@ def get_closest_quantile_data(year, matching, technology, grouped_data=CLEANED_D
 
 
 def return_masked_data(time, matching, tech, data=CLEANED_DATA):
-    mask = (data['year'] == time) & (data['matching'] == matching) & (data['technology'] == tech)
+    mask = (data["year"] == time) & (data["matching"] == matching) & (data["technology"] == tech)
     new_data = data[mask]
     randomizer = np.random.randint(0, len(new_data))
     return new_data.iloc[randomizer]
 
-def process_data(year, matching, technology, df = CLEANED_DATA):
+
+def process_data(year, matching, technology, df=CLEANED_DATA):
     # Group by 'town' and sum the costs
-    total_cost_by_town = df.groupby('town')['cost'].sum().sort_values()
+    total_cost_by_town = df.groupby("town")["cost"].sum().sort_values()
 
     # Find the town names for the 25th, 50th, and 75th percentiles
     percentiles = total_cost_by_town.quantile([0.25, 0.5, 0.75])
@@ -130,17 +136,14 @@ def process_data(year, matching, technology, df = CLEANED_DATA):
     towns_at_percentiles = [total_cost_by_town.sub(p).abs().idxmin() for p in percentiles]
 
     # Filter the dataframe for these towns
-    filtered_df = df[df['town'].isin(towns_at_percentiles)]
+    filtered_df = df[df["town"].isin(towns_at_percentiles)]
 
     # Group by 'year', 'matching', and 'technology'
-    grouped = filtered_df.groupby(['year', 'matching', 'technology'])
+    grouped = filtered_df.groupby(["year", "matching", "technology"])
 
     return grouped.get_group((year, matching, technology))
 
+
 # Running
-if __name__ == '__main__':
-   print(return_masked_data(2023, 'hourly', 'AP CCS'))
-
-
-
-
+if __name__ == "__main__":
+    print(return_masked_data(2023, "hourly", "AP CCS"))

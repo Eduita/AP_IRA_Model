@@ -1,36 +1,43 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import math
 
-matching = 'monthly'
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+
+matching = "monthly"
 CBAM = True
 
 file_path_NPV = f"alldata_v10{'_CBAM' if CBAM else ''}_{matching}.xlsx"
-file_path_sensitivity = f'sensitivities{"_"+matching}.xlsx'
+file_path_sensitivity = f"sensitivities{'_' + matching}.xlsx"
 
-NPV = pd.read_excel(file_path_NPV, sheet_name='NPV')
+NPV = pd.read_excel(file_path_NPV, sheet_name="NPV")
 sensitivities = pd.read_excel(file_path_sensitivity, sheet_name=None)
 
-NPV = NPV.rename(columns={
-    'AP_SMR_NPV': 'AP SMR',
-    'AP_CCS_NPV': 'AP CCS',
-    'AP_BH2S_NPV': 'AP BH2S',
-    'AP_AEC_NPV': 'AP AEC'
-})
+NPV = NPV.rename(
+    columns={
+        "AP_SMR_NPV": "AP SMR",
+        "AP_CCS_NPV": "AP CCS",
+        "AP_BH2S_NPV": "AP BH2S",
+        "AP_AEC_NPV": "AP AEC",
+    }
+)
 
-technologies = ['AP SMR', 'AP CCS', 'AP BH2S', 'AP AEC']
-scenarios = ['A', 'B', 'C', 'D']
+technologies = ["AP SMR", "AP CCS", "AP BH2S", "AP AEC"]
+scenarios = ["A", "B", "C", "D"]
 times = [2023, 2030]
 
-grouped_NPV = NPV.groupby(['time','scenario'])
+grouped_NPV = NPV.groupby(["time", "scenario"])
 
-grouped_sensitivities = {key:sensitivities[key].groupby(['time', 'scenario']) for key in sensitivities}
+grouped_sensitivities = {
+    key: sensitivities[key].groupby(["time", "scenario"]) for key in sensitivities
+}
 
 tech_dict_corr = {}
 for tech in technologies:
-    storage_of_corr_scenario_time = {time:{scenario:None for scenario in scenarios} for time in times}
+    storage_of_corr_scenario_time = {
+        time: {scenario: None for scenario in scenarios} for time in times
+    }
     for (time, scenario), NPV_df in grouped_NPV:
         tech_NPV = NPV_df[tech]
         sensitivity_inputs_df = grouped_sensitivities[tech].get_group((time, scenario))
@@ -38,12 +45,13 @@ for tech in technologies:
 
         storage_of_corr = {}
         for col in input_columns:
-            correlation = np.corrcoef(tech_NPV, sensitivity_inputs_df[col])[0,1]
+            correlation = np.corrcoef(tech_NPV, sensitivity_inputs_df[col])[0, 1]
             storage_of_corr[col] = correlation
 
         storage_of_corr_scenario_time[time][scenario] = storage_of_corr
 
     tech_dict_corr[tech] = storage_of_corr_scenario_time
+
 
 def replace_nan_with_zero_nested_dict(d):
     for key, value in d.items():
@@ -52,7 +60,9 @@ def replace_nan_with_zero_nested_dict(d):
         elif isinstance(value, float) and math.isnan(value):
             d[key] = 0
 
+
 replace_nan_with_zero_nested_dict(tech_dict_corr)
+
 
 def plot_heatmap_for_scenario(time, scenario, data, ax=None, title=None, threshold=10.0):
     """
@@ -82,41 +92,66 @@ def plot_heatmap_for_scenario(time, scenario, data, ax=None, title=None, thresho
 
     # Order the y-axis based on sum of absolute correlation coefficients
     ordered_data = percentage_heatmap_data.reindex(
-        percentage_heatmap_data.abs().sum(axis=1).sort_values(ascending=False).index)
+        percentage_heatmap_data.abs().sum(axis=1).sort_values(ascending=False).index
+    )
 
     # Plot the heatmap with given adjustments
-    ax = sns.heatmap(ordered_data, cmap='Spectral', annot=True, fmt=".0f", vmin=-100, vmax=100,
-                     linewidths=.5, ax=ax, cbar=False, edgecolor='pink')
-    ax.set_title(title if title else scenario, fontweight='bold')
-    ax.set_xlabel('')
-    ax.set_ylabel('')
+    ax = sns.heatmap(
+        ordered_data,
+        cmap="Spectral",
+        annot=True,
+        fmt=".0f",
+        vmin=-100,
+        vmax=100,
+        linewidths=0.5,
+        ax=ax,
+        cbar=False,
+        edgecolor="pink",
+    )
+    ax.set_title(title if title else scenario, fontweight="bold")
+    ax.set_xlabel("")
+    ax.set_ylabel("")
 
-    ax.set_xticklabels([label.replace('_', ' ').replace("AP ","") for label in ordered_data.columns], rotation=0)
+    ax.set_xticklabels(
+        [label.replace("_", " ").replace("AP ", "") for label in ordered_data.columns], rotation=0
+    )
 
     return ax
 
 
-fig, axs = plt.subplots(2, 3, figsize=(12, 12), gridspec_kw={'width_ratios': [4, 4, 4]})
-fig.subplots_adjust(hspace=0.1,wspace=1.1, left=0.2)
+fig, axs = plt.subplots(2, 3, figsize=(12, 12), gridspec_kw={"width_ratios": [4, 4, 4]})
+fig.subplots_adjust(hspace=0.1, wspace=1.1, left=0.2)
 
-ax_b = plot_heatmap_for_scenario(2023,'B', tech_dict_corr, ax=axs[0, 0], title=f"Scenario A, 2026", threshold=0)
+ax_b = plot_heatmap_for_scenario(
+    2023, "B", tech_dict_corr, ax=axs[0, 0], title=f"Scenario A, 2026", threshold=0
+)
 ax_b.set_xticks([])
-ax_c = plot_heatmap_for_scenario(2023,'C', tech_dict_corr, ax=axs[0, 1], title=f"Scenario B, 2026", threshold=0)
+ax_c = plot_heatmap_for_scenario(
+    2023, "C", tech_dict_corr, ax=axs[0, 1], title=f"Scenario B, 2026", threshold=0
+)
 ax_c.set_xticks([])
-ax_d = plot_heatmap_for_scenario(2023,'D', tech_dict_corr, ax=axs[0, 2], title=f"Scenario C, 2026", threshold=0)
+ax_d = plot_heatmap_for_scenario(
+    2023, "D", tech_dict_corr, ax=axs[0, 2], title=f"Scenario C, 2026", threshold=0
+)
 ax_d.set_xticks([])
 
-ax_b_2030 = plot_heatmap_for_scenario(2030,'B', tech_dict_corr, ax=axs[1, 0], title=f"Scenario A, 2033", threshold=0)
-ax_c_2030 = plot_heatmap_for_scenario(2030,'C', tech_dict_corr, ax=axs[1, 1], title=f"Scenario B, 2033", threshold=0)
-ax_d_2030 = plot_heatmap_for_scenario(2030,'D', tech_dict_corr, ax=axs[1, 2], title=f"Scenario C, 2033", threshold=0)
+ax_b_2030 = plot_heatmap_for_scenario(
+    2030, "B", tech_dict_corr, ax=axs[1, 0], title=f"Scenario A, 2033", threshold=0
+)
+ax_c_2030 = plot_heatmap_for_scenario(
+    2030, "C", tech_dict_corr, ax=axs[1, 1], title=f"Scenario B, 2033", threshold=0
+)
+ax_d_2030 = plot_heatmap_for_scenario(
+    2030, "D", tech_dict_corr, ax=axs[1, 2], title=f"Scenario C, 2033", threshold=0
+)
 
 
 # Add a single colorbar to the figure
 cbar_ax = fig.add_axes([0.92, 0.3, 0.02, 0.4])
 cmap = sns.color_palette("Spectral", as_cmap=True)
 norm = plt.Normalize(vmin=-100, vmax=100)
-cb1 = plt.colorbar(plt.cm.ScalarMappable(cmap=cmap, norm=norm), cax=cbar_ax, format='%d%%')
-cb1.set_label("Pearson Correlation Coefficient", rotation = 270, fontweight = 'bold', labelpad=2)
+cb1 = plt.colorbar(plt.cm.ScalarMappable(cmap=cmap, norm=norm), cax=cbar_ax, format="%d%%")
+cb1.set_label("Pearson Correlation Coefficient", rotation=270, fontweight="bold", labelpad=2)
 
 plt.savefig(f"Final figures/v10_sensitivites_{'_CBAM' if CBAM else ''}_{matching}.png", dpi=400)
 plt.close()

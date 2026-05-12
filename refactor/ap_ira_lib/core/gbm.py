@@ -18,7 +18,7 @@ class BrownianMotion:
         self.n_steps = n_steps
         self.seed = seed
 
-    def correlated_GBM(self, initial_prices: list[float]) -> tuple[np.ndarray, np.ndarray]:
+    def correlated_gbm(self, initial_prices: list[float]) -> tuple[np.ndarray, np.ndarray]:
         np.random.seed(self.seed)
         mean = [self.drift, self.drift]
         covariance = [
@@ -30,7 +30,7 @@ class BrownianMotion:
         prices2 = initial_prices[1] * np.cumprod(np.exp(samples[:, 1]))
         return prices1, prices2
 
-    def uncorrelated_GBM(self, initial_price: float) -> np.ndarray:
+    def uncorrelated_gbm(self, initial_price: float) -> np.ndarray:
         np.random.seed(self.seed)
         samples = np.random.normal(self.drift, self.std_dev, self.n_steps)
         return initial_price * np.cumprod(np.exp(samples))
