@@ -57,7 +57,7 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 # No installable Python packages at the workspace root.
 # ap_ira_lib and ap_ira_dagster are provided by the refactor/ member.
-packages = []
+only-include = []
 
 # ── uv workspace ─────────────────────────────────────────────────────────────
 [tool.uv.workspace]
