@@ -13,10 +13,25 @@ from pulp import LpProblem, LpMinimize, LpVariable, PULP_CBC_CMD, LpStatus
 from tqdm import tqdm
 
 # Constants
-ROOT_DIR = r'C:/Users/eduar/OneDrive/Desktop/PythonProjects/Ammonia Project/pythonProject1/NOVEMBER AP Model/'
+ROOT_DIR = r'C:/Users/pilar/Desktop/AP_IRA_Model/legacy/'
 API_BASE = 'https://www.renewables.ninja/api/'
-API_KEYS = ["7e6cf2119c0caa0a784e15a16669de2d5448b36e", "***REMOVED_WPI_TOKEN***",
-            'cb0c920ef9c68906261a2d149851017fc2930628']
+def _load_dotenv(path):
+    """Load .env key=value pairs into os.environ (no third-party deps required)."""
+    if os.path.isfile(path):
+        with open(path) as _f:
+            for _line in _f:
+                _line = _line.strip()
+                if _line and not _line.startswith('#') and '=' in _line:
+                    _k, _v = _line.split('=', 1)
+                    os.environ.setdefault(_k.strip(), _v.strip())
+
+_load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env'))
+
+API_KEYS = [
+    os.environ.get('NINJA_CU_TOKEN', ''),
+    os.environ.get('NINJA_WPI_TOKEN', ''),
+    os.environ.get('NINJA_MY_TOKEN', ''),
+]
 AP_LOC_PATH = ROOT_DIR + 'power_markets/AP_location_dataset.xlsx'
 API_CFDATA_OUTPUT_FOLDER = 'power_markets/capacity_factors'
 

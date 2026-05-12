@@ -1,0 +1,5 @@
+# Dagster workspace — run `dagster dev` from AP_IRA_Model/refactor/
+load_from:
+  - python_module:
+      module_name: ap_ira_dagster
+      working_directory: .
