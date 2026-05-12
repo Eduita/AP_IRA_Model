@@ -40,7 +40,7 @@ def simulation_results(
 
     matching = config.matching
     is_cbam = config.cbam
-    L = config.L
+    lifetime = config.L
     n_sims = config.n_simulations
 
     # Build the stage pipeline once; stages cache any expensive I/O internally.
@@ -74,7 +74,7 @@ def simulation_results(
             sim_index=sim,
             matching=matching,
             technologies=technologies,
-            L=L,
+            L=lifetime,
             policy=True,
             is_cbam=is_cbam,
             data={"aeo22_data": aeo22, "aeo23_data": aeo23},
@@ -99,10 +99,18 @@ def simulation_results(
         if results.get("tax_credits"):
             for tech in non_smr:
                 tc = results["tax_credits"].get(tech, {})
-                tc_rows.append((
-                    time, scenario, sim, tech,
-                    tc.get("45V", 0), tc.get("45Q", 0), tc.get("45Y", 0), tc.get("48E", 0),
-                ))
+                tc_rows.append(
+                    (
+                        time,
+                        scenario,
+                        sim,
+                        tech,
+                        tc.get("45V", 0),
+                        tc.get("45Q", 0),
+                        tc.get("45Y", 0),
+                        tc.get("48E", 0),
+                    )
+                )
 
         if (sim + 1) % 50 == 0:
             context.log.info(f"  [{scenario}/{time}] {sim + 1}/{n_sims} simulations complete")
@@ -110,9 +118,7 @@ def simulation_results(
     dfs: dict[str, pd.DataFrame] = {}
 
     if npv_rows:
-        dfs["NPV"] = pd.DataFrame(
-            npv_rows, columns=["time", "scenario", "simulation"] + tech_cols
-        )
+        dfs["NPV"] = pd.DataFrame(npv_rows, columns=["time", "scenario", "simulation"] + tech_cols)
         dfs["NPV_no_policy"] = pd.DataFrame(
             npv_np_rows, columns=["time", "scenario", "simulation"] + tech_cols
         )

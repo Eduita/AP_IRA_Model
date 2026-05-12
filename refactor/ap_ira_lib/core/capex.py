@@ -27,23 +27,28 @@ class CAPEX:
         self.construction_expense_and_contractors_fee = None
         self.contingency = None
 
-    def get_installed_and_uninstalled_cost(self, basic_equipment_costs: dict, technology: str) -> dict:
+    def get_installed_and_uninstalled_cost(
+        self, basic_equipment_costs: dict, technology: str
+    ) -> dict:
         self.installed_costs = basic_equipment_costs[technology][0]
         self.uninstalled_cost = basic_equipment_costs[technology][1]
         return {"installed costs": self.installed_costs, "uninstalled cost": self.uninstalled_cost}
 
-    def calculate_FCI_CAPEX_and_WC(self) -> dict:
+    def calculate_fci_capex_and_wc(self) -> dict:
         self.UC = self.uninstalled_cost
         self.IC = self.installed_costs
         purchased_equipment_factor = self.UC * (1 / ((2717 / 100) ** 0.6))
 
         self.installation = self.UC + (-self.UC + self.IC)
-        self.instrumentation_and_controls = self.inputs["Instrumentation and Controls Cost"] * purchased_equipment_factor
+        self.instrumentation_and_controls = (
+            self.inputs["Instrumentation and Controls Cost"] * purchased_equipment_factor
+        )
         self.piping = self.inputs["Piping Cost"] * purchased_equipment_factor
         self.electrical = self.inputs["Electrical Cost"] * purchased_equipment_factor
         self.building_process_auxiliary = self.inputs["Buildings Cost"] * purchased_equipment_factor
         self.service_facilities_and_yard_improvements = (
-            self.inputs["Service Facilities and Yard Improvements Cost"] * purchased_equipment_factor
+            self.inputs["Service Facilities and Yard Improvements Cost"]
+            * purchased_equipment_factor
         )
         direct_costs = (
             self.instrumentation_and_controls
@@ -55,10 +60,13 @@ class CAPEX:
             + self.installation
         )
 
-        self.engineering_supervision = self.inputs["Engineering and Supervision Cost"] * purchased_equipment_factor
+        self.engineering_supervision = (
+            self.inputs["Engineering and Supervision Cost"] * purchased_equipment_factor
+        )
         self.legal_expenses = self.inputs["Legal Expenses Cost"] * purchased_equipment_factor
         self.construction_expense_and_contractors_fee = (
-            self.inputs["Construction Expense and Contractors Fee Cost"] * purchased_equipment_factor
+            self.inputs["Construction Expense and Contractors Fee Cost"]
+            * purchased_equipment_factor
         )
         self.contingency = self.inputs["Contingency Cost"] * purchased_equipment_factor
         indirect_costs = (
@@ -86,10 +94,14 @@ class CAPEX:
         self.piping += ratio * self.piping
         self.electrical += ratio * self.electrical
         self.building_process_auxiliary += ratio * self.building_process_auxiliary
-        self.service_facilities_and_yard_improvements += ratio * self.service_facilities_and_yard_improvements
+        self.service_facilities_and_yard_improvements += (
+            ratio * self.service_facilities_and_yard_improvements
+        )
         self.engineering_supervision += ratio * self.engineering_supervision
         self.legal_expenses += ratio * self.legal_expenses
-        self.construction_expense_and_contractors_fee += ratio * self.construction_expense_and_contractors_fee
+        self.construction_expense_and_contractors_fee += (
+            ratio * self.construction_expense_and_contractors_fee
+        )
         self.contingency += ratio * self.contingency
 
         return {"UC": self.UC, "FCI": self.FCI, "WC": self.WC, "CAPEX": self.CAPEX}

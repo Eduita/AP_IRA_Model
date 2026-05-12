@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """Entry point: run the AP IRA model from the project root.
 
-    uv run python scripts/run.py
-    uv run python scripts/run.py --config models/ap_ira.yaml
+uv run python scripts/run.py
+uv run python scripts/run.py --config models/ap_ira.yaml
 """
 
 import argparse

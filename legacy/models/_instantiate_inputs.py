@@ -1,15 +1,16 @@
-from numpy.random import uniform as uni
-from numpy.random import seed as seed
-import numpy as np
 import json
 
-class InstantiateInputs:
+import numpy as np
+from numpy.random import seed as seed
+from numpy.random import uniform as uni
 
+
+class InstantiateInputs:
     def __init__(self, seed_number):
         self.constant_variables = {}
         self.random_variables = {}
         self.seed = seed_number
-        self.force_correlate = uni(0,1)
+        self.force_correlate = uni(0, 1)
         # seed(self.seed)
 
     def randomness_from_JSON_inputs(self, input_dictionary):
@@ -54,4 +55,3 @@ class InstantiateInputs:
                 self.constant_variables[key] = value
 
         return input_dictionary
-

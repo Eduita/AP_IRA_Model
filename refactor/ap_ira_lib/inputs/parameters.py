@@ -23,13 +23,13 @@ class ParameterSampler:
 
     def sample(self, parameters_file: Path | str) -> dict:
         """Load JSON and draw random samples. Returns the fully resolved parameter dict."""
-        with open(parameters_file, "r") as f:
+        with open(parameters_file) as f:
             raw = json.load(f)
         return self._sample_recursive(raw)
 
     def average(self, parameters_file: Path | str) -> dict:
         """Load JSON and use midpoint values (deterministic mode)."""
-        with open(parameters_file, "r") as f:
+        with open(parameters_file) as f:
             raw = json.load(f)
         return self._average_recursive(raw)
 

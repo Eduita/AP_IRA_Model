@@ -68,12 +68,14 @@ def calculate_battery_and_turbine_cost(technology: str, time: int, capex_inputs:
     return wind_capex + battery_capex + solar_capex
 
 
-def calculate_electrode_cost(time: int, electricity_requirements: dict, capex_inputs: dict) -> float:
+def calculate_electrode_cost(
+    time: int, electricity_requirements: dict, capex_inputs: dict
+) -> float:
     key = "Stack cost 2023" if time == 2023 else "Stack cost 2030"
     return electricity_requirements["AP AEC"][1] * capex_inputs[key] * 1000
 
 
-def calculate_final_CAPEX(
+def calculate_final_capex(
     technology: str,
     scenario: str,
     battery_and_turbine: float,
@@ -83,7 +85,7 @@ def calculate_final_CAPEX(
 ) -> dict:
     obj = CAPEX(capex_inputs)
     obj.get_installed_and_uninstalled_cost(basic_equipment_costs, technology)
-    obj.calculate_FCI_CAPEX_and_WC()
+    obj.calculate_fci_capex_and_wc()
 
     if scenario == "C" and technology != "AP SMR":
         additional = battery_and_turbine + (electrode_cost if technology == "AP AEC" else 0.0)
@@ -94,7 +96,9 @@ def calculate_final_CAPEX(
     return obj.as_dict()
 
 
-def back_calculate_depreciable_capital_factor(capex_inputs: dict, excluded_factors: list[str]) -> None:
+def back_calculate_depreciable_capital_factor(
+    capex_inputs: dict, excluded_factors: list[str]
+) -> None:
     """Compute CAPEX_from_installed_cost and store it in-place on capex_inputs."""
     keys = list(capex_inputs.keys())[1:12]
     factor = 1.0

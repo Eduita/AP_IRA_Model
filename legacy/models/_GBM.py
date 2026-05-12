@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class brownian_motion:
     def __init__(self, drift=0, std_dev=1, correlation=0, n_steps=100, seed=None):
         self.drift = drift
@@ -13,8 +14,10 @@ class brownian_motion:
 
         # Define the mean and covariance of the bivariate normal distribution
         mean = [self.drift, self.drift]
-        covariance = [[self.std_dev ** 2, self.std_dev ** 2 * self.correlation],
-                      [self.std_dev ** 2 * self.correlation, self.std_dev ** 2]]
+        covariance = [
+            [self.std_dev**2, self.std_dev**2 * self.correlation],
+            [self.std_dev**2 * self.correlation, self.std_dev**2],
+        ]
 
         # Generate random samples from the bivariate normal distribution
         samples = np.random.multivariate_normal(mean, covariance, self.n_steps)
@@ -32,7 +35,6 @@ class brownian_motion:
         samples = np.random.normal(self.drift, self.std_dev, self.n_steps)
 
         # Calculate the prices using the geometric Brownian motion formula
-        prices = initial_price * np.cumprod(np.exp(samples)) #list len = 100
+        prices = initial_price * np.cumprod(np.exp(samples))  # list len = 100
 
         return prices
-

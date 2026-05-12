@@ -1,11 +1,13 @@
-import numpy as np
-import seaborn as sns
-import pandas as pd
-import matplotlib.pyplot as plt
-import pprint
 import logging
+import pprint
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
 
 def load_excel_sheets(file_path):
     # Load the Excel file
@@ -26,34 +28,44 @@ def load_excel_sheets(file_path):
 
 
 ROOT_FILES = r"C:\Users\eduar\OneDrive\Desktop\PythonProjects\Ammonia Project\pythonProject1\NOVEMBER AP Model"
-root_path = rf'{ROOT_FILES}\v14_DATASET'
-matchings = ['yearly', 'monthly', 'hourly']
-CBAM = ['', '_CBAM']
+root_path = rf"{ROOT_FILES}\v14_DATASET"
+matchings = ["yearly", "monthly", "hourly"]
+CBAM = ["", "_CBAM"]
 times = [2023, 2030]
-scenarios = ['B', 'C', 'D']
-technologies = ['AP_SMR', 'AP_CCS', 'AP_BH2S', 'AP_AEC']
-CI_technologies = ['AP SMR', 'AP CCS', 'AP BH2S', 'AP AEC']
-metrics = ['_NPV', '_CAC', '_Potential', '_CE', '_CAPEX', '_OPEX', '_support_45V', '_support_45Q', '_support_45Y',
-           '_support_48E']
+scenarios = ["B", "C", "D"]
+technologies = ["AP_SMR", "AP_CCS", "AP_BH2S", "AP_AEC"]
+CI_technologies = ["AP SMR", "AP CCS", "AP BH2S", "AP AEC"]
+metrics = [
+    "_NPV",
+    "_CAC",
+    "_Potential",
+    "_CE",
+    "_CAPEX",
+    "_OPEX",
+    "_support_45V",
+    "_support_45Q",
+    "_support_45Y",
+    "_support_48E",
+]
 
 
 datafiles = {}
 
 for matching in matchings:
     for C in CBAM:
-        temp = C if matching == 'monthly' else ''
-        baselineData = load_excel_sheets(root_path + temp + '_' + matching + '.xlsx')
+        temp = C if matching == "monthly" else ""
+        baselineData = load_excel_sheets(root_path + temp + "_" + matching + ".xlsx")
         datafiles[matching + temp] = baselineData
 
 # Clean the data into scenarios and timeframe
 cleaned_datafiles_with_matching = {time: {} for time in times}
 
-#Manually get CI Files
+# Manually get CI Files
 CI_data = {
-    'AP CCS': datafiles[list(datafiles.keys())[0]]['CI_AP CCS'],
-    'AP BH2S': datafiles[list(datafiles.keys())[0]]['CI_AP BH2S'],
-    'AP AEC': datafiles[list(datafiles.keys())[0]]['CI_AP AEC'],
-    'AP SMR': datafiles[list(datafiles.keys())[0]]['CI_AP SMR']
+    "AP CCS": datafiles[list(datafiles.keys())[0]]["CI_AP CCS"],
+    "AP BH2S": datafiles[list(datafiles.keys())[0]]["CI_AP BH2S"],
+    "AP AEC": datafiles[list(datafiles.keys())[0]]["CI_AP AEC"],
+    "AP SMR": datafiles[list(datafiles.keys())[0]]["CI_AP SMR"],
 }
 
 # Process each file and clean the data with additional checks for columns
@@ -67,30 +79,36 @@ for key, file_data in datafiles.items():
             technology = sheet_name.replace("CI_", "").replace(" ", "_")
 
             # For each time in the dataframe
-            for time in df['time'].unique():
+            for time in df["time"].unique():
                 if matching_type not in cleaned_datafiles_with_matching[time]:
                     cleaned_datafiles_with_matching[time][matching_type] = {}
                 if "CI" not in cleaned_datafiles_with_matching[time][matching_type]:
                     cleaned_datafiles_with_matching[time][matching_type]["CI"] = {}
-                cleaned_datafiles_with_matching[time][matching_type]["CI"][technology] = df[df['time'] == time].copy()
+                cleaned_datafiles_with_matching[time][matching_type]["CI"][technology] = df[
+                    df["time"] == time
+                ].copy()
 
-        elif 'time' in df.columns and 'scenario' in df.columns:  # Check if the columns exist before grouping
+        elif (
+            "time" in df.columns and "scenario" in df.columns
+        ):  # Check if the columns exist before grouping
             # Group by time and scenario
-            grouped = df.groupby(['time', 'scenario'])
+            grouped = df.groupby(["time", "scenario"])
 
             for (time, scenario), group_df in grouped:
                 if matching_type not in cleaned_datafiles_with_matching[time]:
                     cleaned_datafiles_with_matching[time][matching_type] = {}
                 if scenario not in cleaned_datafiles_with_matching[time][matching_type]:
                     cleaned_datafiles_with_matching[time][matching_type][scenario] = {}
-                cleaned_datafiles_with_matching[time][matching_type][scenario][sheet_name] = group_df.copy()
+                cleaned_datafiles_with_matching[time][matching_type][scenario][sheet_name] = (
+                    group_df.copy()
+                )
 
 for time_key, matching_data in cleaned_datafiles_with_matching.items():
     for matching_type, scenario_data in matching_data.items():
         if "CI" in scenario_data:
             CI_data = scenario_data["CI"]
             for tech, tech_df in CI_data.items():
-                grouped = tech_df.groupby(['time', 'scenario'])
+                grouped = tech_df.groupby(["time", "scenario"])
                 for (time, scenario), group_df in grouped:
                     if scenario not in scenario_data:
                         scenario_data[scenario] = {}
@@ -99,15 +117,17 @@ for time_key, matching_data in cleaned_datafiles_with_matching.items():
                     scenario_data[scenario][f"CI_{tech}"] = group_df.copy()
             del scenario_data["CI"]  # Remove the original ungrouped CI data
 
+
 def aggregate_lists(series):
     flattened_list = [item for sublist in series for item in sublist]
     return {
-        'median': np.median(flattened_list),
-        'q25': np.percentile(flattened_list, 25),
-        'q75': np.percentile(flattened_list, 75),
-        'min': min(flattened_list),
-        'max': max(flattened_list)
+        "median": np.median(flattened_list),
+        "q25": np.percentile(flattened_list, 25),
+        "q75": np.percentile(flattened_list, 75),
+        "min": min(flattened_list),
+        "max": max(flattened_list),
     }
+
 
 all_frames_to_combine = {}
 
@@ -115,23 +135,25 @@ for time in times:
     for matching in cleaned_datafiles_with_matching[time]:
         for scenario in scenarios:
             for key, metric in cleaned_datafiles_with_matching[time][matching][scenario].items():
-                all_frames_to_combine[key] = [] if key not in all_frames_to_combine else all_frames_to_combine[key]
+                all_frames_to_combine[key] = (
+                    [] if key not in all_frames_to_combine else all_frames_to_combine[key]
+                )
 
                 logging.info(f"Added entry {key} to all_frames_dictionary")
 
                 metric = metric.describe()
                 logging.info(f"Columns: {metric.columns} and {metric.index}")
-                if 'simulation' in metric.columns:
-                    metric.drop(['time','simulation'],inplace=True, axis=1)
-                elif 'sim' in metric.columns:
-                    metric.drop(['time', 'sim'], inplace=True, axis=1)
-                elif 'Simulation' in metric.columns:
-                    metric.drop(['time', 'Simulation'], inplace=True, axis=1)
+                if "simulation" in metric.columns:
+                    metric.drop(["time", "simulation"], inplace=True, axis=1)
+                elif "sim" in metric.columns:
+                    metric.drop(["time", "sim"], inplace=True, axis=1)
+                elif "Simulation" in metric.columns:
+                    metric.drop(["time", "Simulation"], inplace=True, axis=1)
 
-                metric.insert(0, 'statistic', metric.index)
-                metric.insert(0, 'matching', matching)
-                metric.insert(0, 'time', time)
-                metric.insert(0, 'scenario', scenario)
+                metric.insert(0, "statistic", metric.index)
+                metric.insert(0, "matching", matching)
+                metric.insert(0, "time", time)
+                metric.insert(0, "scenario", scenario)
 
                 logging.info(f"Succesfully labeled column with matching: {matching}")
 
@@ -140,9 +162,10 @@ for time in times:
 
 
 for key in all_frames_to_combine.keys():
-    all_frames_to_combine[key] = pd.concat(all_frames_to_combine[key],axis=0)
+    all_frames_to_combine[key] = pd.concat(all_frames_to_combine[key], axis=0)
 
 logging.info("Succesfully concateinated all data into the metrics")
+
 
 def dataframes_to_excel(dfs, file_name):
     """
@@ -165,10 +188,9 @@ def dataframes_to_excel(dfs, file_name):
                         sub_df.to_excel(writer, sheet_name=sub_sheet_name, index=False)
                 else:
                     df.to_excel(writer, sheet_name=sheet_name, index=False)
-        print(f'Successfully written to {file_name}')
+        print(f"Successfully written to {file_name}")
     except Exception as e:
-        print(f'An error occurred: {e}')
-
-dataframes_to_excel(all_frames_to_combine, f'{ROOT_FILES}/visuals/AP_NE_Statistics.xlsx')
+        print(f"An error occurred: {e}")
 
 
+dataframes_to_excel(all_frames_to_combine, f"{ROOT_FILES}/visuals/AP_NE_Statistics.xlsx")
