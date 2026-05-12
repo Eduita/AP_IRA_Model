@@ -89,5 +89,6 @@ ignore = [
 
 # ── Pytest ───────────────────────────────────────────────────────────────────
 [tool.pytest.ini_options]
-testpaths = ["refactor"]
-addopts   = "-v --tb=short"
+testpaths    = ["refactor"]
+addopts      = "-v --tb=short"
+norecursedirs = [".venv", "*.egg-info", ".git", "dist", "build"]
