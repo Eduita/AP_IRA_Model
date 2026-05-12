@@ -1,0 +1,9 @@
+# Default owner for everything in the repo.
+# PRs require review from @Eduita before merging.
+* @Eduita
+
+# Research paper — extra care; any change needs the lead author.
+/paper/ @Eduita
+
+# Shared input data — any change must be reviewed by the lead author.
+/data/ @Eduita

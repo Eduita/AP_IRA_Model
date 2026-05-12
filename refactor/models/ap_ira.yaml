@@ -1,0 +1,89 @@
+# AP IRA Model Configuration
+# Stochastic financial analysis of ammonia production technologies under U.S. IRA tax credits
+# Reference: https://doi.org/10.1038/s41467-025-56006-6
+
+name: AP IRA Model
+version: "1.0"
+
+# ── Model dimensions ────────────────────────────────────────────────────────
+scenarios:
+  - A   # Grid electricity (AEO 2022 projections)
+  - B   # Grid electricity (AEO 2023 projections)
+  - C   # Dedicated renewable + storage (wind/solar/battery)
+  - D   # Power Purchase Agreement (PPA)
+
+technologies:
+  - AP SMR      # Steam methane reforming (baseline)
+  - AP CCS      # SMR with carbon capture & storage
+  - AP BH2S     # Biomass-powered hydrogen synthesis
+  - AP AEC      # Alkaline electrolysis cell (green H2)
+
+time_horizons:
+  - 2023
+  - 2030
+
+# ── Simulation settings ──────────────────────────────────────────────────────
+simulation:
+  n_simulations: 400        # Monte Carlo draws per (scenario × time horizon)
+  matching: monthly         # temporal matching: yearly | monthly | hourly
+  L: 480                    # plant operating lifetime in months (40 years)
+  cbam: false               # include EU CBAM CO2 price
+
+# ── Data sources (relative to project root) ──────────────────────────────────
+data:
+  aeo_energy_mix: data/AEO22_AEO23_energy_mix_fraction.xlsx
+
+# ── Pipeline: ordered list of calculation stages ─────────────────────────────
+# Stages run in order for every simulation iteration.
+# Each stage reads from SimContext.data and writes new keys back.
+#
+# To swap a stage (e.g. use a custom CAPEX model):
+#   1. Implement a subclass of ap_ira_lib.pipeline.base.Stage
+#   2. Point `module` and `class` at your new implementation
+#
+pipeline:
+  - id: parameter_sampling
+    module: ap_ira_lib.pipeline.stages
+    class: ParameterSamplingStage
+    config:
+      parameters_file: data/input_parameters.json
+
+  - id: location_setup
+    module: ap_ira_lib.pipeline.stages
+    class: LocationSetupStage
+    config:
+      optimization_file: power_markets/solar_optimization_results.xlsx
+
+  - id: engineering_setup
+    module: ap_ira_lib.pipeline.stages
+    class: EngineeringSetupStage
+
+  - id: carbon_intensity_setup
+    module: ap_ira_lib.pipeline.stages
+    class: CarbonIntensitySetupStage
+    config:
+      ppa_file: data/PPA_output.xlsx
+      times: [2023, 2030]
+      matching_types: [yearly, monthly, hourly]
+
+  - id: capex
+    module: ap_ira_lib.pipeline.stages
+    class: CAPEXStage
+
+  - id: opex
+    module: ap_ira_lib.pipeline.stages
+    class: OPEXStage
+
+  - id: dcf
+    module: ap_ira_lib.pipeline.stages
+    class: DCFStage
+    config:
+      outputs_enabled:
+        npv: true
+        cac: true
+        carbon_intensity: true
+        tax_credits: true
+
+# ── Output configuration ─────────────────────────────────────────────────────
+outputs:
+  directory: results

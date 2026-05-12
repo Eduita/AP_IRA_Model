@@ -42,16 +42,17 @@ def convert_string_to_list(df):
     Returns:
     DataFrame: A DataFrame with string lists converted to actual lists.
     """
-    for column in df:
-        for idx, value in df[column].items():
-            # Check if the value is a string that represents a list
-            if isinstance(value, str) and value.startswith('[') and value.endswith(']'):
-                try:
-                    # Convert the string to a list
-                    df.at[idx, column] = eval(value)
-                except:
-                    # If the conversion fails, keep the original value
-                    pass
+    def _try_eval(value):
+        if isinstance(value, str) and value.startswith('[') and value.endswith(']'):
+            try:
+                return eval(value)
+            except Exception:
+                pass
+        return value
+
+    for column in df.columns:
+        if df[column].dtype == object:
+            df[column] = df[column].apply(_try_eval)
     return df
 
 CLEANED_DATA = convert_string_to_list(DATA)
