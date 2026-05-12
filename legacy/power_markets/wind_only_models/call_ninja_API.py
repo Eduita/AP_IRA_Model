@@ -1,14 +1,18 @@
-import pandas as pd
-import requests
+import os
 import json
 
-CU_token = "***REMOVED_CU_TOKEN***"
-WPI_token = "***REMOVED_WPI_TOKEN***"
-myToken = '***REMOVED_MY_TOKEN***'
+import pandas as pd
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+CU_token = os.environ["NINJA_CU_TOKEN"]
+WPI_token = os.environ["NINJA_WPI_TOKEN"]
+myToken = os.environ["NINJA_MY_TOKEN"]
 api_base = 'https://www.renewables.ninja/api/'
 
 s = requests.session()
-# Send token header with each request
 s.headers = {'Authorization': 'Token ' + WPI_token}
 url = api_base + 'data/wind'
 

@@ -2,7 +2,6 @@
 name = "ap-ira-model"
 version = "1.0.0"
 description = "Stochastic financial analysis of ammonia production technologies under U.S. IRA tax credits"
-readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=1.26",
@@ -16,6 +15,8 @@ dependencies = [
     "pytz>=2024.1",
     "pyyaml>=6.0",
     "python-dotenv>=1.0",
+    "dagster>=1.9",
+    "dagster-webserver>=1.9",
 ]
 
 [project.scripts]
@@ -26,7 +27,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["ap_ira_lib"]
+packages = ["ap_ira_lib", "ap_ira_dagster"]
+
+[tool.dagster]
+module_name = "ap_ira_dagster"
 
 [tool.uv]
 dev-dependencies = [
