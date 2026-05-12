@@ -1,0 +1,1920 @@
+\documentclass{article}
+
+\usepackage[version=4]{mhchem} % Formula subscripts using \ce{}
+\usepackage{amsmath}
+\usepackage[super,numbers,sort&compress]{natbib} % For citations
+\usepackage{lineno} % linenumbers
+\usepackage{geometry} % For setting the margins
+\usepackage{setspace} % For setting line spacing
+\usepackage{graphicx} % For including images
+\usepackage{enumitem} % For customizing lists
+\usepackage{caption} % For customizing captions
+\usepackage{fancyhdr} % For customizing headers and footers
+\usepackage{hyperref} % For hyperlinks
+\usepackage{wrapfig} % For wrapping text around figures
+\usepackage{float} % For better figure placement
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{breqn}
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{etoc} % Add this package
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{}
+\renewcommand\numberline[1]{}
+\makeatother
+
+\geometry{margin=1in}
+\renewcommand{\figurename}{Supplementary Figure}
+\renewcommand{\tablename}{Supplementary Table}
+\renewcommand{\theequation}{\arabic{equation}}
+
+\title{\vspace{-1cm}\LARGE \textbf{Supplementary Information}\\[1cm] \LARGE Energy and Climate Policy Implications on the Deployment of Low-Carbon Ammonia Technologies}
+
+\title{Energy and Climate Policy Implications on the Deployment of Low-Carbon Ammonia Technologies}
+
+\author{Chi Kong Chyong\textsuperscript{1,2}, Eduardo Italiani\textsuperscript{2}, Nikolaos Kazantzis\textsuperscript{3}}
+\date{}
+
+\begin{document}
+
+\linenumbers
+
+\maketitle
+
+\noindent\textsuperscript{1} Oxford Institute for Energy Studies, Oxford, OX2 6FA, UK\\
+\textsuperscript{2} Center on Global Energy Policy, School of International and Public Affairs, Columbia University, New York, NY 10027, USA\\
+\textsuperscript{3} Department of Chemical Engineering, Worcester Polytechnic Institute, Worcester, MA 01609, USA\\
+Corresponding author: Kong.Chyong@oxfordenergy.org
+
+
+\tableofcontents
+
+\section{Supplementary Methods}
+
+\subsection{Technical Methods}
+
+The technical underpinnings of the proposed techno-economic performance assessment framework are associated with a fixed-scale configuration of various integrated process units found in the pertinent literature as various process units illustrated in supplementary figure \ref{fig:si_technology_schematic_labeled}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/technology_schematic_cite_labeled.png} 
+  \caption{
+    Structure of composite technical process system. This figure provides a simplified illustration of the structure of a composite technical process system. Abbreviations used: SMR stands for steam-methane reforming, and WGS stands for water-gas shift.
+  }
+  \label{fig:si_technology_schematic_labeled}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+
+The design concept underlying the ammonia process system under consideration is aligned with the well-known Linde Ammonia Concept (LAC) \cite{Amhamed2022}. The advantage of this process design (as opposed to the Kellog-Braun approach) is that the air separation unit is separate from the SMR process, reducing the capacity requirements of the SMR equipment and thus reducing the overall cost. LAC is also easy to simulate as each process block/unit can be treated isolated.
+	
+The rest of this section is dedicated to explaining how we combined these process blocks/units in an integrated process system configuration and formed the requisite technical foundations of this study.
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature for supplementary technical methods.}
+  \label{table:si_techical1_nomenclature}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lll@{}}
+      \toprule
+      \textbf{Variable} & \textbf{Description} & \textbf{Units} \\ \midrule
+      $\eta_{\text{AEC}}$ & Electrolysis efficiency, LHV basis & H$_2$ LHV \\ 
+      $h_{\text{H}_2}^{\text{LHV}}$ & Hydrogen LHV & kWh per kg \\ 
+      $\dot{M}_{\text{H}_2}$ & Hydrogen production flowrate & Tonnes per day (TPD) \\ 
+      $\dot{M}_{\text{NH}_3}$ & Ammonia production flowrate & TPD \\ 
+      $R_{\text{CO}_2}$ & CCS CO$_2$ Capture rate & w\% per w\% \\ 
+      $h_{\text{NG}}^{\text{LHV}}$ & Natural gas LHV & MJ per kg \\ 
+      $\dot{M}_{\text{biomass}}$ & Mass flowrate of biomass & TPD \\ 
+      $Y_{\text{biomass}}$ & Kg of hydrogen per tonne of biomass & Kg H$_2$ per tonne biomass \\ 
+      $\dot{M}_{\text{NG}_j}$ & Energy flowrate of natural gas for technology $j$ & MMbtu per year \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item Abbreviations: AEC, alkaline electrolysis cell; LHV, lower heating value; H$_2$, hydrogen; NH$_3$, ammonia; CCS, carbon capture and storage; CO$_2$, carbon dioxide; NG, natural gas; TPD, tonnes per day; MMbtu, million British thermal units.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+\subsection{Technical Methods for AP SMR and AP CCS}
+
+The hydrogen production details were based on NETL's economic analysis reports, particularly Case 1, involving a conventional SMR option, and Case 2, associated with conventional SMR with an integrated CCS system \cite{LEWIS2022}. For large-scale production of N\textsubscript{2}, cryogenic distillation is preferred. The process for the ASU was also obtained from Young et al. \cite{Young2021}. Finally, the ammonia synthesis loop came from NETL's report by Bransington et al., particularly Case 4, stream 38 \cite{Brasington2011}.
+
+Supplementary table \ref{table:si_technical2_inlet_outlet_streams} contains all relevant inlet and outlet streams of the three LAC production blocks necessary for the design of the multi-stage compression. The resulting scale is 2717 TPD of NH\textsubscript{3}, assuming a nitrogen conversion of 99.9\% through HB \cite{Brasington2011}. The ASU study scale was increased by 6.15\% (2100 TPD to 2237 TPD) to match hydrogen production in a 3:1 H\textsubscript{2} per N\textsubscript{2} (H\textsubscript{2} flowrate in supplementary table \ref{table:si_technical2_inlet_outlet_streams}) molar ratio \cite{LEWIS2022, Young2021}.
+
+The PFD, mass, and energy information of the multi-stage compression and cooling used to integrate the SMR-WGS hydrogen and the ASU nitrogen into the Haber-Bosch loop and electricity generation from surplus steam can be found in supplementary figure \ref{fig:si_non_aec_aspen} and supplementary table \ref{table:si_technical4_stream_information}. All compressors are modeled as isentropic. The steam turbine was assumed to have an isentropic efficiency of 72\% and the make-up compressors 85\%, while the resulting work was more than 50MW. The latter is an overestimate compared to EIAGHG’s report on SMR AP; hence, we assume a generation of 25MW, which closely resembles the results in the EIAGHG report \cite{IEAGHG2017}.
+
+AP CCS and AP AEC will not include the CAPEX of the steam turbine as surplus steam is not generated. AP SMR and AP BH2S will include the steam turbine. See the attached Excel file with the equipment list called \textit{AP\_NE\_Equipment\_List.xlsx}.
+
+\begin{table}[H]
+  \centering
+  \caption{Inlet and outlet streams of selected literature processes.}
+  \label{table:si_technical2_inlet_outlet_streams}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lcccc@{}}
+      \toprule
+      & \textbf{H$_2$ Outlet \cite{LEWIS2022}} & \textbf{N$_2$ Outlet \cite{Young2021}} & \textbf{Surplus Steam from H$_2$ \cite{LEWIS2022}} & \textbf{NH\textsubscript{3} Inlet \cite{Brasington2011}} \\ \midrule
+      \textbf{Flowrate [TPD]} & 483.02 & 2,100.4 & 18,617.0 & 2,632.9 \\
+      \textbf{Temperature [C]} & 30 & 40 & 399 & 21 \\
+      \textbf{Pressure [MPa]} & 6.48 & 0.0980 & 3.1 & 13.614 \\
+      \textbf{Vapor Fraction} & 1 & 1 & 1 & 1 \\
+      \textbf{H$_2$ [mol per mol]} & 0.9998 & 0.0000 & 0.0000 & 0.7490 \\
+      \textbf{N$_2$ [mol per mol]} & 0.0002 & 1.0000 & 0.0000 & 0.2500 \\
+      \textbf{H$_2$O [mol per mol]} & 0.0000 & 0.0000 & 1.0000 & 0.0000 \\
+      \textbf{O$_2$ [mol per mol]} & 0.0000 & 243 ppb & 0.0000 & 0.0000 \\
+      \textbf{Ar [mol per mol]} & 0.0000 & 18 ppm & 0.0000 & 0.0010 \\
+      \textbf{Total [mol per mol]} & 1.0000 & 1.0000 & 1.0000 & 1.0000 \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item Abbreviations: H$_2$, hydrogen; N$_2$, nitrogen; NH$_3$, ammonia; TPD, tonnes per day; C, degrees Celsius; MPa, megapascal; ppb, parts per billion; ppm, parts per million.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/non_aec_aspen_sim.png} 
+  \caption{
+    Compression system for ammonia technologies. The figure illustrates the compression systems for different ammonia production technologies: AP CCS (Ammonia Plant with Carbon Capture System), AP BH2S (Ammonia Plant using Biomass Gasification coupled with Steam Methane Reforming), and AP SMR (Ammonia Plant using Steam Methane Reforming). Note that AP CCS does not generate electricity.
+  }
+  \label{fig:si_non_aec_aspen}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+\begin{table}[H]
+  \centering
+  \caption{Stream information for make-up compression and steam turbine for AP SMR, AP CCS, and AP BH$_2$S.}
+  \label{table:si_technical4_stream_information}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lcccccc@{}}
+      \toprule
+      & \textbf{H$_2$FEED} & \textbf{N$_2$FEED} & \textbf{REACTANT} & \textbf{STEAM IN} & \textbf{STEAM OUT} & \textbf{NH$_3$_OUT} \\ \midrule
+      \textbf{Flowrate [TPD]} & 483.0 & 2237.0 & 2720.0 & 18617.0 & 18617.0 & 2717.0 \\
+      \textbf{Flowrate [kmol per hr]} & 9958.0 & 3327.3 & 13285.3 & 43058.4 & 43058.4 & 6647.4 \\
+      \textbf{Temperature [C]} & 30 & 40 & 26.6 & 399 & 109.3 & 21 \\
+      \textbf{Pressure [MPa]} & 6.48 & 0.098 & 13.614 & 3.1 & 0.1 & 13.614 \\
+      \textbf{Vapor Fraction} & 1 & 1 & 1 & 1 & 1 & 1 \\
+      \textbf{H$_2$ [mol per mol]} & 1.000 & 0.000 & 0.749 & 0.000 & 0.000 & 0.000 \\
+      \textbf{N$_2$ [mol per mol]} & 0.000 & 1.000 & 0.251 & 0.000 & 0.000 & 0.000 \\
+      \textbf{H$_2$O [mol per mol]} & 0.000 & 0.000 & 0.000 & 1.000 & 1.000 & 0.000 \\
+      \textbf{O$_2$ [mol per mol]} & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+      \textbf{Ar [mol per mol]} & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 \\
+      \textbf{NH$_3$ [mol per mol]} & 0.000 & 0.000 & 0.000 & 0.000 & 0.000 & 1.000 \\
+      \textbf{Total [mol per mol]} & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item Abbreviations: H$_2$, hydrogen; N$_2$, nitrogen; NH$_3$, ammonia; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; TPD, tonnes per day; kmol per hr, kilomoles per hour; C, degrees Celsius; MPa, megapascal.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+\subsection{Technical Methods for AP BH2S}
+
+The AP BH2S unit was obtained from Spath et al. and was combined with the inlet of the SMR-WGS hydrogen production process \cite{Spath2005}. Specifically, stream 327 of the current design for BH2S was combined with stream 3 of Case 1 of Lewis et al. \cite{LEWIS2022, Spath2005}. Table A 3 includes the difference in the stream compositions before entering the SMR reactor. The SMR reactors for both studies are modeled as equilibrium reactors with similar design parameters (S/C ratio, pressure, and temperature) \cite{LEWIS2022, Spath2005}. Hence, for the BH2S scenario, we assume that the SMR outlet composition, temperature, and pressure differences are negligible for this techno-economic analysis. Given this assumption, we assume the process equipment before the SMR reactor comes from Spath et al. \cite{Spath2005}. After the SMR reactor, we assume the equipment from Lewis et al. \cite{LEWIS2022} is used. To ascertain the amount of biomass required to fulfill the hydrogen production of the SMR process in Lewis et al. \cite{LEWIS2022}, we use the hydrogen yield from dry biomass by Spath et al. \cite{Spath2005}. Calculation formula found below in supplementary equation (\ref{eq:tech_S1}).
+
+\begin{equation}
+M_{\text{biomass}} = M_{\text{H}_2} \times 1000 \times \frac{1}{Y_{\text{biomass}}}
+\label{eq:tech_S1}
+\end{equation}
+
+\subsection{Technical Methods for AP AEC}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/aec_aspen_sim.png} 
+  \caption{
+    Compression system for ammonia technologies. This figure illustrates the compression system for ammonia production through alkaline electrolysis. Abbreviations used: AEC stands for Alkaline Electrolysis Cell.
+  }
+  \label{fig:si_aec_aspen}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+For the electrolysis system, the CAPEX and OPEX values were obtained from the literature \cite{Bohm2020, Schmidt2017}. A robust study by Sousa and colleagues estimated the outlet conditions of the electrolysis hydrogen stream – their values were used to model the inlet in the compression module \cite{Sousa2022}. We acknowledge that Sousa and colleagues prefer PEM, not AEC, as the technology option. Nevertheless, this assumption is appropriate. The outlet hydrogen stream from PEM and AEC are found under similar conditions. Schmidt et al. indicate that AEC H\textsubscript{2} outlet conditions are less than 30 bar and 60-80 C\textsuperscript{o}. Sousa et al.’s H\textsubscript{2} outlet conditions are 29 bar and 65 C\textsuperscript{o}; therefore, this assumption holds \cite{Sousa2022, Schmidt2017}. Hence, the only difference between AEC and PEM using our modeling methodology would be the cost per kW of capacity, energy efficiency, and cell lifetime. We tune these parameters to AP AEC (see supplementary economic methods).
+
+The water content in the hydrogen stream is separated by a separator block in ASPEN and is cost-estimated as a cylindrical vertical vessel (2m diameter by 10m length) using the heuristics proposed by Turton et al. \cite{Turton2018} (see Excel file named \textit{AP\_NE\_Equipment\_List.xlsx}).
+
+\begin{table}[H]
+  \centering
+  \caption{BH$_2$S composition difference between Lewis et al. (2022) and Spath et al. (2005) at the SMR inlet.}
+  \label{table:si_technical3_bh2s_composition}
+  \begin{threeparttable}
+    \begin{tabular}{@{}p{0.4\linewidth}p{0.25\linewidth}p{0.25\linewidth}@{}}
+      \toprule
+      \textbf{Species} & \textbf{Xi AP} & \textbf{Xi AP BH$_2$S} \\ \midrule
+      H$_2$O & 67.6\% & 40\% \\
+      H$_2$ & 4.3\% & 32\% \\
+      CO & 0\% & 19\% \\
+      CO$_2$ & 1.7\% & 8\% \\
+      CH$_4$ & 25.8\% & 1\% \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item Abbreviations: H$_2$O, water; H$_2$, hydrogen; CO, carbon monoxide; CO$_2$, carbon dioxide; CH$_4$, methane; Xi AP, species composition from Lewis et al. (2022); Xi AP BH$_2$S, species composition from Spath et al. (2005).
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+
+
+\begin{table}[H]
+  \centering
+  \caption{Key technical parameters.}
+  \label{table:si_technical5_key_technical_parameters}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $\dot{M}_{\text{NH}_3}$ & 2717 & TPD & Calculated assuming 99.9\% conversion of N$_2$ \\
+      $\dot{M}_{\text{H}_2}$ & 483.013 & TPD & \cite{LEWIS2022} \\
+      $\eta_{\text{AEC}}$ & uniform(70\%, 78\%) & - & \cite{Brauns2020} \\
+      $h_{\text{H}_2}^{\text{LHV}}$ & 33.3333 & kWh per kg & \\
+      $R_{\text{CO}_2}$ & 95.6\% & W\%/w\% & \cite{LEWIS2022} \\
+      $h_{\text{NG}}^{\text{LHV}}$ & 47.1 & MJ per kg & \cite{LEWIS2022}  \\
+      $Y_{\text{biomass}}$ & 70.1 & Kg H$_2$ per tonne biomass & \cite{Spath2005} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $\dot{M}_{\text{NH}_3}$, ammonia production flowrate; $\dot{M}_{\text{H}_2}$, hydrogen production flowrate; $\eta_{\text{AEC}}$, alkaline electrolysis cell efficiency; $h_{\text{H}_2}^{\text{LHV}}$, lower heating value of hydrogen; $R_{\text{CO}_2}$, carbon capture and storage CO$_2$ capture rate; $h_{\text{NG}}^{\text{LHV}}$, lower heating value of natural gas; $Y_{\text{biomass}}$, hydrogen yield from biomass; TPD, tonnes per day; W\%/w\%, weight percent; MJ, megajoule; kWh, kilowatt-hour.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Electricity requirements.}
+  \label{table:si_technical_6electricity_requirements}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      \textbf{AP SMR} & HP: 13, AP: 64 & MW & \cite{LEWIS2022,Brasington2011,Young2021,Spath2005} \\
+      \textbf{AP CCS} & HP: 41, AP: 117 & MW & \\
+      \textbf{AP BH$_2$S} & HP: 76.6, AP: 127 & MW & \\
+      \textbf{AP AEC} & HP: $\frac{\dot{M}_{\text{H}_2} \times h_{\text{H}_2}^{\text{LHV}} \times 1000}{\eta_{\text{AEC}}}$, AP: $\frac{\dot{M}_{\text{H}_2} \times h_{\text{H}_2}^{\text{LHV}} \times 1000}{\eta_{\text{AEC}}} + 52$ & MW & \cite{LEWIS2022,Brasington2011,Young2021,Bohm2020} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item HP stands for hydrogen production and shows the electricity demand for hydrogen production. AP is ammonia production including hydrogen production, Haber-Bosch (HB) process, air separation unit (ASU), and compression system. Abbreviations: MW, megawatt; $\dot{M}_{\text{H}_2}$, hydrogen production flowrate; $h_{\text{H}_2}^{\text{LHV}}$, lower heating value of hydrogen; $\eta_{\text{AEC}}$, alkaline electrolysis cell efficiency.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+\begin{table}[H]
+  \centering
+  \caption{Natural gas requirements, $M_{\text{NG}_j}$.}
+  \label{table:si_technical7_natural_gas_requirements}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      \textbf{AP SMR} & 25,039,232.02 & MMBtu per yr & \cite{LEWIS2022} \\
+      \textbf{AP CCS} & 26,624,225.74 & MMBtu per yr & \cite{LEWIS2022} \\
+      \textbf{AP BH$_2$S} & 0 & MMBtu per yr & Assumption \\
+      \textbf{AP AEC} & 0 & MMBtu per yr & Assumption \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item The natural gas flowrates were directly obtained from case 1 and 2 of Lewis et al.\cite{LEWIS2022}. Refer to stream number 3. We used the $h_{\text{NG}}^{\text{LHV}}$ and the MMBtu conversion factor to convert to energy units. Abbreviations: $M_{\text{NG}_j}$, natural gas energy flowrate for technology $j$; AP, ammonia production; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell; MMBtu, million British thermal units; $h_{\text{NG}}^{\text{LHV}}$, lower heating value of natural gas.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+\begin{table}[H]
+  \centering
+  \caption{Water demand.}
+  \label{table:si_technical8_water_demand}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      \textbf{AP SMR} & 52,709,532,285 & Kg per year & \cite{LEWIS2022,Brasington2011,Young2021,Spath2005} \\
+      \textbf{AP CCS} & 54,034,044,285 & Kg per year & \\
+      \textbf{AP BH$_2$S} & 53,448,253,002 & Kg per year & \\
+      \textbf{AP AEC Osmosis$^A$} & 1,332,790,200, 73,077,302,619 & Kg per year & \cite{LEWIS2022,Brasington2011,Young2021,Sousa2022} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item \textsuperscript{A} The first value provided is the reverse osmosis flowrate. The second value is the process water demand. For more details on how the water demand was calculated, see the annexed Excel file called \texttt{AP\_NE\_Water\_Balance.xlsx}. Abbreviations: AP, ammonia production; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell; Kg, kilogram.
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+\subsection{Techno-Economic Methods}
+
+This section aims to determine the equipment capacities for the AP process by combining the processes discussed in the previous section. These equipment capacities directly influence the capital expenditure (CAPEX\textsubscript{j}) associated with technology \( j \), as defined in supplementary equation (2):
+
+\begin{equation}
+j \in \{\text{AP SMR}, \text{AP CCS}, \text{AP BH}_2\text{S}, \text{AP AEC}\}
+\label{eq:S2}
+\end{equation}
+
+
+Additionally, the demands for feedstock, utilities, and other raw materials can be obtained from the mass and energy balances from the reports. This will constitute the variable operating costs. The fixed operating costs, however, are estimated based on the number of unit operations required to operate the plant. These types of costs constitute the operational expenditure (OPEX\textsubscript{j}).
+
+The goal of this section is to describe the methodology used to estimate the CAPEX\textsubscript{j} and OPEX\textsubscript{j} for each technology option, following the techno-economic approach outlined by Peters et al. \cite{Peters2003}. These two quantities will allow for calculating the desired financial variables in ensuing sections (i.e., NPV, CAC, etc.).
+
+\subsection{Techno-Economic Methods for CAPEX}
+
+
+
+The full nomenclature for CAPEX variables can be found in supplementary table \ref{table:capex_nomenclature}. Values for heuristics used to arrive at the CAPEX are in supplementary table \ref{table:xz_values_excluding_wcj}. Installed and uninstalled costs can be found in supplementary table \ref{table:ec_values}.
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature for the CAPEX section.}
+  \label{table:capex_nomenclature}
+  \begin{threeparttable}
+    \begin{tabular}{@{}llc@{}}
+      \toprule
+      \textbf{Parameter} & \textbf{Description} & \textbf{Units} \\ \midrule
+      $j$ & Technology index & \\
+      $z$ & Cost factor index & \\
+      $x_z$ & CAPEX cost factor & \% EC$_{u_j}$ \\
+      $CAPEX_j$ & Capital Expenditure cost for technology $j$ & \$ \\
+      $P_{(n_0,t_0,z)}$ & Base capacity equipment cost & \$ \\
+      $m_n$ & Number of spare equipment units required & N \\
+      $S_n$ & Required equipment capacity & \\
+      $S_{n0}$ & Base capacity & \\
+      $i$ & Installation cost factor & \\
+      $f$ & Equipment economies of scale factor \cite{Peters2003} & \\
+      $C_{t_0}$ & Chemical engineering plant index at $t_0$ & \\
+      $C_{2023}$ & Chemical engineering plant index in 2023 & \\
+      $M_{\text{NG}}$ & Energy flowrate of natural gas & MMBtu per year \\
+      $M_{\text{EL}}$ & Electricity demand & kWh per year \\
+      $C_{\text{EL}}(T)$ & Electricity operating hour & hour \\
+      $CAPEX_{\text{updated}_j}$ & Updated CAPEX after adding the additional cost & \$ \\
+      $FCI_j$ & Fixed capital investment of technology $j$ & \$ \\
+      $EC_{u_j}$ & Uninstalled cost for technology $j$ & \$ \\
+      $EC_{i_j}$ & Installed cost for technology $j$ & \$ \\
+      $WC_j$ & Working capital for technology $j$ & \$ \\
+      $C_{\text{I\&C}}$ & Cost factor for instrumentation and controls & \% EC$_{u_j}$ \\
+      $C_p$ & Cost factor for piping & \% EC$_{u_j}$ \\
+      $C_{\text{el}}$ & Cost factor for electrical & \% EC$_{u_j}$ \\
+      $C_b$ & Cost factor for buildings & \% EC$_{u_j}$ \\
+      $C_{\text{sf\&yi}}$ & Cost factor for service facilities and yard improvements & \% EC$_{u_j}$ \\
+      $C_{\text{land}}$ & Cost factor for land & \% EC$_{u_j}$ \\
+      $C_{\text{eng}}$ & Cost factor for engineering & \% EC$_{u_j}$ \\
+      $C_L$ & Cost factor for legal & \$ \\
+      $C_c$ & Cost factor for construction & \% EC$_{u_j}$ \\
+      $C_{\text{co}}$ & Cost factor for contingency & \% EC$_{u_j}$ \\
+      $C_{\text{WC}}$ & Cost factor for working capital & \% FCI \\
+      $C_{\text{AEC}}$ & Cost of AEC electrolyzer & \$ per kWe \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: CAPEX, capital expenditure; EC$_{u_j}$, uninstalled cost for technology $j$; FCI, fixed capital investment; MMBtu, million British thermal units; kWh, kilowatt-hour; AEC, alkaline electrolysis cell. The symbols and parameters represent various cost factors and indices used in the CAPEX calculation.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+
+\begin{table}[H]
+  \centering
+  \caption{Values for $x_z$ excluding $WC_j$.}
+  \label{table:xz_values_excluding_wcj}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $C_{\text{I\&C}}$ & uniform(0.08, 0.55) & \% Purchased equipment (PE) & \cite{Peters2003} \\
+      $C_p$ & uniform(0.1, 0.8) & \% PE & \cite{Peters2003} \\
+      $C_{\text{el}}$ & uniform(0.1, 0.4) & \% PE & \cite{Peters2003} \\
+      $C_b$ & uniform(0.1, 0.7) & \% PE & \cite{Peters2003} \\
+      $C_{\text{sf\&yi}}$ & uniform(0.05, 0.18) & \% PE & \cite{Peters2003} \\
+      $C_{\text{land}}$ & 900,000 & \$ & \cite{LEWIS2022} \\
+      $C_{\text{eng}}$ & uniform(0.05, 0.3) & \% PE & \cite{Peters2003} \\
+      $C_L$ & uniform(0.03, 0.05) & \% PE & \cite{Peters2003} \\
+      $C_c$ & uniform(0.3, 0.4) & \% PE & \cite{Peters2003} \\
+      $C_{\text{co}}$ & uniform(0.35, 0.45) & \% PE & \cite{Peters2003} \\
+      $C_{\text{WC}}$ & uniform(0.1, 0.2) & \% FCI & \cite{Peters2003} \\
+      $C_{\text{AEC}}$ & 2026: uniform(750, 1000), 2033: uniform(500, 1000) & \$ per kWe & \cite{Bohm2020, Schmidt2017, IRENA2020} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: PE, purchased equipment; FCI, fixed capital investment; AEC, alkaline electrolysis cell; kWe, kilowatt of electrical capacity. Values for $C_{\text{AEC}}$ are projected for 2026 and 2033, reflecting expected cost reductions over time.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{EC$_{u_j}$ and EC$_{i_j}$ for each technology.}
+  \label{table:ec_values}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      \textbf{AP SMR} & (726,947,344.6, 508,096,133.6) & \$ & Calculated \\
+      \textbf{AP CCS} & (1,103,130,442, 781,847,023.7) & \$ & Calculated \\
+      \textbf{AP BH$_2$S} & (940,144,529.3, 5,080,528,806,470) & \$ & Calculated \\
+      \textbf{AP AEC} & (567,914,373, 402,707,562.8) & \$ & Calculated \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item The first value in the parenthesis is EC$_{i_j}$ and the second is EC$_{u_j}$. Obtained from the Excel file called \texttt{AP\_NE\_Equipment\_List.xlsx}. Abbreviations: AP, ammonia production; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell; EC$_{i_j}$, installed cost for technology $j$; EC$_{u_j}$, uninstalled cost for technology $j$.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Values for $x_z$ excluding $WC_j$.}
+  \label{table:xz_values_excluding_wcj}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $C_{\text{I\&C}}$ & uniform(0.08, 0.55) & \% Purchased equipment (PE) & \cite{Peters2003} \\
+      $C_p$ & uniform(0.1, 0.8) & \% PE & \cite{Peters2003} \\
+      $C_{\text{el}}$ & uniform(0.1, 0.4) & \% PE & \cite{Peters2003} \\
+      $C_b$ & uniform(0.1, 0.7) & \% PE & \cite{Peters2003} \\
+      $C_{\text{sf\&yi}}$ & uniform(0.05, 0.18) & \% PE & \cite{Peters2003} \\
+      $C_{\text{land}}$ & 900,000 & \$ & \cite{LEWIS2022} \\
+      $C_{\text{eng}}$ & uniform(0.05, 0.3) & \% PE & \cite{Peters2003} \\
+      $C_L$ & uniform(0.03, 0.05) & \% PE & \cite{Peters2003} \\
+      $C_c$ & uniform(0.3, 0.4) & \% PE & \cite{Peters2003} \\
+      $C_{\text{co}}$ & uniform(0.35, 0.45) & \% PE & \cite{Peters2003} \\
+      $C_{\text{WC}}$ & uniform(0.1, 0.2) & \% FCI & \cite{Peters2003} \\
+      $C_{\text{AEC}}$ & 2026: uniform(750, 1000), 2033: uniform(500, 1000) & \$ per kWe & \cite{Bohm2020, Schmidt2017, IRENA2020} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: PE, purchased equipment; FCI, fixed capital investment; AEC, alkaline electrolysis cell; kWe, kilowatt of electrical capacity. Values for $C_{\text{AEC}}$ are projected for 2026 and 2033, reflecting expected cost reductions over time. The parameter $C_{\text{WC}}$ represents the working capital cost factor as a percentage of FCI.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+
+\begin{equation}
+\text{CAPEX}_j = \sum_{z=0}^z \left[ (s_f \times x_z) \times \text{EC}_{u_j} \right] + \text{EC}_{i_j} + C_{\text{land}} + \text{WC}_j
+\label{eq:S3}
+\end{equation}
+
+Supplementary equation (\ref{eq:S3}) describes how the CAPEX\textsubscript{j} was estimated. This method obtains the installed (EC\textsubscript{i\_j}) and uninstalled (EC\textsubscript{u\_j}) costs for a specific technology and calculates the CAPEX\textsubscript{j}. The values for EC\textsubscript{i\_j} and EC\textsubscript{u\_j} were calculated based on the equipment data sets described in section A. \( x_z \) is a cost factor for a set of facilities, \( z \)\cite{Peters2003}. \( C\textsubscript{land} \) is the cost of land and a constant for all technologies. \( WC\textsubscript{j} \) is the working capital (calculated in supplementary equation (\ref{eq:S5})).
+
+The average value of the cost factors for each technology for each scenario is in the annexed Excel file named \textit{AP\_NE\_CAPEX.xlsx}. More detailed information on the CAPEX estimation methodology is in Peters et al. \cite{Peters2003}. For clarity, we specify the cost factors below.
+
+\begin{equation}
+x_z \in \left\{ C_{\text{I\&C}}, C_p, C_{\text{el}}, C_b, C_{\text{sf\&yi}}, C_{\text{eng}}, C_L, C_c, C_{\text{co}} \right\}
+\label{eq:S4}
+\end{equation}
+
+where each cost factor, \( C_z \), corresponds to instrumentation and control, piping, electrical, buildings, service facilities and yard improvements, engineering, legal, construction, and contingency, respectively.
+
+The working capital, \( WC\textsubscript{j} \), was calculated using the formula below (supplementary equation (\ref{eq:S5})).
+
+\begin{equation}
+\text{WC}_j = \text{FCI}_j \times C_{\text{WC}} = \left( \sum_{z=0}^z \left[ s_f \times x_z \right] \times \text{EC}_{u_j} + \text{EC}_{i_j} + C_{\text{land}} \right) \times C_{\text{WC}}
+\label{eq:S5}
+\end{equation}
+
+The textbook cost factors used to calculate CAPEX\textsubscript{j} and related parameters are based on a scale of the order of 100 TPD \cite{Peters2003}. Hence, each parameter was scaled using the six-tenths rule to the AP scale of \( M\textsubscript{NH_3} \) (2717 TPD NH\textsubscript{3}). The scaling factor is defined as \( s_f \).
+
+\begin{equation}
+s_f = \left( \frac{1}{100/M_{\text{NH}_3}} \right)^{0.6}
+\label{eq:S6}
+\end{equation}
+
+EC\textsubscript{u\_j} and EC\textsubscript{i\_j} were calculated using supplementary equations (\ref{eq:S7}) and (\ref{eq:S8}).
+
+\begin{equation}
+\text{EC}_{u_j} = \sum_{n=0}^N \left[ m_n \times P_{(n,t_0,j)} \times \left(\frac{S_n}{S_{n0}}\right)^f \times \left(\frac{C_{2023}}{C_{t_0}}\right) \right]
+\label{eq:S7}
+\end{equation}
+
+\begin{equation}
+\text{EC}_{i_j} = \sum_{n=0}^N \left[ m_n \times P_{(n_0,t_0,j)} \times \left(\frac{S_n}{S_{n0}}\right)^f \times (1+i) \times \left(\frac{C_{2023}}{C_{t_0}}\right) \right]
+\label{eq:S8}
+\end{equation}
+
+EC\textsubscript{u\_j} and EC\textsubscript{i\_j} are functions of the sum of the base-capacity uninstalled equipment costs \( P\textsubscript{(n_0,t_0,z)} \) where \( n_0 \) denotes the name of the piece of equipment (see equipment list, N, in Excel file named \textit{AP\_NE\_Equipment\_List.xlsx}), and \( t_0 \) is the time when the equipment cost was estimated. \( S_n \) is the required capacity of the piece of equipment. \( S\textsubscript{n0} \) is the base equipment capacity. \( f \) is the economies of scale factor obtained from Peters et al. \cite{Peters2003} (also in the Excel file). \( (1+i) \) is the installation factor obtained from Peters et al. \cite{Peters2003}. \( C\textsubscript{2023} \) is the chemical engineering plant index (CEPCI) in 2023 and \( C\textsubscript{(t_0)} \) is the CEPCI at the time the piece of equipment was cost estimated. \( m_n \) is the number of spares for a given piece of equipment (\( m_n \in \mathbb{N} \)).
+
+There are times when we need to add the cost of certain modules directly into the CAPEX\textsubscript{j} from the scientific literature. Once we do this, we also need to scale the cost components of the CAPEX \(\left( s_f \times x_z \right) \times \left( EC\textsubscript{u\_j} \right)\) to be adjusted to the higher CAPEX. We perform the method described below for the AP AEC electrolyzer, solar, wind, and battery storage costs.
+
+We define a new variable \( R\textsubscript{j} \) to represent the scaling ratio by which to increase each CAPEX component.
+
+\begin{equation}
+R_j = 1 + \frac{C_{\text{additional}_j}}{\text{CAPEX}_{\text{Updated}_j}}
+\label{eq:S9}
+\end{equation}
+
+CAPEX\textsubscript{updated\_j} is the updated CAPEX after adding the additional cost \( C\textsubscript{additional\_j} \). This ensures that the overall CAPEX estimate accurately reflects the depreciation effect of the additional costs on the project's financial analysis.
+
+\begin{equation}
+\left| s_f \times x_z \times \text{EC}_{u_j} \right|_{\text{updated}} = \left( s_f \times x_z \times \text{EC}_{u_j} \right) \times R_j
+\label{eq:S10}
+\end{equation}
+
+\begin{equation}
+\text{CAPEX}_{\text{updated}} = \text{CAPEX} + C_{\text{additional}}
+\label{eq:S11}
+\end{equation}
+
+Specific to AP AEC, we calculate the CAPEX based on established heuristics by the literature and the electricity demand required to electrolyze water.
+
+\begin{equation}
+C_{\text{additional}_{\text{AP AEC}}} = \left[ \frac{\dot{M}_{\text{H}_2} \times h_{\text{H}_2}^{\text{LHV}} \times 1000}{\eta_{\text{AEC}}} \right] \times C_{\text{AEC}}
+\label{eq:S12}
+\end{equation}
+
+
+\subsection{Techno-Economic Methods for OPEX}
+
+A full nomenclature table for the OPEX calculations can be found in supplementary table \ref{table:opex_nomenclature}. Tables containing the values used for these variables are in supplementary tables \ref{table:processing_steps_by_technology}, \ref{table:heuristics_factors_opex}, \ref{table:miscellaneous_raw_materials_costs}, \ref{table:startup_costs}, \ref{table:gbm_inputs}.
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature for the OPEX section.}
+  \label{table:opex_nomenclature}
+  \begin{threeparttable}
+    \begin{tabular}{@{}llc@{}}
+      \toprule
+      \textbf{Parameter} & \textbf{Description} & \textbf{Units} \\ \midrule
+      $MDOPEX_j$ & Market dependent OPEX for technology $j$ & \$ per month \\
+      $MIOPEX_j$ & Market independent OPEX for technology $j$ & \$ per month \\
+      $H_{\text{shift}}$ & Hours per shift & Hour per shift \\
+      $H_{\text{dp}}$ & Hours per day per processing step & Hours per day per processing step \\
+      $P_s$ & Processing steps & Processing step \\
+      $F_a$ & Availability factor & \% \\
+      $wage_h$ & Operator salary & \$ per hr \\
+      $L_c$ & Monthly operator labor cost & \$ per month \\
+      $TL_{c_j}$ & Total labor costs & \$ per month \\
+      $TF_{c_j}$ & Fixed charges & \$ per month \\
+      $FC_j$ & Fixed cost & \$ per month \\
+      $C_{\text{sup}}$ & Supervision costs to calculate total labor costs & \% $L_c$ \\
+      $C_{\text{os}}$ & Operating supply costs to calculate total labor costs & \% $FCI_j \times C_{\text{MT}}/12$ \\
+      $C_{\text{LC}}$ & Laboratory charges to calculate total labor costs & \% $L_c$ \\
+      $C_{\text{P\&R}}$ & Patent and royalty costs to calculate total labor costs & \% $CAPEX_j$ \\
+      $C_{\text{OH}}$ & Overhead costs to calculate total labor costs & \% maintenance + supervision + labor \\
+      $C_{\text{fin}}$ & Financing fixed cost & \% $CAPEX_j$ \\
+      $C_{\text{rent}}$ & Rent fixed cost & \% $C_{\text{land}}$ \\
+      $C_{\text{ptax}}$ & Local property tax fixed cost & \% $TL_c$ \\
+      $C_{\text{admin}}$ & Administrative fixed cost & \% $C_{\text{admin}}$ \\
+      $C_{\text{ins}}$ & Insurance costs & \% $FCI_j$ \\
+      $C_{\text{MT}}$ & Maintenance costs to calculate total labor costs & \% $FCI_j$ \\
+      $VC_j$ & Variable cost & \$ per month \\
+      $S_{\text{H}_2\text{O}}$ & Water cost & \$ per kg \\
+      $M_{\text{H}_2\text{O}}$ & Process water demand per month & Kg per month \\
+      $Misc_j$ & Miscellaneous costs in calculating OPEX & \$ per month \\
+      $M_{\text{H}_2\text{O}}^{\text{osmosis}}$ & Feedstock water demand & \$ per kg \\
+      $S_{\text{H}_2\text{O}}^{\text{osmosis}}$ & Reverse Osmosis water cost & Kg per month \\
+      $i$ & Commodity index & \\
+      $P_i(T)$ & GBM price function for commodity $i$ & \$ per unit $i$ \\
+      $P_i(T=0)$ & Initial price of commodity $i$ & \$ per unit $i$ \\
+      $\mu_i$ & Drift for commodity $i$ & \% \\
+      $\sigma_i$ & Volatility for commodity $i$ & \% \\
+      $F_{\text{DM}}$ & Distribution and marketing costs & \$ \\
+      $F_{\text{RD}}$ & R\&D costs & \$ \\
+      $M_{\text{NG}}$ & Energy flowrate of natural gas & mmBTU per year \\
+      $M_{\text{EL}}$ & Electricity demand & kWh per year \\
+      $OPEX_j$ & Operational Expenditure for technology $j$ & \$ \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item Abbreviations: OPEX, operational expenditure; MDOPEX, market-dependent OPEX; MIOPEX, market-independent OPEX; FCI, fixed capital investment; CAPEX, capital expenditure; GBM, geometric Brownian motion; $P_i(T)$, price function for commodity $i$; $M_{\text{NG}}$, natural gas energy flowrate; $M_{\text{EL}}$, electricity demand; $M_{\text{H}_2\text{O}}$, process water demand; $S_{\text{H}_2\text{O}}$, water cost; $M_{\text{H}_2\text{O}}^{\text{osmosis}}$, feedstock water demand; $S_{\text{H}_2\text{O}}^{\text{osmosis}}$, reverse osmosis water cost; VC, variable cost; TL, total labor; R\&D, research and development; mmBTU, million British thermal units; kWh, kilowatt-hour.
+\end{tablenotes}
+
+    
+  \end{threeparttable}
+\end{table}
+
+
+\begin{table}[H]
+  \centering
+  \caption{Number of processing steps by technology.}
+  \label{table:processing_steps_by_technology}
+  \begin{threeparttable}
+    \begin{tabular}{@{}p{8cm}p{4cm}@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} \\ \midrule
+      \textbf{AP SMR} & 30 \\
+      \textbf{AP CCS} & 33 \\
+      \textbf{AP BH$_2$S} & 38 \\
+      \textbf{AP AEC} & 23 \\
+      $H_{\text{dp}}$ & 55 \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item Processing steps of each AP process. Used for labor cost calculations. All values are assumptions estimated from the process flow diagrams of Lewis et al., Spath et al., Brasington et al., and Young et al. \cite{Spath2005, LEWIS2022, Brasington2011, Young2021}. Abbreviations: AP, ammonia production; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell; $H_{\text{dp}}$, hours per day per processing step.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Heuristics factors for OPEX.}
+  \label{table:heuristics_factors_opex}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $C_{\text{MT}}$ & 0.0286 & \% $CAPEX_j$ & \cite{Peters2003} \\
+      $C_{\text{sup}}$ & 0.15 & \% $L_c$ & \cite{Peters2003} \\
+      $C_{\text{os}}$ & 0.1 & \% $FCI_j \times C_{\text{MT}}/12$ & \cite{Peters2003} \\
+      $C_{\text{LC}}$ & 0.15 & \% $L_c$ & \cite{Peters2003} \\
+      $C_{\text{P\&R}}$ & 0.005 & \% $CAPEX_j$ & \cite{Peters2003} \\
+      $C_{\text{OH}}$ & 0.70 & \% maintenance + supervision + labor & \cite{Peters2003} \\
+      $C_{\text{fin}}$ & 0 & \% $CAPEX_j$ & \cite{Peters2003} \\
+      $C_{\text{rent}}$ & 0.1 & \% $C_{\text{land}}$ & \cite{Peters2003} \\
+      $C_{\text{ptax}}$ & 0.005 & \% $FCI_j$ & \cite{Peters2003} \\
+      $C_{\text{admin}}$ & 0.025 & \% $TL_c$ & \cite{Peters2003} \\
+      $C_{\text{ins}}$ & 0.2 & \% $FCI_j$ & \cite{Peters2003} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $C_{\text{MT}}$, maintenance costs; CAPEX, capital expenditure; $C_{\text{sup}}$, supervision costs; $L_c$, operator labor cost; $C_{\text{os}}$, operating supply costs; FCI, fixed capital investment; $C_{\text{LC}}$, laboratory charges; $C_{\text{P\&R}}$, patent and royalty costs; $C_{\text{OH}}$, overhead costs; $C_{\text{fin}}$, financing costs; $C_{\text{rent}}$, rent costs; $C_{\text{ptax}}$, local property tax; $C_{\text{admin}}$, administrative costs; $C_{\text{ins}}$, insurance costs; $TL_c$, total labor cost.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Miscellaneous raw materials costs.}
+  \label{table:miscellaneous_raw_materials_costs}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      \textbf{AP SMR} & 6,824,075.7 & \$ per year & \cite{LEWIS2022, Brasington2011, Young2021} \\
+      \textbf{AP CCS} & 12,434,783.5 & \$ per year & \cite{LEWIS2022, Brasington2011, Young2021} \\
+      \textbf{AP BH$_2$S} & 27,093,089.5 & \$ per year & \cite{LEWIS2022, Brasington2011, Young2021} \\
+      \textbf{AP AEC} & 335,267.1 & \$ per year & \cite{LEWIS2022, Brasington2011, Young2021} \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item Abbreviations: AP, ammonia production; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell. Miscellaneous raw material costs are annual estimates based on data from Lewis et al., Brasington et al., and Young et al. \cite{LEWIS2022, Brasington2011, Young2021}.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Start-up costs.}
+  \label{table:startup_costs}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      \textbf{AP SMR} & 15,413,897.7 & \$ & \cite{LEWIS2022, Brasington2011} \\
+      \textbf{AP CCS} & 16,514,194.1 & \$ & \cite{LEWIS2022, Brasington2011} \\
+      \textbf{AP BH$_2$S} & 15,532,525.5 & \$ & \cite{LEWIS2022, Brasington2011} \\
+      \textbf{AP AEC} & 118,627.7 & \$ & \cite{LEWIS2022, Brasington2011} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: AP, ammonia production; SMR, steam methane reforming; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell. Start-up costs are based on data from Lewis et al. and Brasington et al. \cite{LEWIS2022, Brasington2011}.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{GBM inputs.}
+  \label{table:gbm_inputs}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lccc@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $P_{\text{NG}}(T=0)$ & 7.753 & \$ per mmBTU & \cite{EIA2023b} \\
+      $\mu_{\text{NG}}$ & -0.0016 & - & \cite{EIA2023b} \\
+      $\sigma_{\text{NG}}$ & 0.039683 & - & \cite{EIA2023b} \\
+      $P_{\text{EL}}(T=0)$ & 0.083 & \$ per kWh & \cite{EIA2023b} \\
+      $\mu_{\text{EL}}$ & -0.0006 & - & \cite{EIA2023b} \\
+      $\sigma_{\text{EL}}$ & 0.00536 & - & \cite{EIA2023b} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+      \small
+      \item \textsuperscript{A} The drift terms were obtained by calibrating the GBM model to the average price of commodity $i$ in 2050 to the EIA’s Annual Energy Outlook 2023 predictions \cite{EIA2023b}. Electricity was picked as the industrial electricity price in the baseline scenario. Natural gas was picked as the industrial natural gas price in the baseline scenario.
+    \end{tablenotes}
+    \begin{tablenotes}
+  \small
+  \item \textsuperscript{A} The drift terms were obtained by calibrating the GBM model to the average price of commodity $i$ in 2050 to the EIA’s Annual Energy Outlook 2023 predictions \cite{EIA2023b}. Electricity was picked as the industrial electricity price in the baseline scenario. Natural gas was picked as the industrial natural gas price in the baseline scenario. Abbreviations: GBM, geometric Brownian motion; $P_{\text{NG}}(T=0)$, initial price of natural gas; $\mu_{\text{NG}}$, drift term for natural gas; $\sigma_{\text{NG}}$, volatility of natural gas; $P_{\text{EL}}(T=0)$, initial price of electricity; $\mu_{\text{EL}}$, drift term for electricity; $\sigma_{\text{EL}}$, volatility of electricity; mmBTU, million British thermal units; kWh, kilowatt-hour.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+The OPEX is partitioned into two parts: a market-dependent OPEX (MDOPEX\textsubscript{j}) and a market-independent (MI) OPEX (MIOPEX\textsubscript{j}). These two values are combined to derive the OPEX\textsubscript{j} for each technology option considered.
+
+The OPEX\textsubscript{j} is generally divided into fixed and variable costs. The fixed costs represent costs related to labor, overhead, maintenance, and insurance, while the variable costs rely on raw materials and utility costs. In the methodology we utilize, the fixed and variable costs are added together. From this combined quantity, we add another set of cost factors.
+
+Some raw materials and utilities have costs that vary with the market; hence the variable costs are split between the MDOPEX\textsubscript{j} and MIOPEX\textsubscript{j}. All the fixed costs are within the MIOPEX\textsubscript{j}.
+
+\begin{equation}
+\text{OPEX} = \text{MIOPEX} + \text{MDOPEX}
+\label{eq:S13}
+\end{equation}
+
+The monthly cost of labor was calculated assuming a number of hours per day per processing step, \( H\textsubscript{dp} \). Then, dividing by the hours per shift, \( H\textsubscript{shift} \), and multiplying by the number of processing steps, \( P\textsubscript{s} \), times 7 days in a week over 5 shifts per week per operator, gives the number of operators assuming each operator can cover one shift per day. This is the first factor in the square brackets. The resulting hours an operator will work (5 shifts, 8 hours each) results in 40 hours per week. The hourly wage, \( \text{wage}_h \), times 40 results in the weekly cost of an operator. This is the second factor in the square brackets. Finally, the weekly cost of labor (number of operators times the weekly cost per operator) is converted to the monthly cost of labor through the factor, \( \frac{52}{12} \times F\textsubscript{a} \), where \( F\textsubscript{a} \) is the availability factor.
+
+\begin{equation}
+L_c = \left(\frac{H_{\text{dp}}}{H_{\text{shift}}} \times P_s \times \frac{7}{5}\right) \times \left(40 \times \text{wage}_h\right) \times \frac{52}{12} \times F_a
+\label{eq:S14}
+\end{equation}
+
+The total labor costs are a function of \( L_c \), CAPEX\textsubscript{j}, and cost factors. Hence, we introduce the total labor costs, \( TL_c \):
+
+\begin{equation}
+\begin{aligned}
+\text{TL}_{c_j} &= L_c \left(1 + C_{\text{sup}} + C_{\text{LC}}\right) + \text{FCI}_j \times \frac{C_{\text{MT}}}{12} \\
+&\quad + \left(\text{FCI}_j \times \frac{C_{\text{MT}}}{12}\right) \times C_{\text{OS}} + \text{CAPEX}_j \times \frac{C_{\text{P\&R}}}{12} \\
+&\quad + \left( L_c \left(1 + C_{\text{sup}}\right) + \text{FCI}_j \times \frac{C_{\text{MT}}}{12} \right) \times C_{\text{OH}}
+\end{aligned}
+\label{eq:S15}
+\end{equation}
+
+There are also fixed charges, \( TF_c \):
+
+\begin{equation}
+\text{TF}_{c_j} = \frac{C_{\text{fin}}}{12} \times \text{CAPEX}_j + \frac{C_{\text{rent}}}{12} \times C_{\text{land}} + \frac{C_{\text{ins}}}{12} \times \text{FCI}_j + \frac{C_{\text{ptax}}}{12} \times \text{FCI}_j + C_{\text{admin}} \times \text{TL}_c
+\label{eq:S16}
+\end{equation}
+
+After obtaining \( TL_c\textsubscript{j} \) and \( TF_c\textsubscript{j} \), we can calculate the fixed cost, \( FC \):
+
+\begin{equation}
+\text{FC}_j = \text{TL}_{c_j} + \text{TF}_{c_j}
+\label{eq:S17}
+\end{equation}
+
+The utility costs portion of the MI OPEX\textsubscript{j} is only the water costs since electricity is a market-dependent parameter. For SMR, CCS, and BH2S, supplementary equation (\ref{eq:S18}) applies. We also add miscellaneous costs, which account for other raw materials (catalysts, column trays, solvents, water treatment, etc.). These miscellaneous costs are found in the original reports (see supplementary technical methods). We define the variable costs, \( VC\textsubscript{j} \), as:
+
+\begin{equation}
+\text{VC}_j = S_{\text{H}_2\text{O}} \times M_{\text{H}_2\text{O}_j} + \text{Misc}_j
+\label{eq:S18}
+\end{equation}
+
+If the process is AP AEC, the water dedicated to feedstock is water by reverse osmosis and is more expensive. Hence, for AP AEC, the following supplementary equation applies.
+
+\begin{equation}
+\text{VC}_{j=\text{AP AEC}} = S_{\text{H}_2\text{O}} \times M_{\text{H}_2\text{O}_j} + S_{\text{H}_2\text{O}_{\text{osmosis}}} \times M_{\text{H}_2\text{O}_{\text{osmosis}_j}} + \text{Misc}_j
+\label{eq:S19}
+\end{equation}
+
+With the previous definitions, the MI OPEX\textsubscript{j} is defined as:
+
+\begin{equation}
+\text{MI OPEX}_j = \text{FC}_j + \text{VC}_j
+\label{eq:S20}
+\end{equation}
+
+For the market-dependent OPEX, the objective is to use geometric Brownian motion (GBM) to model natural gas, electricity, and ammonia prices with parameters including the drift, \( \mu_i \), and volatility, \( \sigma_i \), for commodity \( i \). We used a bivariate distribution for ammonia and natural gas prices so that we could set a correlation parameter between the two commodities. The correlation was calculated using industrial natural gas prices and ammonia price indices from December 2014 to January 2023 \cite{EIA2023b}.
+
+\begin{equation}
+P_i (T) = P(T=0)_i \prod_{T=0}^L \left[ \mathcal{N}(1+\mu_i, \sigma_i) \right]
+\label{eq:S21}
+\end{equation}
+
+Distribution and marketing costs (\( F\textsubscript{DM} \)) and R\&D (\( F\textsubscript{RD} \)) costs are dependent on the variable costs. The MDOPEX\textsubscript{j} can be defined as:
+
+\begin{equation}
+\begin{aligned}
+\text{MDOPEX}_j (T) &= M_{\text{NG}} \times P_{\text{NG}} (T) + M_{\text{EL}} \times P_{\text{EL}} (T) + \text{MIOPEX}_j \\
+&\quad + \left(F_{\text{DM}} + F_{\text{DM}} \times F_{\text{RD}} \right) \times \left( M_{\text{NG}} \times P_{\text{NG}} (T) + M_{\text{EL}} \times P_{\text{EL}} (T) + \text{MIOPEX}_j \right)
+\end{aligned}
+\label{eq:S22}
+\end{equation}
+
+where \( M\textsubscript{NG} \) is the energy flowrate of natural gas in mmBTU per year, and \( M\textsubscript{EL} \) is the electricity demand in kWh per year. The term, \( M\textsubscript{NG} \times P\textsubscript{NG}(T) + M\textsubscript{EL} \times P\textsubscript{EL}(T) + MIOPEX\textsubscript{z} \), is the manufacturing cost. If it is the year when operations start, then start-up costs are added to the MDOPEX\textsubscript{j}(T) (see supplementary table \ref{table:miscellaneous_raw_materials_costs}). With supplementary equation (\ref{eq:S22}), supplementary equation (\ref{eq:S13}) can be evaluated. More details on \( T \) and financial analysis in the economic methods section.
+
+\subsection{Economic Methods}
+
+This analysis employs a Stochastic Discounted Cash Flow (DCF) model to evaluate the economic viability of various technology pathways for ammonia production. This assessment aims to provide a comprehensive understanding of the economic performance by considering various uncertain factors and their impact on the Net Present Value (NPV) per lifetime ammonia produced metric. The NPV calculation factors in different cash flows, discount rates, and probabilities, enabling a robust evaluation of the pathways in a stochastic context.
+
+The nomenclature for a Stochastic Discounted Cash Flow (DCF) model encompasses key financial and economic parameters used to evaluate investments and projects under uncertain conditions. These parameters define discount rates, costs, revenues, emissions, and various financial factors. These parameters are essential for assessing the potential financial outcomes of an investment while considering factors like inflation, tax credits, cash flows, and environmental impacts.
+
+\subsection{Economic Methods for Discounted Cash Flow model}
+
+The nomenclature for this this section is supplementary table \ref{table:dcf_nomenclature}.
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature for DCF section.}
+  \label{table:dcf_nomenclature}
+  \begin{threeparttable}
+    \begin{tabular}{@{}llc@{}}
+      \toprule
+      \textbf{Parameter} & \textbf{Description} & \textbf{Units} \\ \midrule
+      $d_p$ & Private discount rate & \% \\
+      $d_s$ & Social discount rate & \% \\
+      $e$ & Equity & - \\
+      $R_e$ & Cost of equity & - \\
+      $R_d$ & Cost of debt & - \\
+      $\phi_{\text{state}}$ & State income taxes & \$ \\
+      $\phi_{\text{federal}}$ & Federal income taxes & \$ \\
+      $r$ & Interest rate & \% \\
+      $\dot{M}_{\text{NH}_3}$ & Monthly ammonia production & Tonne per day \\
+      $S$ & Month of project start & month \\
+      $C$ & Construction time & months \\
+      $L$ & Operating lifetime (duration) & months \\
+      $NPV$ & Net Present Value & \$ \\
+      $CF(T)$ & Cash flow at time $T$ & \$ \\
+      $Land(T)$ & Costs of purchasing land at time $T$ & \$ \\
+      $C_{\text{land}}$ & Land cost & \$ \\
+      $WC(T)$ & Costs of injecting working capital at time $T$ & \$ \\
+      $L_{\text{loan}}$ & Loan lifetime & years \\
+      $H_y$ & Hours per year (365 * 24) & hour per year \\
+      $CI_{j_{\text{direct}}}$ & Direct emission & kgCO$_2$ per kgH$_2$ \\
+      $CI_{j_{\text{NG}}}$ & Natural gas emission & kgCO$_2$ per kgH$_2$ \\
+      $CI_{j_{\text{Biomass}}}$ & Biomass emission & kgCO$_2$ per kgH$_2$ \\
+      $X_{\text{oil}}(T)$ & Electric demand from oil over the hydrogen production & kgCO$_2$ per kWh$_e$ \\
+      $X_{\text{nuclear}}(T)$ & Electric demand from nuclear over the hydrogen production & kgCO$_2$ per kWh$_e$ \\
+      $X_{\text{renewables}}(T)$ & Electric demand from renewables over the hydrogen production & kgCO$_2$ per kWh$_e$ \\
+      $X_{\text{NG}}(T)$ & Electric demand from NG over the hydrogen production & kgCO$_2$ per kWh$_e$ \\
+      $X_{\text{coal}}(T)$ & Electric demand from coal over the hydrogen production & kgCO$_2$ per kWh$_e$ \\
+      $Sales(T)$ & Revenue stream from selling ammonia at time $T$ & \$ \\
+      $Credits_{\text{CE}}(T)$ & Cash-equivalent tax credits & - \\
+      $F_{\text{45V}}(CI_j)$ & Intensive tax credits per unit of H$_2$ captured & - \\
+      $F_{\text{45Q}}$ & Intensive tax credits per unit of CO$_2$ captured & - \\
+      $L_{\text{equipment}}$ & Equipment lifetime & years \\
+      $C_{\text{uninstalled equipment}}$ & Costs of uninstalled equipment & \$ \\
+      $\eta_{\text{NGCC}}$ & NGCC thermal efficiency & \% \\ \bottomrule
+    \end{tabular}
+  \end{threeparttable}
+  \begin{tablenotes}
+  \small
+  \item Abbreviations: DCF, discounted cash flow; $d_p$, private discount rate; $d_s$, social discount rate; $R_e$, cost of equity; $R_d$, cost of debt; $\phi_{\text{state}}$, state income taxes; $\phi_{\text{federal}}$, federal income taxes; $r$, interest rate; $\dot{M}_{\text{NH}_3}$, monthly ammonia production; $NPV$, net present value; $CF(T)$, cash flow at time $T$; $WC(T)$, working capital costs at time $T$; $L_{\text{loan}}$, loan lifetime; $H_y$, hours per year; $CI$, carbon intensity; $X_{\text{fuel}}(T)$, electric demand from a specific fuel source over hydrogen production; $F_{\text{45V}}$, tax credits for hydrogen; $F_{\text{45Q}}$, tax credits for CO$_2$ capture; $L_{\text{equipment}}$, equipment lifetime; $\eta_{\text{NGCC}}$, natural gas combined cycle efficiency; kgCO$_2$, kilograms of carbon dioxide; kWh$_e$, kilowatt-hour of electricity.
+\end{tablenotes}
+
+\end{table}
+
+The economic performance of each technology pathway was assessed using a Net Present Value (NPV) per lifetime ammonia produced metric. NPV is the sum of the present value of all cash flows at each period (monthly basis) over the lifetime amount of ammonia production, \( M\textsubscript{NH_3} \).
+
+\begin{equation}
+\text{NPV} = \frac{1}{M_{\text{NH}_3}} \sum_{T=S}^{S+C+L} \frac{\text{CF}(T)}{(1 + \frac{d_p}{12})^{(T-S)}}
+\label{eq:S23}
+\end{equation}
+
+where \( CF(T) \) is the cash flow at time \( T \). The public discount rate, \( d_p \), was calculated as the weighted average cost of capital (WACC) (supplementary equation (\ref{eq:S23})); as shown below; \( e \) is the equity, \( R_e \) is the cost of equity, \( R_d \) is the cost of debt, and \( \phi\textsubscript{state} + \phi\textsubscript{federal} \) are the state and federal income taxes, respectively.
+
+\begin{equation}
+d_p = e \cdot R_e + \left( [1-e] \cdot R_d \cdot [1-(\phi_{\text{state}} + \phi_{\text{federal}})] \right)
+\label{eq:C2}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\text{CF}(T) &= \text{FCI}(T) + \text{Land}(T) + \text{WC}(T) + \text{PMT}(T) \\
+&\quad + \text{Sales}(T) + \text{OPEX}(T) + \text{Tax}(T) + \text{Credits}_{\text{CE}}(T)
+\end{aligned}
+\label{eq:C3}
+\end{equation}
+
+Supplementary equations (\ref{eq:C4}–\ref{eq:C6}) represent the staggered spending of the FCI to build the ammonia plant over three years (\( C \) months). \( Y_1 \), \( Y_2 \), and \( Y_3 \) are the fractions of the FCI that are spent in a given year.
+
+\begin{equation}
+FCI(0<T \leq \frac{C}{3}) = -Y_1 \cdot \frac{FCI_j}{12}
+\label{eq:C4}
+\end{equation}
+
+\begin{equation}
+FCI\left(\frac{C}{3}<T \leq \frac{2C}{3}\right) = -Y_2 \cdot \frac{FCI_j}{12}
+\label{eq:C5}
+\end{equation}
+
+\begin{equation}
+FCI\left(\frac{2C}{3}<T \leq C\right) = -Y_3 \cdot \frac{FCI_j}{12}
+\label{eq:C6}
+\end{equation}
+
+\( \text{Land}(T) \) and \( \text{WC}(T) \) are the costs of purchasing land and injecting working capital to begin operation.
+
+\begin{equation}
+\text{Land}(T=S) = -C_{\text{land}}, \quad \text{Land}(T=S+C+L) = C_{\text{land}}
+\label{eq:S25}
+\end{equation}
+
+\begin{equation}
+\text{WC}(T=S+C) = -\text{WC}_j, \quad \text{WC}(T=S+C+L) = \text{WC}_j
+\label{eq:S26}
+\end{equation}
+
+Supplementary equations (\ref{eq:S27})-(\ref{eq:S29}) represent increasing interest payments as the amount of borrowed capital increases throughout the construction period and \ref{eq:S30} the constant payments to pay off the loan.
+
+\begin{equation}
+\text{PMT}(S < T \leq S + \frac{C}{3}) = -\frac{r}{12} \times T \times (1-e) \times Y_1 \times \frac{\text{FCI}_j}{12}
+\label{eq:S27}
+\end{equation}
+
+\begin{equation}
+\text{PMT}(S + \frac{C}{3} < T \leq S + \frac{2C}{3}) = -\frac{r}{12} \times (1-e) \times \left[ \left(T - \left(S + \frac{C}{3}\right)\right) \times \frac{Y_2 \times \text{FCI}_j}{12} + Y_1 \times \text{FCI}_j \right]
+\label{eq:S28}
+\end{equation}
+
+\begin{equation}
+\text{PMT}(S + \frac{2C}{3} < T \leq S + C) = -\frac{r}{12} \times (1-e) \times \left[ \left(T - \left(\frac{2C}{3} + S\right)\right) \times \frac{Y_3 \times \text{FCI}_j}{12} + (Y_1 + Y_2) \times \text{FCI}_j \right]
+\label{eq:S29}
+\end{equation}
+
+\begin{equation}
+\text{PMT}(S + C < T \leq S + C + L_{\text{loan}}) = -\text{FCI}_j \times \frac{r}{1 - (1 - r)^{12 \times L_{\text{loan}}}}
+\label{eq:S30}
+\end{equation}
+
+\( \text{Sales}(T) \) and \( \text{OPEX}(T) \) represent the revenue stream from selling ammonia to the market and the cost of operating the plant, respectively.
+
+\begin{equation}
+\text{Sales}(S + C < T \leq S + C + L) = \dot{M}_{\text{NH}_3} \times \left(\frac{F_A \times H_y}{24}\right) \times \frac{1}{12} \times P_{\text{NH}_3}(T)
+\label{eq:S31}
+\end{equation}
+
+\begin{equation}
+\text{OPEX}(S + C < T \leq S + C + L) = \text{OPEX}_j(T)
+\label{eq:S32}
+\end{equation}
+
+where \( L\textsubscript{loan} \) is the loan lifetime in years, \( F_a \times H_y \) are the operating hours per year, \( \dot{M}\textsubscript{NH_3} \) is the monthly ammonia production, and \( C\textsubscript{NH_3}(T) \) is its market-dependent cost.
+
+\( \text{Tax}(T) \) is the income tax, and \( \text{Credits}\textsubscript{CE}(T) \) represents the cash-equivalent IRA tax credits. The following variables are interconnected in the financial analysis of income and expenses, with depreciation and uninstalled equipment cost playing key roles in determining net revenue and, subsequently, tax.
+
+\begin{equation}
+\text{Tax}(S + C < T < S + C + L) = -\text{Net revenue}(T) \times (\phi_{\text{state}} + \phi_{\text{federal}})
+\label{eq:S33}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\text{Net revenue}(S + C \leq T \leq S + C + L) &= \text{Depreciation}(S + C \leq T \leq S + C + L_{\text{equipment}}) \\
+&\quad + \text{OPEX}(T) \\
+&\quad + \text{Sales}(T) \\
+&\quad + \text{PMT}(T)
+\end{aligned}
+\label{eq:S34}
+\end{equation}
+
+\begin{equation}
+\text{Depreciation}(T) = \left(\frac{100\%}{L_{\text{equipment}}}\right) \times \text{EC}_{u_j}
+\label{eq:S35}
+\end{equation}
+
+\subsection{Economic Methods for Policy model}
+
+The calculation of the carbon intensity as a function of time, \( CI\textsubscript{j}(T) \), is divided into multiple components. Each component is in units of \(\frac{\text{Kg}_{\text{CO}_2}}{\text{Kg}_{\text{H}_2}}\) in supplementary equation (\ref{eq:S36}). The electric grid carbon intensity (C.19) in \(\frac{\text{Kg}_{\text{CO}_2}}{\text{Kg}_{\text{H}_2}}\) is the electric mix weighted average of the carbon intensities of each type of electric generation times the electric demand of the technology \( j \) over the hydrogen production. In this study, we use the electricity demand of hydrogen only because the tax credits only depend on the emissions of hydrogen.
+
+\begin{equation}
+\text{CI}_j(T) = \text{CI}_{j_{\text{direct}}} + \text{CI}_{j_{\text{NG}}} + \text{CI}_{j_{\text{Biomass}}} + \text{CI}_{j_{\text{Electricity}}}(T)
+\label{eq:S36}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\text{CI}_{j_{\text{Electricity}}}(T) &= X_{\text{oil}}(T) \times \text{CI}_{\text{elec\_oil}} + X_{\text{nuclear}}(T) \times \text{CI}_{\text{elec\_nuclear}} \\
+&\quad + X_{\text{renewables}}(T) \times \text{CI}_{\text{elec\_nuclear}} + X_{\text{NG}}(T) \times \text{CI}_{\text{elec\_NG}} \\
+&\quad + X_{\text{coal}}(T) \times \text{CI}_{\text{elec\_coal}}
+\end{aligned}
+\label{eq:S37}
+\end{equation}
+
+The natural gas carbon intensity of SMR and CCS are estimated from the upstream emissions per kWh of electricity of an NGCC plant times the average efficiency of an NGCC plant (see supplementary table \ref{table:carbon_emissions_intensity}). The direct, or stack, emissions, \( CI\textsubscript{j\_direct} \), from SMR and CCS come from Lewis et al.\cite{LEWIS2022} and are assumed to be zero for BH2S and AEC.
+
+\begin{table}[H]
+  \centering
+  \caption{Direct carbon emissions intensity.}
+  \label{table:carbon_emissions_intensity}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{5cm}cp{2cm}@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $CI_{\text{SMR}}^{\text{direct}}$ & 9.3 & Kg CO$_2$ per Kg H$_2$ & \cite{LEWIS2022} \\
+      $\eta_{\text{NGCC}}$ & 46.1\% & - & \cite{DONO2014} \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item Efficiency value for NGCC. Abbreviations: $CI_{\text{SMR}}^{\text{direct}}$, direct carbon intensity of steam methane reforming; $\eta_{\text{NGCC}}$, natural gas combined cycle efficiency; NGCC, natural gas combined cycle; Kg CO$_2$, kilograms of carbon dioxide; Kg H$_2$, kilograms of hydrogen.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{equation}
+\text{CI}_{\text{SMR}_{\text{NG}}} = \text{CI}_{\text{elec\_NG}} \times \eta_{\text{NGCC}} \times \frac{\dot{M}_{\text{NG}_j}/365}{M_{\text{H}_2} \times h_{\text{NG}}^{\text{LHV}} \times [0.000948 \ \text{MMBtu/MJ}] \times [1000 \ \text{kg/tonne}]}
+\label{eq:S38}
+\end{equation}
+
+\begin{equation}
+\text{CI}_{\text{CCS}_{\text{NG}}} = \text{CI}_{\text{SMR}_{\text{NG}}} \times (1 - R_{\text{CO}_2})
+\label{eq:S39}
+\end{equation}
+
+\begin{equation}
+\text{CI}_{j_{\text{Biomass}}} = \frac{\dot{M}_{\text{biomass}}}{M_{\text{H}_2}} \times \text{CI}_{\text{Biomass}}
+\label{eq:S40}
+\end{equation}
+
+The AP plan first must decide on a credit program (45V or 45Q). AP BH2S and AP AEC do not qualify for 45Q. Hence, only AP CCS can choose between 45V and 45Q by using the formula below:
+
+\begin{equation}
+\begin{aligned}
+\text{max}\Bigg[& \text{45V} : \sum_{T=S+C}^{L+S+C} \mathbf{H}_{\text{CE}} \left(\frac{F_{45Q} \times \dot{M}_{\text{H}_2} \times (\text{CI}_{\text{SMR}_{\text{direct}}} - \text{CI}_{j_{\text{direct}}})}{(1 + d_p)^{T-S}}\right), \\
+& \quad \text{45Q} : \sum_{T=S+C}^{L+S+C} \mathbf{H}_{\text{CE}} \left(\frac{\dot{M}_{\text{H}_2} \times F_{45V} \times \text{CI}_j}{(1 + d_p)^{T-S}}\right) \Bigg]
+\end{aligned}
+\label{eq:S41}
+\end{equation}
+
+where \( \textbf{H}\textsubscript{CE} \) is an operator that converts the tax credits from the IRA-eligible tax credits to the cash-equivalent utilizing the “direct pay” and “transferability” capabilities of the credits – it performs the logical operation in supplementary equations (\ref{eq:S44}) and (\ref{eq:S45}). The first term in the max function is the NPV of 45V credits. The second term is the NPV of 45Q credits.
+
+\begin{equation}
+\text{Credits}_{45V_j}(T) = \dot{M}_{\text{H}_2} \times F_{45V} \times \text{CI}_j
+\label{eq:S42}
+\end{equation}
+
+\begin{equation}
+\text{Credits}_{45Q_j}(T) = F_{45Q} \times \dot{M}_{\text{H}_2} \times (\text{CI}_{\text{SMR}_{\text{direct}}} - \text{CI}_{j_{\text{direct}}})
+\label{eq:S43}
+\end{equation}
+
+\begin{equation}
+\text{Credits}_{\text{CE}}(T \mid \mid \text{Tax}(T) \mid > \text{Credits}(T)) = \text{Credits}_j(T)
+\label{eq:S44}
+\end{equation}
+
+\begin{equation}
+\text{Credits}_{\text{CE}}(T \mid \mid \text{Tax}(T) \mid < \text{Credits}(T)) = -\text{Tax}(T) + F_t(T) \times (\text{Credits}_j(T) + \text{Tax}(T))
+\label{eq:S45}
+\end{equation}
+
+where \( F\textsubscript{45V}(CI\textsubscript{j}) \) and \( F\textsubscript{45Q} \) are the intensive tax credits per unit of H\textsubscript{2} produced and CO\textsubscript{2} captured, respectively. 45V is a piecewise function of \( CI \). 45V and 45Q are mutually exclusive, so the highest tax credit is preferred for technology option \( j \). \( \dot{M}\textsubscript{H_2} \) is the monthly flowrate of H\textsubscript{2} and CO\textsubscript{2}. \( F_t(T) \) is an exchange rate of USD per tax credit. It is equal to 1 in the first five years of operation (due to direct pay) and then attains a market value of less than one after five years. \( F\textsubscript{45V}(CI\textsubscript{j}) \) and \( F\textsubscript{45Q} \) become zero after 10 and 12 years of operation, respectively.
+
+\subsection{Economic Methods for Measurement metrics}
+
+A valuable measure in the context of comparisons of climate policy instruments could be the carbon abatement cost (\( CAC\textsubscript{j} \)), which quantifies the cost to the taxpayer of bringing low-carbon technologies to commercialization, normalized by the mitigated emissions over the lifetime of the plant.
+
+\begin{equation}
+\text{CAC}_j = \frac{\sum_{T=S+C}^{L+S+C} \left(\frac{\text{Credits}_j(T)}{[1 + d_s]^{T-S}}\right)}{\sum_{T=S+C}^{L+S+C} \left(\frac{\dot{M}_{\text{H}_2} \times (\text{CI}_{\text{SMR}}(T) - \text{CI}_j(T))}{[1 + d_s]^{T-S}}\right)}
+\label{eq:S46}
+\end{equation}
+
+where \( L+S+C \) represents the operating lifetime, the month the plant begins to be built, and the construction period, respectively. The denominator represents the total abated emissions as a Riemann sum of the CO\textsubscript{2} at all periods. Both the carbon and credits are discounted to the present value at the social discount rate, \( d_s \). The discount rate for the \( CAC \) is set to two percent, in line with EPA’s estimates of the social cost of carbon\cite{EPA2022}.
+
+Much like the \( \text{CAC}_j \), the total tax credits we measure are on a hydrogen basis. This metric is easily compared to the popular levelized cost of hydrogen (LCOH) metric. We develop the following metrics to quantify the three types of tax credit \( \text{TC}_{j\alpha} \) quantifications we report:
+
+\begin{equation}
+\text{TC}_{j_{\text{Potential (2\%)}}} = \frac{\sum_{T=S+C}^{L+S+C} \left(\frac{\text{Credits}_j(T)}{[1 + d_s/12]^{T-S}}\right)}{\sum_{T=S+C}^{S+C+L_{\text{H}_2}} \left(\frac{\dot{M}_{\text{H}_2}}{[1 + d_s/12]^{T-S}}\right)}
+\label{eq:S47}
+\end{equation}
+
+\begin{equation}
+\text{TC}_{j_{\text{CE (2\%)}}} = \frac{\sum_{T=S+C}^{L+S+C} \left(\frac{\text{Credits}_{\text{CE}_j}(T)}{[1 + d_s/12]^{T-S}}\right)}{\sum_{T=S+C}^{S+C+L_{\text{H}_2}} \left(\frac{\dot{M}_{\text{H}_2}}{[1 + d_s/12]^{T-S}}\right)}
+\label{eq:S48}
+\end{equation}
+
+\begin{equation}
+\text{TC}_{j_{\text{CE (9.3\%)}}} = \frac{\sum_{T=S+C}^{L+S+C} \left(\frac{\text{Credits}_{\text{CE}_j}(T)}{[1 + d_p/12]^{T-S}}\right)}{\sum_{T=S+C}^{S+C+L_{\text{H}_2}} \left(\frac{\dot{M}_{\text{H}_2}}{[1 + d_p/12]^{T-S}}\right)}
+\label{eq:S49}
+\end{equation}
+
+We take the NPV of the tax credits from the public and private perspectives. \( TC\textsubscript{j\_Potential (2\%)} \) captures the total amount of credits issued – hence the cost to the taxpayer. \( TC\textsubscript{j\_CE (2\%)} \) is always less than \( TC\textsubscript{j\_Potential (2\%)} \) and represents the amount of tax credits awarded to the low-carbon AP investor from the total pool of tax credits, \( TC\textsubscript{j\_Potential (2\%)} \). \( TC\textsubscript{j\_CE (9.3\%)} \) is the low-carbon AP investor’s valuation of the tax credits using the WACC as the discount rate. The AP investor is more “impatient” than the government and hence places more value on credits awarded in the near future.
+
+\begin{table}[h]
+  \centering
+  \caption{IRA tax credit market value assumptions for “direct pay” and “transferability” provisions.}
+  \label{tab:tax_credit_conversion} % Add label here
+  \begin{threeparttable}
+    \begin{tabularx}{\textwidth}{@{}p{3cm}p{3cm}Xp{4cm}@{}}
+    \toprule
+    \textbf{Time} & \textbf{Value} & \textbf{Notes} & \textbf{Source} \\ 
+    Years 0-5 of operation & 1 \$ per TC & Per IRS “direct pay” guidelines published in June. & \cite{YOSEF2023, Chang2023} \\ 
+    2031-2032 & Uniform (0.6,0.85) & Early industry prediction & \cite{McKenna2022, MARCUM2022} \\ 
+    2032-2033 & Uniform (0.7,0.9) & Early industry prediction & \cite{McKenna2022, MARCUM2022} \\ 
+    2033-2034 & Uniform (0.75,0.925) & Early industry prediction & \cite{McKenna2022, MARCUM2022} \\ 
+    2034-2035 & Uniform (0.8,0.95) & Early industry prediction & \cite{McKenna2022, MARCUM2022} \\ 
+    2035-onwards & Uniform (0.85,0.95) & Early industry prediction & \cite{McKenna2022, MARCUM2022} \\ \bottomrule
+    \end{tabularx}
+\begin{tablenotes}
+  \footnotesize
+  \item Inflation Reduction Act's (IRA) tax credit market value assumptions for “direct pay” and “transferability” provisions. Abbreviations: IRS, Internal Revenue Service; TC, tax credit. Assumptions are based on early industry predictions and guidelines from referenced sources.
+\end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature.}
+  \label{table:nomenclature}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{10cm}c@{}}
+      \toprule
+      \textbf{Parameter} & \textbf{Description} & \textbf{Units} \\ \midrule
+      $CAC_j$ & Carbon abatement cost for technology $j$ & \$ per tCO$_2$eq \\
+      $d_s$ & Social discount rate & \% \\
+      $T{C_j}_\alpha$ & Tax credit for technology $j$ for type of credit $\alpha$ & \$ per Kg H$_2$ \\
+      $\alpha$ & Can be the potential tax credits discounted at $d_s$, cash-equivalent tax credits discounted at $d_s$, or cash-equivalent tax credits discounted at $d_p$ & \\
+      $L_{H_2}$ & Lifetime of hydrogen produced under the IRA & months \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $CAC_j$, carbon abatement cost for technology $j$; $d_s$, social discount rate; $T{C_j}_\alpha$, tax credit for technology $j$ for type of credit $\alpha$; $L_{H_2}$, lifetime of hydrogen produced under the Inflation Reduction Act (IRA); tCO$_2$eq, tonnes of CO$_2$ equivalent; Kg H$_2$, kilograms of hydrogen.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+
+
+
+\begin{table}[H]
+  \centering
+  \caption{Carbon intensity inputs for electricity mix.}
+  \label{table:carbon_intensity_inputs}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{6cm}cp{2cm}@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $X_{\text{oil}}(T)$ & uniform(0.256, 1.17) & Kg CO$_2$ per Kg H$_2$ & \cite{Nicholson2021} \\
+      $X_{\text{NG}}(T)$ & uniform(0.389, 0.988) & Kg CO$_2$ per Kg H$_2$ & \cite{Nicholson2021} \\
+      $X_{\text{Coal}}(T)$ & uniform(1.001, 1.01) & Kg CO$_2$ per Kg H$_2$ & \cite{Nicholson2021} \\
+      $X_{\text{nuclear}}(T)$ & uniform(0.012, 0.220) & Kg CO$_2$ per Kg H$_2$ & \cite{Nicholson2021} \\
+      $X_{\text{renewables}}(T)$ & 0 & Kg CO$_2$ per Kg H$_2$ & \cite{Nicholson2021} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $X_{\text{oil}}(T)$, carbon intensity from oil in the electricity mix; $X_{\text{NG}}(T)$, carbon intensity from natural gas in the electricity mix; $X_{\text{Coal}}(T)$, carbon intensity from coal in the electricity mix; $X_{\text{nuclear}}(T)$, carbon intensity from nuclear in the electricity mix; $X_{\text{renewables}}(T)$, carbon intensity from renewables in the electricity mix; Kg CO$_2$, kilograms of carbon dioxide; Kg H$_2$, kilograms of hydrogen. Values represent uniform distributions based on data from Nicholson (2021) \cite{Nicholson2021}.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Financial inputs.}
+  \label{table:financial_inputs}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{6cm}cp{2cm}@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $F_a$ & 0.9 & - & \cite{LEWIS2022} \\
+      $Y_1,Y_2,Y_3$ & 10\%, 60\%, 30\% & - & Assumption \\
+      $R_e$ & 12.27\% & - & \cite{Damodaran2023} \\
+      $R_d$ & 5.5\% & - & \cite{Damodaran2023} \\
+      $e$ & 63.19\% & - & \cite{Damodaran2023} \\
+      $\phi_{\text{state}}$ & 5.25\% & - & \\
+      $\phi_{\text{federal}}$ & 21\% & - & \\
+      $L_{\text{loan}}$ & 180 & years & \cite{LEWIS2022} \\
+      $L_{\text{equipment}}$ & 84 & years & \cite{Turton2018} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $F_a$, availability factor; $Y_1, Y_2, Y_3$, distribution of costs over the first three years; $R_e$, cost of equity; $R_d$, cost of debt; $e$, equity fraction; $\phi_{\text{state}}$, state income tax rate; $\phi_{\text{federal}}$, federal income tax rate; $L_{\text{loan}}$, loan lifetime; $L_{\text{equipment}}$, equipment lifetime.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{IRA Inputs.}
+  \label{table:ira_inputs}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{6cm}cp{2cm}@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $F_{\text{45V}}$ (0 – 0.45 KgCO$_{2\text{eq}}$ per Kg H$_2$) & 3 & \$ per Kg H$_2$ & \cite{IRA2022} \\
+      $F_{\text{45V}}$ (0.45 – 1.5 KgCO$_{2\text{eq}}$ per Kg H$_2$) & 1 & \$ per Kg H$_2$ & \cite{IRA2022} \\
+      $F_{\text{45V}}$ (1.5 – 2.5 KgCO$_{2\text{eq}}$ per Kg H$_2$) & 0.75 & \$ per Kg H$_2$ & \cite{IRA2022} \\
+      $F_{\text{45V}}$ (2.5 – 4.0 KgCO$_{2\text{eq}}$ per Kg H$_2$) & 0.6 & \$ per Kg H$_2$ & \cite{IRA2022} \\
+      $F_{\text{45Q}}$ & 85 & \$ per tCO$_2$e & \cite{IRA2022} \\ \bottomrule
+    \end{tabular}
+
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $F_{\text{45V}}$, tax credit for hydrogen production based on carbon intensity; $F_{\text{45Q}}$, tax credit for CO$_2$ sequestration; KgCO$_{2\text{eq}}$, kilograms of CO$_2$ equivalent; Kg H$_2$, kilograms of hydrogen; tCO$_2$e, tonnes of CO$_2$ equivalent. Tax credits are based on thresholds defined in the Inflation Reduction Act (IRA) \cite{IRA2022}.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Measurement metrics values.}
+  \label{table:measurement_metrics_values}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{3cm}cp{2cm}@{}}
+      \toprule
+      \textbf{Input Name} & \textbf{Value} & \textbf{Unit} & \textbf{Source} \\ \midrule
+      $d_s$ & 2\% & \% per year & \cite{EPA2022} \\
+      $L_{H_2}$ & 120$^A$ & months & \cite{IRA2022} \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item $^A$ The lifetime of 45V credits (10 years) is assumed to be the lifetime of hydrogen production under the IRA. Abbreviations: $d_s$, social discount rate; $L_{H_2}$, lifetime of hydrogen production under the IRA.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\subsection{Electricity Source Methods}
+
+The problem aims to minimize the capital cost required for installations to meet constant electricity demand. Optimal sizing of solar, wind and battery capacity depends on the relative costs, resource availability, and requirements for constant electricity output. Thus, the objective is to find the optimal capacities of asset installations that minimize the overall capital cost.
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature.}
+  \label{table:nomenclature_electricity}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{8cm}cp{4cm}@{}}
+      \toprule
+      \textbf{Description} & \textbf{Units} & \textbf{Source} \\ \midrule
+      \multicolumn{3}{@{}l}{\textbf{Decision variables}} \\ \midrule
+      $w$ & Installed wind capacity & MW & \\
+      $b$ & Installed battery capacity & MW & \\
+      $S$ & Installed solar capacity & MW & \\
+      $w(t)$ & Wind generation in each time period & MWh & \\
+      $s(t)$ & Solar generation in each time period & MWh & \\
+      $c(t)$ & Battery charge in each time period & MWh & \\
+      $d(t)$ & Battery discharge in each time period & MWh & \\
+      $b(t)$ & Battery state of charge in each time period & MWh & \\ \midrule
+      \multicolumn{3}{@{}l}{\textbf{Parameters}} \\ \midrule
+      $CF_w(t)$ & Capacity factor of wind across different periods & Unitless & \\
+      $CF_s(t)$ & Capacity factor of solar across different periods & Unitless & \\
+      $D$ & Constant electricity demand, varies by specific technologies & MWh & \\
+      $EFF$ & Roundtrip efficiency of the battery system, assumed 85\%$^A$ & Unitless & \\
+      $COST_{\text{wind}}$ & Capital cost per MW of wind capacity & \$ per MW & \\
+      $COST_{\text{battery}}$ & Capital cost per MW of battery capacity & \$ per MW & \\
+      $COST_{\text{solar}}$ & Capital cost per MW of solar capacity & \$ per MW & \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item $^A$ Cole \& Frazier (2019). Abbreviations: MW, megawatt; MWh, megawatt-hour; $CF_w(t)$, capacity factor of wind across different periods; $CF_s(t)$, capacity factor of solar across different periods; $EFF$, roundtrip efficiency of the battery system; $COST_{\text{wind}}$, capital cost per MW of wind capacity; $COST_{\text{battery}}$, capital cost per MW of battery capacity; $COST_{\text{solar}}$, capital cost per MW of solar capacity.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\subsection{Electricity Source Methods for Formulation}
+
+The objective function (supplementary equation (\ref{eq:S50})) is to minimize the total capital investments, which is the sum of the capital cost of wind installation (\(\text{COST}\textsubscript{wind} \times w\)), solar (\(\text{COST}\textsubscript{solar} \times s\)), and the capital cost of battery installation (\(\text{COST}\textsubscript{battery} \times b\)).
+
+\begin{equation}
+\begin{aligned}
+\min_{\substack{w \geq 0, \\ b \geq 0, \\ s \geq 0}} & \quad F = \text{COST}_{\text{wind}} \times w + \text{COST}_{\text{battery}} \times b + \text{COST}_{\text{solar}} \times s
+\end{aligned}
+\label{eq:S50}
+\end{equation}
+
+The power balance constraint \eqref{eq:S51} ensures that the net power balance in each time period equals the electricity demand (D). It accounts for wind generation \(w(t)\), battery charging \(c(t)\), solar generation \(s(t)\), and battery discharging \(d(t)\). The net power balance is achieved by subtracting the battery charge and adding the battery discharge to the wind generation:
+
+\begin{equation}
+s(t) + w(t) - c(t) + d(t) = D, \ \forall t
+\label{eq:S51}
+\end{equation}
+
+Wind and solar generation constraints \eqref{eq:S52} and \eqref{eq:S53} enforce generation in each time period to not exceed resource availability \(\text{CF}(t) \times w\):
+
+\begin{equation}
+0 \leq w(t) \leq \text{CF}_{\text{wind}}(t) \times w, \ \forall t
+\label{eq:S52}
+\end{equation}
+
+\begin{equation}
+0 \leq s(t) \leq \text{CF}_{\text{solar}}(t) \times s, \ \forall t
+\label{eq:S53}
+\end{equation}
+
+Supplementary equations \eqref{eq:S54} and \eqref{eq:S55} limit the battery charging and discharging to their capacity:
+
+\begin{equation}
+0 \leq c(t) \leq b, \ \forall t
+\label{eq:S54}
+\end{equation}
+
+\begin{equation}
+0 \leq d(t) \leq b, \ \forall t
+\label{eq:S55}
+\end{equation}
+
+Supplementary equation \eqref{eq:S56} defines the battery storage state considering roundtrip efficiency, charge, and discharge dynamics:
+
+\begin{equation}
+b(t) = b(t-1) + \text{EFF} \times c(t) - d(t), \ \forall t > 1
+\label{eq:S56}
+\end{equation}
+
+Lastly, supplementary equation \eqref{eq:S57} puts a lower and an upper limit on the battery's state of charge:
+
+\begin{equation}
+0 \leq b(t) \leq b, \ \forall t
+\label{eq:S57}
+\end{equation}
+
+The data for the capacity factors \( CF(t) \) is parameterized by location, year, and design. The hourly capacity data originates from Pfenninger et al. \cite{Pfenninger2016}.
+
+\textbf{Locations:} The capacity factors are obtained from 8 locations, labeled Yara, Koch, Woodward, Port Neal, Verdigris, Nutrien, Donaldson, and AdvanSix. The locations match some of the largest AP plants in the US (see supplementary table \ref{table:ap_plant_locations}).
+
+\begin{table}[H]
+  \centering
+  \caption{Specific locations of AP plants.}
+  \label{table:ap_plant_locations}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    \textbf{Company} & \textbf{Name} & \textbf{State} & \textbf{Latitude} & \textbf{Longitude} \\ \midrule
+    CF Industries & Donaldsonville Complex & LS & 30.087397 & -90.955682 \\
+    CF Industries & Verdigris Complex & OK & 36.233335 & -95.718833 \\
+    CF Industries & Woodward Complex & OK & 36.437942 & -99.472056 \\
+    CF Industries & Port Neal Complex & IA & 42.332879 & -96.377213 \\
+    Koch Industries & Koch Fertilizer Company Enid & OK & 36.380941 & -97.761921 \\
+    Nutrien & Nutrien Augusta Nitrogen & GA & 33.443125 & -81.930376 \\
+    Yara & BASF Chemicals Division & TX & 29.000639 & -95.393318 \\
+    AdvanSix & AdvanSix & VA & 37.300405 & -77.271941 \\ \bottomrule
+  \end{tabular}
+  \begin{tablenotes}
+  \small
+  \item Abbreviations: AP, ammonia production; LS, Louisiana; OK, Oklahoma; IA, Iowa; GA, Georgia; TX, Texas; VA, Virginia. Latitude and longitude coordinates represent the geographical locations of specific ammonia production plants.
+\end{tablenotes}
+
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Constant electricity demand of each technology.}
+  \label{table:constant_electricity_demand}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Low}} & \multicolumn{2}{c}{\textbf{High}} \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    & \textbf{MW} & \textbf{MWh per year} & \textbf{MW} & \textbf{MWh per year} \\ \midrule
+    AP CCS, $D$ & 117 & 922,428 &  &  \\
+    AP BH2S, $D$ & 127 & 1,001,268 &  &  \\
+    AP AEC, $D$ & 913 & 7,198,092 & 1,007 & 7,939,188 \\ \bottomrule
+  \end{tabular}
+\begin{tablenotes}
+  \small
+  \item Abbreviations: AP, ammonia production; CCS, carbon capture and storage; BH$_2$S, blue hydrogen sulfide; AEC, alkaline electrolysis cell; MW, megawatt; MWh per year, megawatt-hours per year. Notes: AP AEC has a demand range because we assume an uncertain electrolyzer efficiency.
+\end{tablenotes}
+
+\end{table}
+
+\textbf{Year:} Only 2019 data was available. We assume 2019 capacity factors to be a typical meteorological year (TMY) for the AP plant model for computational tractability. In other words, the time-varying results from this optimization problem \( w(t), d(t), \) etc. are oscillatory functions in the context of the AP plant (see SI F).
+
+\textbf{Wind turbine design:} As wind turbine technology improves, the costs are expected to decrease and the hub heights and capacity per turbine to increase. 2026 scenario data was obtained using a hub height of 90.2 m and a BONUS B82 2300 turbine. 2033 data was obtained using a hub height of 120 m and a GAMESA G128 5000 turbine. The turbine design was picked to match closely with the average design specifications of deployed wind turbines in the baseline and moderate scenarios of NREL’s Annual Technology Baseline report\cite{OEDI2022}.
+
+Our stochastic NPV model uses a uniform distribution to capture the lower and upper bounds of uncertain variables such as wind and battery CAPEX. To capture the upper and lower bounds of wind resource availability in those eight locations, we compute the average monthly and hourly capacity factors and pick two farm locations each year with the highest and lowest average capacity factors (see supplementary table \ref{table:capacity_factor_data}). Intuitively, locations with low-energy wind resources will have a larger wind capacity (higher overall CAPEX) than locations with high-energy wind resources (lower overall CAPEX).
+
+\begin{table}[H]
+  \centering
+  \caption{Capacity factor data for selected locations.}
+  \label{table:capacity_factor_data}
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule
+    & \multicolumn{4}{c}{\textbf{2023}} \\ \cmidrule(lr){2-5}
+    \textbf{Location} & \textbf{Average} & \textbf{Minimum} & \textbf{Maximum} & \textbf{Std Deviation} \\ \midrule
+    Koch & 35.5\% & 0.0\% & 98.2\% & 28.1\% \\
+    AdvanSix & 17.8\% & 0.0\% & 97.6\% & 18.9\% \\
+    Port Neal & 34.9\% & 0.0\% & 98.2\% & 27.8\% \\
+    Nutrien & 18.4\% & 0.0\% & 98.2\% & 18.7\% \\
+    Yara & 29.1\% & 0.0\% & 98.1\% & 23.7\% \\
+    Woodward & 39.2\% & 0.0\% & 98.2\% & 29.6\% \\
+    Donaldson & 19.4\% & 0.0\% & 98.2\% & 20.1\% \\
+    Verdigris & 31.4\% & 0.0\% & 98.2\% & 26.7\% \\ \midrule
+    & \multicolumn{4}{c}{\textbf{2030}} \\ \cmidrule(lr){2-5}
+    \textbf{Location} & \textbf{Average} & \textbf{Minimum} & \textbf{Maximum} & \textbf{Std Deviation} \\ \midrule
+    Koch & 42.7\% & 0.0\% & 96.4\% & 29.8\% \\
+    AdvanSix & 26.7\% & 0.0\% & 96.4\% & 23.5\% \\
+    Port Neal & 41.9\% & 0.0\% & 96.4\% & 29.3\% \\
+    Nutrien & 25.4\% & 0.0\% & 96.4\% & 22.5\% \\
+    Yara & 35.7\% & 0.0\% & 96.4\% & 26.0\% \\
+    Woodward & 46.1\% & 0.0\% & 96.4\% & 30.9\% \\
+    Donaldson & 25.8\% & 0.0\% & 96.4\% & 23.2\% \\
+    Verdigris & 38.7\% & 0.0\% & 96.4\% & 28.8\% \\ \bottomrule
+  \end{tabular}
+  \begin{tablenotes}
+  \small
+  \item Abbreviations: Std Deviation, standard deviation. Capacity factor data represents the operational efficiency of the facilities at selected locations for the years 2023 and 2030. Values include average, minimum, maximum, and standard deviation of capacity factors for each location.
+\end{tablenotes}
+
+\end{table}
+
+This helps in understanding which locations are performing the best and the worst in wind electricity generation, and these two locations’ data are used for stochastic NPV analysis.
+
+The capital cost of wind and battery is based on values from Bistline et al. \cite{Bistline2023}. See below in supplementary table \ref{table:capex_wind_battery}.
+
+\begin{table}[H]
+  \centering
+  \caption{CAPEX of wind and battery systems.}
+  \label{table:capex_wind_battery}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    \textbf{Battery} & \textbf{Low} & \textbf{High} & \textbf{Units} \\ \midrule
+    2023, $COST_{\text{battery}}$ & 800 & 1,500 & \$ per kW \\
+    2030, $COST_{\text{battery}}$ & 450 & 1,200 & \$ per kW \\ \midrule
+    \textbf{Wind} & \textbf{Low} & \textbf{High} & \textbf{Units} \\ \midrule
+    2023, $COST_{\text{wind}}$ & 1,200 & 1,400 & \$ per kW \\
+    2030, $COST_{\text{wind}}$ & 750 & 1,200 & \$ per kW \\ \bottomrule
+  \end{tabular}
+  \begin{tablenotes}
+  \small
+  \item Abbreviations: CAPEX, capital expenditure; $COST_{\text{battery}}$, cost of battery systems; $COST_{\text{wind}}$, cost of wind systems; kW, kilowatt. The table presents the range of CAPEX values for wind and battery systems for the years 2023 and 2030.
+\end{tablenotes}
+
+\end{table}
+
+\subsection{Electricity Source Methods for Implementation}
+
+The optimization problem is formulated in Python and solved using the PuLP library, a popular open-source linear programming (LP) modeling package that can seamlessly handle mixed-integer linear programming (MILP) scenarios.
+
+PuLP offers a simple and intuitive syntax for defining optimization problems using Python, such as intuitive syntax for defining decision variables, objective functions, and constraints. Thus, the model can be formulated to closely resemble the mathematical notation that describes optimization problems. It provides a high-level abstraction that makes it easier to express mathematical programming concepts.
+
+\subsection{Electricity Source Methods for Results}
+
+The optimal results are computed for installed wind capacity, battery capacity, wind generation, battery charging, battery discharging, battery state of charge, storage duration, and wind supply curtailment. These results collectively provide insights into how the optimization model has determined the optimal configuration for wind capacity, battery capacity, and their operational behavior to minimize costs while ensuring supply-demand balance and considering various constraints. We report and publish all results from this optimization in an Excel file named \textit{AP\_NE\_Optimization\_Results.xlsx}.
+
+\subsection{Scenario-Specific Methods}
+
+\begin{table}[H]
+  \centering
+  \caption{Business models and policy scenarios.}
+  \label{tab:electricity-source-scenarios} % Add label here
+  \begin{threeparttable}
+    \begin{tabular}{@{}p{1.5cm}p{8cm}p{2cm}p{1.5cm}@{}}
+    \toprule
+    \textbf{Scenario} & \textbf{Description} & \textbf{AP SMR} & \textbf{LCAP} \\ 
+    A & “IRA compatible” US power grid (with a range of LCA of fuels): Grid electricity (2023-2035) – EIA AEO 2023 scenario (CO2 intensity) & Yes & Yes \\ 
+    B & “Build and own” a wind farm with a battery that powers the AP processes (upfront CAPEX-intensive, benefit of low marginal cost of electricity generation)\textsuperscript{a} & No & Yes \\ 
+    C & Power Purchase Agreement (PPA) with a wind farm with a battery (OPEX-intensive, electricity purchase paid at the LCOE of wind farm with battery)\textsuperscript{a} & No & Yes \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \footnotesize
+  \item \textsuperscript{a} We developed an optimization model to minimize the CAPEX of the wind and battery system. The main constraint of this system is constant electric output. For more details, see the supplementary electricity source methods section. Abbreviations: AP, ammonia production; SMR, steam methane reforming; LCAP, low-carbon ammonia production; CAPEX, capital expenditure; OPEX, operational expenditure; LCOE, levelized cost of electricity; IRA, Inflation Reduction Act; EIA AEO, Energy Information Administration Annual Energy Outlook.
+\end{tablenotes}
+
+    
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Nomenclature for scenario-specific changes}
+  \label{table:nomenclature_scenario_specific}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{8cm}c@{}}
+      \toprule
+      \textbf{Variables/Parameters} & \textbf{Description} & \textbf{Units} \\ \midrule
+      $MIOPEX_{\text{el}}(\Gamma)$ & Additional market-independent OPEX as a function of the remainder of the AP plant time attributed to the solar, wind and battery O\&M. & \$ per month \\
+      $d_{\text{monthly}}(\Gamma)$ & Monthly aggregated sum of the battery discharge & MWh per month \\
+      $C_{(f+v)}^{\text{wind}}$ & Fixed and variable O\&M cost of the wind farm & \$ per MW per year \\
+      $C_{(f+v)}^{\text{solar}}$ & Fixed and variable O\&M cost of the solar farm & \$ per MW per year \\
+      $C_f^{\text{battery}}$ & Fixed O\&M costs of the battery system & \$ per kW-year \\
+      $C_v^{\text{battery}}$ & Variable O\&M costs of the battery system & \$ per MWh \\
+      $L$ & Plant operating lifetime & months \\
+      $S$ & The time step in which the plant construction begins & month \\
+      $C$ & Construction time & months \\
+      $S_{\text{el}}(T)$ & Surplus electricity income & \$ per month \\
+      $w_{\text{monthly}}(\Gamma)$ & Monthly aggregated sum of the total electricity generated by the wind farm & MWh per month \\
+      $s_{\text{monthly}}(\Gamma)$ & Monthly aggregated sum of the total electricity generated by the solar farm & MWh per month \\
+      $LCOE_{\text{wind farm only}}$ & The levelized cost of electricity of a stand-alone wind and solar farm & \$ per MWh \\
+      $P_{\text{Electricity}}(T)$ & Electricity market price & \$ per kWh \\
+      $48E$ & The percentage ITC of 48E credits from the IRA & \% solar, wind and battery CAPEX \\
+      $45Y(T)$ & Time function of 45Y credits bounded by the start of operations and 45Y credit lifetime, $E_{45Y}$ & \$ per MWh \\
+      $E_{45Y}$ & Lifetime of 45Y credits, constrained by $2023 + \frac{(E_{45Y} + S + C)}{12} = 2050$ & Months \\
+      $H_{\text{CE}}[x]$ & Cash-equivalent operator, performs the conversion from nominal tax credits to cash-equivalent tax credits & \$ \\
+      $d_r$ & Discount rate & \\
+      $LCOE$ & Levelized cost of electricity & \$ per MWh \\
+      $CO_2$ tax & CO$_2$ tax imposed by CBAM & \$ per Month \\
+      $CI_{\text{SMR}_{\text{EU}}}(T)$ & European AP SMR carbon intensity & Kg CO$_2$eq per kg H$_2$ \\
+      $M_{\text{H}_2}$ & Mass flowrate of hydrogen & Tonnes per day \\
+      $F_a$ & Availability factor & \% \\
+      $CO_2^{\text{EUPrice}}$ & Price for CBAM certificates & \$ per tCO$_2$ \\
+      $R_{\text{EU emissions}}$ & Decay rate for EU AP SMR emissions intensity & \% \\
+      $L_{\text{battery}}$ & Lifetime of battery system & years \\
+      $L_{\text{wind}}$ & Lifetime of wind farm turbines & years \\
+      $L_{\text{solar}}$ & Lifetime of solar farm turbines & years \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $MIOPEX_{\text{el}}(\Gamma)$, additional market-independent OPEX for electricity systems; $d_{\text{monthly}}(\Gamma)$, monthly battery discharge; $C_{(f+v)}^{\text{wind}}$, fixed and variable O\&M costs of wind farms; $C_{(f+v)}^{\text{solar}}$, fixed and variable O\&M costs of solar farms; $C_f^{\text{battery}}$, fixed O\&M costs of battery systems; $C_v^{\text{battery}}$, variable O\&M costs of battery systems; $L$, plant operating lifetime; $S$, construction start time; $C$, construction time; $S_{\text{el}}(T)$, surplus electricity income; $w_{\text{monthly}}(\Gamma)$, monthly wind generation; $s_{\text{monthly}}(\Gamma)$, monthly solar generation; $LCOE_{\text{wind farm only}}$, levelized cost of electricity for stand-alone wind and solar farms; $P_{\text{Electricity}}(T)$, electricity market price; $48E$, ITC percentage from IRA credits; $45Y(T)$, 45Y credits function; $E_{45Y}$, lifetime of 45Y credits; $H_{\text{CE}}[x]$, cash-equivalent operator; $d_r$, discount rate; $LCOE$, levelized cost of electricity; $CO_2$ tax, CO$_2$ tax from CBAM; $CI_{\text{SMR}_{\text{EU}}}(T)$, EU SMR carbon intensity; $M_{\text{H}_2}$, hydrogen flowrate; $F_a$, availability factor; $CO_2^{\text{EUPrice}}$, CBAM certificate price; $R_{\text{EU emissions}}$, EU SMR emission decay rate; $L_{\text{battery}}$, battery system lifetime; $L_{\text{wind}}$, wind farm turbine lifetime; $L_{\text{solar}}$, solar farm turbine lifetime; Kg CO$_2$eq, kilograms of CO$_2$ equivalent; tCO$_2$, tonnes of CO$_2$; MWh, megawatt-hour; kWh, kilowatt-hour; TPD, tonnes per day; CBAM, Carbon Border Adjustment Mechanism.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Input values for for scenario-specific section.}
+  \label{table:input_values_section_f}
+  \begin{threeparttable}
+    \begin{tabular}{@{}lp{5cm}p{4cm}@{}}
+      \toprule
+      \textbf{Variables/Parameters} & \textbf{Value} & \textbf{Source} \\ \midrule
+      $C_{(f+v)}^{\text{wind}}$ & 52.22 \$ per MW per year & \cite{Stehly2020} \\
+      $C_{(f+v)}^{\text{solar}}$ & & \\
+      $C_f^{\text{battery}}$ & Uniform(6.16, 49.33) \$ per kW-year & \cite{Cole2019} \\
+      $C_v^{\text{battery}}$ & Uniform(0, 8.63) \$ per MWh &\cite{Cole2019} \\
+      $L$ & 480 months (40 years) & Author assumption \\
+      $S$ & 0 months (year 2023) or 84 (year 2030) & Author assumption \\
+      $C$ & 36 months & Author assumption \\
+      $48E$ & Uniform(30\%, 40\%) & \cite{IRA2022} \\
+      $45Y(T)$ & \$1.5 per MWh (when eligible) & \cite{IRA2022} \\
+      $M_{\text{H}_2}$ & 483 TPD & \cite{LEWIS2022} \\
+      $F_a$ & 90\% & \cite{LEWIS2022} \\
+      $L_{\text{battery}}$ & Uniform(13, 20) years & \cite{Cole2019} \\
+      $L_{\text{wind}}$ & 20 years & \cite{Stehly2020} \\
+      $L_{\text{solar}}$ & 20 years & \\
+      $CI_{\text{SMR}_{\text{EU}}}(T=0)$ & 8.82 (KgCO$_2$e) per (KgH$_2$) & \cite{McDonald2023} \\
+      $R_{\text{EU emissions}}$ & 1.4\% & \cite{McDonald2023, Kakoulaki2021, EU2020}\\
+      $CO_2^{\text{EUPrice}}$ & Uniform(35-100) \$ per tCO$_2$e & \cite{McDonald2023} \\ \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+  \small
+  \item Abbreviations: $C_{(f+v)}^{\text{wind}}$, fixed and variable O\&M costs of wind energy; $C_{(f+v)}^{\text{solar}}$, fixed and variable O\&M costs of solar energy; $C_f^{\text{battery}}$, fixed O\&M costs of battery systems; $C_v^{\text{battery}}$, variable O\&M costs of battery systems; $L$, operating lifetime; $S$, project start time; $C$, construction time; $48E$, tax credit for renewable energy projects under the IRA; $45Y(T)$, tax credit for renewable energy production; $M_{\text{H}_2}$, hydrogen production flowrate; $F_a$, availability factor; $L_{\text{battery}}$, battery system lifetime; $L_{\text{wind}}$, wind farm lifetime; $L_{\text{solar}}$, solar panel lifetime; $CI_{\text{SMR}_{\text{EU}}}(T=0)$, carbon intensity of SMR in the EU at time $T=0$; $R_{\text{EU emissions}}$, emissions reduction rate in the EU; $CO_2^{\text{EUPrice}}$, EU carbon price; TPD, tonnes per day; KgCO$_2$e, kilograms of carbon dioxide equivalent; KgH$_2$, kilograms of hydrogen; MWh, megawatt-hour; kW, kilowatt.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+The previous SI modules describe the model methodology for scenario A in its entirety. This section contains a set of case studies of this model. There are three dimensions to the case studies:
+\begin{enumerate}
+    \item Business models: choice between scenarios A, B, and C. Scenario A is the baseline and is not discussed in this section.
+    \item CBAM: a choice on whether to enforce CBAM or not.
+    \item Electricity matching constraints: a choice to enforce yearly, monthly, or hourly constraints.
+\end{enumerate}
+This section describes the differences between scenarios B and C from the baseline. We also describe the implementation of CBAM. Finally, we do not discuss matching constraints because the constraints are integrated into the optimization model (see electricity sources section).
+
+\subsection{Scenario-Specific Methods for Scenario B}
+
+To describe the changes we make to the baseline model (scenario A), we include a table with all the changes (supplementary table \ref{table:changes_module_descriptions}). We utilize some of the variables from the optimization problem and introduce some new variables in \ref{table:nomenclature_scenario_specific}. We define the AP plant time step to be \( T \in S+C+L \) months. Let \( \Gamma = T \mod 12 \) (so \( 0 \leq \Gamma \leq 11 \)). \( \Gamma \) is a useful transformation of \( T \) that allows us to extend the values of the optimization model from one year to 40 years of AP plant operation.
+
+The decision between 48E and 45Y is found below (reference supplementary table \ref{table:changes_module_descriptions}):
+
+\begin{table}[H]
+  \centering
+  \caption{Changes made to scenario A to make scenario C}
+  \label{table:changes_module_descriptions}
+  \begin{tabular}{@{}lp{2cm}p{10cm}@{}}
+    \toprule
+    \textbf{Change} & \textbf{Module Affected} & \textbf{Description} \\ \midrule
+    Farm CAPEX & CAPEX & The CAPEX of each technology is increased by $COST_{\text{wind}} \times w + COST_{\text{battery}} \times b + COST_{\text{solar}} \times s$ except for AP SMR. The increased CAPEX is propagated to the rest of the CAPEX components. \\
+    Grid electricity costs & MDOPEX & Electricity costs from the grid are set to zero. \\
+    Farm OPEX & MIOPEX & The electricity costs are replaced by the variable and fixed O\&M costs of the hybrid farm and battery system.
+    \newline $MIOPEX_{\text{el}}(\Gamma) = w \times \frac{C_{(f+v)}^{\text{wind}}}{12} + s \times \frac{C_{(f+v)}^{\text{solar}}}{12} + \left[\frac{b \times 1000}{12}\right] \times C_f^{\text{battery}} + d_{\text{monthly}}(\Gamma) \times C_v^{\text{battery}}$ \\
+    $CI_{(j | j \neq \text{SMR})}^{\text{Electricity}}(T) = 0$ & Carbon Intensity & We assume the carbon generated from the farm is zero. \\
+    48E or 45Y credits & Tax Credits & The NPV model has added tax credits coming from IRA programs that support the farm system. The decision between 48E and 45Y is based on the NPV of each cash-equivalent tax credit. The formulation of the decision is long, so we describe it in the scenario-specific methods \\
+    Selling surplus electricity & MDOPEX & Surplus electricity produced by the farm that is not stored can be sold to the grid at the higher price between the LCOE of the farm and the market price:
+    \newline $S_{\text{el}}(T) = \left[CF_{\text{wind}}(\Gamma) \times w + CF_{\text{solar}}(\Gamma) \times s - w_{\text{monthly}}(\Gamma) - s_{\text{monthly}}(\Gamma)\right] \times \max[LCOE_{\text{farm only}}, P_{\text{Electricity}}(T) \times 1000]$
+    \newline So that $MDOPEX(T)$ is increased by $S_{\text{el}}(T)$. \\
+    Farm has replacement costs & MIOPEX & Every $L_{\text{solar}}, L_{\text{battery}}$, and $L_{\text{wind}}$, the uninstalled equipment cost of the assets is incurred. We make this assumption as the project lifetime of solar, wind farm, and battery storage is shorter than AP.
+    
+    The cost of the farm across time is the same cost as the start year. Hence, no technological improvements are taken into account. We adopt this assumption because the capacity factor data (and hence the optimization algorithm) is a function of the design parameters of the wind turbine. Relaxing this assumption brings about considerable computation barriers and also has little effect on the PPA price (scenario C) or NPV (scenario B) because the replacement cost is heavily discounted. Consider that 75\% of the value of the NPV or PPA price is derived from the first 13 years of performance. At 20 years, the replacement cost plays a small part in the economic performance.  
+    \\ \bottomrule
+  \end{tabular}
+  \begin{tablenotes}
+  \small
+  \item Abbreviations: CAPEX, capital expenditure; OPEX, operational expenditure; MDOPEX, market-dependent OPEX; MIOPEX, market-independent OPEX; $COST_{\text{wind}}$, wind farm cost per MW; $COST_{\text{battery}}$, battery system cost per MW; $COST_{\text{solar}}$, solar farm cost per MW; $MIOPEX_{\text{el}}$, additional OPEX due to electricity systems; $CI_{(j | j \neq \text{SMR})}^{\text{Electricity}}(T)$, carbon intensity of non-SMR technologies due to electricity; 48E, tax credit for renewable energy projects under the IRA; 45Y, tax credit for renewable energy production; $LCOE$, levelized cost of electricity; $P_{\text{Electricity}}(T)$, electricity market price at time $T$; $S_{\text{el}}(T)$, surplus electricity income; $L_{\text{solar}}$, solar farm lifetime; $L_{\text{battery}}$, battery system lifetime; $L_{\text{wind}}$, wind farm turbine lifetime; AP, ammonia production; SMR, steam methane reforming; NPV, net present value; PPA, power purchase agreement; IRA, Inflation Reduction Act.
+\end{tablenotes}
+
+\end{table}
+
+\begin{equation}
+\begin{aligned}
+\text{max}\Bigg[& \mathbf{H}_{\text{CE}} \left(\frac{48E \times (\text{COST}_{\text{wind}} \times w + \text{COST}_{\text{battery}} \times b + \text{COST}_{\text{solar}} \times s)}{(1 + d_r)^{S+C}}\right), \\
+&\quad \sum_{T=S+C}^{L+S+C} \mathbf{H}_{\text{CE}} \left(\frac{(w(\Gamma) + s(\Gamma)) \times 45Y(T)}{(1 + d_r)^{T-S}}\right) \Bigg]
+\end{aligned}
+\label{eq:S58}
+\end{equation}
+
+48E credits are redeemed at the start of operation and are discounted to the present value. We assume 48E credits also cover investments in the battery system.
+
+45Y credits are spread out across time, hence the summation term. 45Y(\( T \mid S+C \leq T \leq S+C+E\textsubscript{45Y} \)) is non-zero and zero whenever \( T \notin S+C \leq T \leq S+C+E\textsubscript{45Y} \). The lifetime of 45Y credits, \( E\textsubscript{45Y} \), is determined to be when the grid emits 75\% less than the 2022 grid. We first estimated this through \( \frac{CI\textsubscript{AP\_AEC}(T)}{CI\textsubscript{AP\_AEC}(T=0)} = 0.25 \) since \( \frac{CI\textsubscript{grid}(T)}{CI\textsubscript{grid}(T=0)} \propto \frac{CI\textsubscript{AP\_AEC}(T)}{CI\textsubscript{AP\_AEC}(T=0)} \) because AP AEC’s CI only varies with electricity. We find that grid emissions, according to the AEO2023, do not reach that level until after 2050\cite{EIA2023b}. For simplicity, we assume \( 2023+\frac{E\textsubscript{45Y}+S+C}{12} = 2050 \) so that \( E\textsubscript{45Y} \) is a free variable that ensures 45Y(\( T \)) is zero after 2050.
+
+Once a tax credit program is chosen, the tax credits are added to the total tax credits. In the case of 48E, \ref{eq:S59} is used. \ref{eq:S60} is used when 45Y is larger than 48E.
+
+
+\begin{equation}
+\begin{aligned}
+\text{Credits}_{\text{CE}_{\text{scenario B}}}(T) &= \text{Credits}_{\text{CE}}(T) + \\
+&\quad \begin{cases}
+\mathbf{H}_{\text{CE}} \left[ 48E \times (\text{COST}_{\text{wind}} \times w \right. \\
+\quad \left. + \text{COST}_{\text{battery}} \times b \right. \\
+\quad \left. + \text{COST}_{\text{solar}} \times s) \right], & \text{if } T = S+C, \\
+0, & \text{otherwise}.
+\end{cases}
+\end{aligned}
+\label{eq:S59}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+\text{Credits}_{\text{CE}_{\text{scenario C}}}(T) &= \text{Credits}_{\text{CE}}(T) + \\
+&\quad \mathbf{H}_{\text{CE}} \left[ (w(\Gamma) + s(\Gamma)) \times 45Y(T) \right]
+\end{aligned}
+\label{eq:S60}
+\end{equation}
+
+\subsection{Scenario-Specific Methods for Power-Purchase Agreement}
+
+The electricity price in scenario C becomes the LCOE of the hybrid farm, which we refer to as the PPA price. supplementary table \ref{table:changes_baseline_model_scenario_c} contains the details of how scenario C differs from scenario A.
+
+\begin{table}[H]
+  \centering
+  \caption{Changes to the baseline model to enable scenario C. All changes apply to the low-carbon technologies. AP SMR stays the same as the baseline.}
+  \label{table:changes_baseline_model_scenario_c}
+  \begin{tabular}{@{}p{4cm}p{1.5cm}p{8cm}@{}}
+    \toprule
+    \textbf{Change} & \textbf{Module Affected} & \textbf{Description} \\ \midrule
+    \multicolumn{3}{@{}l}{\textbf{Changes to the AP Model}} \\ \midrule
+    Change in the electricity price & MDOPEX & The new electricity price corresponds to the LCOE of the hybrid farm. \\
+    \multicolumn{3}{@{}l}{\textbf{Changes to AP Model to derive the LCOE}} \\ \midrule
+    Every probabilistic value becomes the average value & All modules & \\
+    Heuristic factors for the CAPEX are no longer multiplied by a factor of $\frac{1}{(2717/100)^{0.6}}$. (see section C) & CAPEX & This scaling factor for the heuristics is not valid for the hybrid facility because the facility does not produce ammonia. \\
+    All OPEX costs are substituted for heuristics & MIOPEX & The OPEX becomes the $MIOPEX(\Gamma)$.
+    \newline $MIOPEX_{\text{el}}(\Gamma) = w \times \frac{C_{(f+v)}^{\text{wind}}}{12} + s \times \frac{C_{(f+v)}^{\text{solar}}}{12}$ \newline $+ \left[\frac{b \times 1000}{12}\right] \times C_f^{\text{battery}} + d_{\text{monthly}}(\Gamma) \times C_v^{\text{battery}}$ \\
+    Sales change from ammonia to electricity & Sales & $Sales(\Gamma) = \left[D_j + \left(CF_{\text{wind}}(\Gamma) \times w + CF_{\text{solar}}(\Gamma) \times s \right. \right.$ \newline $\left. \left. - w_{\text{monthly}}(\Gamma) - s_{\text{monthly}}(\Gamma)\right)\right] \times LCOE$ \\
+    Only 48E or 45Y credits are considered & Tax Credits & 48E or 45Y credits are applied using the same formulation as scenario C (see section F.1.1). \\
+    Instead of an NPV analysis, we use a levelized cost analysis & DCF Model & We iterate the LCOE until the absolute value of the NPV is minimized.
+    \newline $\text{arg} \min_{\text{LCOE}} \sum_{T=0}^{L+S+C} \left| \frac{CF_{\text{LCOE}}(T)}{(1+d_r)^{T-S}} \right|$ \\ \bottomrule
+  \end{tabular}
+  \begin{tablenotes}
+  \small
+  \item Abbreviations: AP, ammonia production; SMR, steam methane reforming; LCOE, levelized cost of electricity; CAPEX, capital expenditure; OPEX, operational expenditure; MDOPEX, market-dependent OPEX; MIOPEX, market-independent OPEX; $MIOPEX_{\text{el}}$, electricity-related OPEX; $CF_{\text{wind}}(\Gamma)$, wind capacity factor; $CF_{\text{solar}}(\Gamma)$, solar capacity factor; $w$, installed wind capacity; $s$, installed solar capacity; $b$, installed battery capacity; $C_{(f+v)}^{\text{wind}}$, fixed and variable O\&M costs of wind farms; $C_{(f+v)}^{\text{solar}}$, fixed and variable O\&M costs of solar farms; $C_f^{\text{battery}}$, fixed O\&M costs of battery systems; $C_v^{\text{battery}}$, variable O\&M costs of battery systems; $d_{\text{monthly}}(\Gamma)$, battery discharge; $w_{\text{monthly}}(\Gamma)$, monthly wind generation; $s_{\text{monthly}}(\Gamma)$, monthly solar generation; 48E, tax credit for renewable energy CAPEX under IRA; 45Y, tax credit for renewable energy production; NPV, net present value; DCF, discounted cash flow; $d_r$, discount rate.
+\end{tablenotes}
+
+\end{table}
+
+The levelized cost method applied to the hybrid farm system initially follows the same method as the baseline AP NPV model, with an additional step to minimize the absolute value of the NPV by iterating through the levelized cost (LCOE or PPA price).
+
+\subsection{Scenario-Specific Methods for Carbon Border Adjustment Mechanism}
+
+The implementation of CBAM is a simple formula that measures the difference between the European AP SMR CI and the technology \( j \). The magnitude of the difference is translated into the carbon tax below:
+
+\begin{equation}
+\text{CO}_2\text{tax} = \left(CI_{\text{SMR\_EU}}(T) - CI_j(T)\right) \times M_{H_2} \times \frac{365}{12} \times F_a \times \text{CO}_2\text{EUPrice}
+\label{eq:E4}
+\end{equation}
+
+\begin{equation}
+CI_{\text{SMR\_EU}}(T) = CI_{\text{SMR\_EU}}(T=0) \times \left(1 - R_{\text{EU\_emissions}}\right)^{T/12}
+\label{eq:E5}
+\end{equation}
+
+We assume CBAM does not expire. The values for each parameter are found in \ref{table:E1}. We calibrated \( R_{\text{EU\_emissions}} \) so that the EU AP SMR emissions in 2050 will match the predictions by the European Commission and Kakoulaki et al. \cite{Kakoulaki2021, EU2020}. We chose an exponential decay type of relationship to show more pronounced emissions reductions early in the century and slower reductions towards the middle of the century.
+
+\section{Supplementary Discussion}
+
+This section briefly reviews the four AP technologies this report considers. supplementary figure \ref{fig:si_technology_schematic} shows a visual schematic of the technologies analyzed in our study. We start with the carbon-intensive, conventional AP SMR. Then, we describe AP SMR with Carbon Capture and Storage (AP CCS), followed by AP SMR with carbon-neutral biomass, as feedstock (AP BH2S). The last low-carbon technology pathway we considered for the AP is via Alkaline Electrolysis (AP AEC). Additionally, we include a comparison of each AP technology's technical advantages and disadvantages.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/technology_schematic.png} 
+  \caption{
+    Technology pathways analyzed in this article. This figure illustrates the technology pathways for ammonia production, including steam-methane reforming (SMR) and water-gas shift (WGS) processes. Abbreviations used: SMR stands for steam-methane reforming, and WGS stands for water-gas shift.
+  }
+  \label{fig:si_technology_schematic}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+\subsection{AP through Steam Methane Reforming (baseline scenario)}
+
+The common denominator across all technologies is the notable Haber-Bosch (HB) process – a chemical process by which pure sources of hydrogen (H\textsubscript{2}) and nitrogen (N\textsubscript{2}) gases combine to form ammonia (NH\textsubscript{3}). The source of N\textsubscript{2} is separated from the air with an air separation unit (ASU), as air is 78\% N\textsubscript{2} by volume. For H\textsubscript{2}, natural gas (NG) is the most prominent source (78\% of global AP) – although coal is also common (22\%) \cite{EIA2021}. NG is chemically treated to obtain pure H\textsubscript{2} for the HB process selectively. Specifically, the chemical treatment for hydrogen production has three major steps \cite{Amhamed2022, Appl1999, IRENA2022, MacFarlane2020}:
+
+\begin{enumerate}
+    \item NG is cleaned of impurities such as sulfur (Kim et al., 2021).
+    \item The NG is mixed with steam and reacted in several heated vessels – the first reaction is called steam-methane reforming (SMR), and the second is the water-gas shift (WGS) reaction. The resulting chemicals from these reactions are methane, CO\textsubscript{2}, and H\textsubscript{2}.
+    \item H\textsubscript{2} is separated from CO\textsubscript{2} and methane in a pressure-swing absorption unit (PSA). The pure H\textsubscript{2} product is sent to the HB process. The remaining methane and CO\textsubscript{2} heat the SMR vessel through combustion. Finally, the combusted gas is emitted into the environment through the plant’s stack.
+\end{enumerate}
+
+The H\textsubscript{2} from the HP process and the N\textsubscript{2} from the ASU must be compressed because the HB process requires extreme pressures and temperatures. The compression of H\textsubscript{2} and N\textsubscript{2} is the most energy-intensive step in AP. The source of energy for compression varies across technologies (see the technical supplementary methods section).
+
+The typical AP SMR plant produces 500 to 3000 metric tons per day (TPD) of NH\textsubscript{3} \cite{Amhamed2022, IEA2021}. The IEA reports that the break-even AP SMR ammonia price ranges from approximately \$300 to \$600 per ton of NH\textsubscript{3}, whereas the market price is between \$200 and \$750 in 2021 \cite{IEA2021}. Natural gas price constitutes 30\% of the levelized cost of ammonia (LCOA) as it is needed for hydrogen production and heating \cite{Appl1999, Maxwell2012, Zhang2020}. Therefore, a strong correlation between natural gas and ammonia markets exists. The remaining cost is attributed primarily to capital expenditure (CAPEX) and the rest to operational expenditure (OPEX) \cite{Appl1999, Maxwell2012}.
+
+\subsection{AP SMR with a Carbon Capture System (AP CCS)}
+
+The state-of-the-art CCS technologies are amine-based carbon sequestration units operated commercially for direct air or point-source capture. This CCS technology operates by mixing CO\textsubscript{2}-rich gases with water and amine solution to dissolve the CO\textsubscript{2} in the solvent. The CO\textsubscript{2}-rich solvent can be stripped of the CO\textsubscript{2} by heating – effectively regenerating the solvent and obtaining pure CO\textsubscript{2} gas for transportation and storage. CCS systems can capture up to 95\% of the CO\textsubscript{2} within the AP plant at an additional electric energy penalty cost relative to AP SMR. A report by the DOE comparing hydrogen production via SMR with and without CCS found that H\textsubscript{2} SMR required 0.65 kWh per Kg H\textsubscript{2} of electricity, while H\textsubscript{2} SMR with CCS required 2.04 kWh per Kg H\textsubscript{2} \cite{LEWIS2022}.
+
+\subsection{AP SMR with a Biomass-derived feedstock (AP BH2S)}
+
+The natural gas feedstock of AP SMR can be substituted with biomass. Hydrogen production with a biomass feedstock utilizes the organic compounds in the biomass to generate small gaseous molecules (i.e., CH\textsubscript{4}, C\textsubscript{2}H\textsubscript{4}, CO, CO\textsubscript{2}, H\textsubscript{2}, N\textsubscript{2}, etc.) through a process known as gasification. These molecules are further processed into H\textsubscript{2} and CO\textsubscript{2} through the conventional SMR-WGS steps \cite{Arora2017, Tock2013, TUNA2014}. According to Spath et al., the organic molecules are converted to small molecules in a separate tar reformer before the SMR to pre-treat the syngas for sulfur contaminants and avoid char formation – although the goal design would be to perform tar reforming and SMR in the same vessel \cite{Spath2005}.
+
+Biomass feedstocks are effectively net-zero, as the carbon emitted by biomass comes from the atmospheric CO\textsubscript{2} fixated into plants through photosynthesis. However, the electric energy requirements to process the biomass into usable NG-like synthesis gas are in the ballpark of AP CCS \cite{LEWIS2022, Spath2005}. Hence, significant and possibly IRA-disqualifying indirect emissions of AP BH2S may be a fault of a carbon-intensive electric source (i.e., the electric grid) \cite{EIA2023b}.
+
+\subsection{AP via Alkaline Electrolysis (AP AEC)}
+
+The most abundant source of hydrogen is water. Water contains zero carbon and can be electrolyzed to produce pure hydrogen and oxygen gas. The advantage of electrolysis is that it is modular and suitable for decentralized systems \cite{Sousa2022, Bohm2020}. The current competing technologies are alkaline water electrolysis (AEC), proton exchange membrane electrolysis (PEM), and solid oxide electrolysis (SOE) \cite{Bohm2020, Santos2017, Proost2017, Schmidt2017}.
+
+AEC is the most competitive technology as it has a high lifetime (60,000-90,000 hours (h)) and a low cost (1300-500 \$\slash kW) when compared to PEM (20,000-90,000h and 2000-800 \$\slash kW) \cite{Schmidt2017}. SOE stacks have the highest cost among all technologies (5000-1500 \$\slash kW) and the shortest lifetime (<20,000h) as they are still at the laboratory stage \cite{Schmidt2017}. Nevertheless, SOE stacks are expected to experience the most significant cost reductions from deployment and R\&D \cite{Schmidt2017, Lee2021}. AP AEC forms a small part of AP in general (<0.02 Mt in 2021) \cite{Bohm2020, IRENA2022}. AEC pathways and other electrolysis technologies expect cost reductions of 0-24\% from R\&D and 17-30\% from production scale-up \cite{Schmidt2017}.
+
+While electrolytic pathways mitigate emissions by ensuring a zero-carbon feedstock, the additional electric energy demand can be higher \cite{Singh2022}. Gomez and colleagues identified that H\textsubscript{2} electrolysis required 50-60 kWh per kg H\textsubscript{2} versus 0.65 kWh per kg H\textsubscript{2} for SMR \cite{Gomez2020, LEWIS2022}. The additional electricity usage renders electrolytic hydrogen production to be non-zero because of the indirect emissions of the grid and construction materials. Simons and Bauer estimate solar-powered electrolysis at 3 kg CO\textsubscript{2} eq per kg H\textsubscript{2} and wind at 2 kg CO\textsubscript{2} eq per kg H\textsubscript{2} due to the indirect emissions of the construction materials for wind and solar alone \cite{Simons2011}.
+
+\subsection{Economic and environmental comparison of AP across the literature}
+
+The most often used and preferred method in the literature to compare economic performance of low-carbon hydrogen and ammonia is the levelized cost approach (LCOH and LCOA) \cite{Arora2016, Campion2022, Pozo2022, Gomez2020, Guerra2020, Lee2021, LEWIS2022, Osman2020, Rouwenhorst2019, Sanchez2019, Sousa2022, Tock2013, TUNA2014, Wang2020, Zhang2020}. The LCOA, while pertinent in numerous instances, is primarily focused on the production cost side of the equation, potentially overlooking the IRA's significant dynamics, which influence the revenue side.
+
+This revenue-side influence, particularly concerning income taxes, is outside the scope of the LCOA, necessitating assumptions that could potentially overstate outcomes. For instance, Jenkins et al. implicitly assumed all tax credits equal \$1 US dollar by awarding full credit value to their levelized cost analysis \cite{Jenkins2023}. This approach may lead to overestimations, particularly regarding policy support for low-profit, riskier, low-carbon technologies that heavily rely on a tax credit market. Consequently, this study adopts the NPV approach, offering a more comprehensive and nuanced perspective better suited to capturing the real-world effects of income tax credit-based policies like the IRA.
+
+Regarding the electric energy intensity of AP, compressing the gas out of the HP and ASU systems before the HB loop is known to be a highly energy-intensive step. Hence, using surplus energy from other parts of the process is a critical step that may sometimes drive AP SMR to generate electricity \cite{IEAGHG2017}. This energy integration step is essential in determining the relative OPEX between AP SMR and low-carbon technologies. Some technologies lack surplus energy to power the compression and need to purchase energy from the grid.
+
+In general, AP SMR may have surplus energy to power the entire compression load, and hence, it uses the least amount of grid electricity \cite{LEWIS2022, IEAGHG2017}. AP CCS does not have surplus energy and uses grid electricity \cite{IEAGHG2017, LEWIS2022}. AP BH2S does have surplus energy for one compression process but has two in total—hence using around the same amount of grid electricity as AP CCS \cite{Spath2005}. Finally, AP AEC needs an order of magnitude larger amount of electricity for hydrogen production. It does not have surplus energy for compression—making it the most electrically energy-intensive process in the portfolio \cite{Gomez2020}. Regarding total energy efficiency, AP AEC is the least efficient, followed by BH2S and CCS. AP SMR is the most energy-efficient pathway\cite{Pozo2022, Smith2020, Tock2013, Spath2005}.
+
+In terms of economic cost assessment, large-scale AP SMR plants, with capacities above 2000 TPD of ammonia, can have capital expenditure (CAPEX) ranging from \$500M (\$250k per TPD NH\textsubscript{3}) to \$1800M (\$900k per TPD NH\textsubscript{3}) and operating expenditure (OPEX) ranging from \$180 to \$500 per ton of NH\textsubscript{3} \cite{IEA2021, Pfromm2017, Maxwell2012}. For AP CCS at an 88.2\% capture rate, the CAPEX is estimated to be between \$298k per TPD NH\textsubscript{3} and \$275k per TPD NH\textsubscript{3}, with an OPEX of €280 per Ton NH\textsubscript{3} \cite{Pozo2022}. On the other hand, AP BH2S costs have been studied at scales of 73 to 1187 TPD NH\textsubscript{3}. Arora et al. provided a detailed process model for biomass gasification at 73.5 TPD NH\textsubscript{3} \cite{Arora2017}. They noted that the CAPEX and OPEX of biomass gasification are between \$170k to \$175k per TPD NH\textsubscript{3} and \$705 to \$722 per ton NH\textsubscript{3}, respectively.
+
+Although specific cost data for AP AEC was not easily found in the literature, it is likely to have similar or higher costs than AP CCS and AP BH2S, depending on variable factors such as electricity costs (OPEX-related) and electrode stack costs (CAPEX-related), which are highly uncertain variables \cite{Sousa2022}. AP AEC is the pathway expected to reduce cost due to modularity \cite{Schmidt2017}. AP CCS is expected to remain at a similar cost level—hence only seen as a transitory technology for decarbonization \cite{MacFarlane2020}. AP BH2S, on the other hand, presents significant uncertainties regarding its cost and feedstock availability \cite{Sanchez2019, Tock2013, TUNA2014}.
+
+On the environmental front, life cycle assessments (LCA) of AP SMR produce variable results involving the emissions intensity of ammonia production. The cradle-to-gate equivalent CO\textsubscript{2} emissions of AP SMR varied by 10 to 15\% from the average across studies \cite{Bicer2016, Bicer2017, Liu2020}. For example, Bicer and colleagues measured the emissions intensity for AP SMR to be 1.6 kg of equivalent CO\textsubscript{2} emissions (kgCO\textsubscript{2}e) per kg of NH\textsubscript{3} with a plant-wide scope, while ARPA-E reported a value of 2.55 kgCO\textsubscript{2}e per kgNH\textsubscript{3} for a cradle-to-gate analysis using the GREET model \cite{Bicer2016, Bicer2017}. Liu and colleagues reported emissions intensities of around 1.8 kgCO\textsubscript{2}e per kgNH\textsubscript{3} for a cradle-to-gate scope \cite{Liu2020}. Young and colleagues found that CCS reduced cradle-to-gate CO\textsubscript{2}e emissions by 69\% \cite{Young2019}.
+
+The DOE report on hydrogen production via SMR with CCS found similar results at a 61\% reduction in cradle-to-gate CO\textsubscript{2}e intensity \cite{LEWIS2022}. The average CO\textsubscript{2}e intensity of AP SMR across four studies is approximately 11.7 kgCO\textsubscript{2}e per kgH\textsubscript{2} (1.99 kgCO\textsubscript{2}e per kgNH\textsubscript{3}) \cite{Bicer2016, Bicer2017, Liu2020} – Please note that reductions by 61-69\% qualify AP SMR with CCS for significant 45Q carbon sequestration credits under IRA \cite{LEWIS2022, Bauer2022, IRA2022}.
+
+AP through BH2S has been considered a viable alternative to ammonia production as it is a zero-carbon fuel \cite{Arora2016, Arora2017, Gilbert2014}. Gilbert and colleagues show that biomass reduces cradle-to-gate emissions to 0.7 kg CO\textsubscript{2}e per kg NH\textsubscript{3} (3.95 kg CO\textsubscript{2}e per kg H\textsubscript{2}) from a 1.9 kg CO\textsubscript{2}e per kg NH\textsubscript{3} (10.7 kg CO\textsubscript{2}e per kg H\textsubscript{2}) natural gas AP SMR baseline\cite{Gilbert2014}. The environmental performance of AP w/ BH2S has also been shown to decrease with increasing scale at varying proportions depending on the type of biomass. Arora et al. display results indicating the inverse relationship between decreasing life-cycle emissions and scale-up cost reductions \cite{Arora2017}.
+
+While AP AEC pathways mitigate emissions by ensuring a zero-carbon feedstock, the additional indirect electric energy emissions can be higher. The estimated potential emissions intensity of AP AEC can range between 4.4-2.2 kg CO\textsubscript{2}e per kgH\textsubscript{2}. Simons and Bauer estimate solar-powered electrolysis at 3 kg CO\textsubscript{2}e per kgH\textsubscript{2} and wind at 2 kgCO\textsubscript{2}e per kgH\textsubscript{2} due to the indirect emissions of the construction materials for wind and solar \cite{Simons2011}. Borole and Greig estimated wind-powered electrolysis at 0.97 kgCO\textsubscript{2}e per kgH\textsubscript{2}, and Valente et al. estimated 0.3 kgCO\textsubscript{2}e per kgH\textsubscript{2} \cite{Borole2019, Valente2020}. Liu and colleagues estimated the emissions intensity of N\textsubscript{2} production and the Haber-Bosch process to be 0.3 kgCO\textsubscript{2}e per kgH\textsubscript{2} and 0.9 kg CO\textsubscript{2}e per kgH\textsubscript{2}, respectively \cite{Liu2020}. By adding Liu et al.’s estimates to the results, the estimated potential emissions intensity of AP AEC can range between 4.4-2.2 kg CO\textsubscript{2}e per kg H\textsubscript{2}.
+
+In essence, AP CCS and AP BH2S are effective strategies for significantly reducing the carbon emissions associated with AP SMR. Despite this, AP CCS is inherently limited by a capture rate that falls short of 100\%, leading to unavoidable residual emissions. In contrast, AP BH2S holds the potential for near-net-zero emissions at the risk of limited feedstock supplies and quality. Alternatively, AP AEC can attain net-zero emissions, provided that the emissions linked to the production of materials are disregarded, especially in scenarios where the power generation is green.
+
+\subsection{Haber-Bosch Flexibility}
+
+The maximum flexibility of the HB loop varies widely between sources, ranging from 10\% of nominal capacity \cite{Ostundi2011} to nearly 80\% \cite{Verleysen2023}, with most estimates being concentrated around the 40\% level. This wide variance can be attributed to a range of underlying assumptions made by various authors; Verleysen et al. conservatively estimate a flexibility of 78.7\% of maximum capacity while optimizing system performance under realistic operational constraints\cite{Verleysen2023}. They also observe a significant 76.2\% decrease in mean AP for a 9.33\% increase in flexibility.
+
+Another study by Cheema and Krewer found through physicochemical modeling that by reducing the H\textsubscript{2}-N\textsubscript{2} ratio in the feed, H\textsubscript{2} consumption can be reduced by 67\% with a consequential 17\% increase in recycle load \cite{Cheema2018}. Cocon conducted a technical design optimization of an HB reactor while fluctuating the feed stream composition (H\textsubscript{2}:N\textsubscript{2}) from 3:1 to 1.31:2.69 over a 24-minute simulation. No substantive comments were made on the economic implications of implementing such a reactor \cite{cocon2021towards}.
+
+Armijo and Philibert outline a standard flexibility case through interviews with manufacturers where HB flexibility is 40\% of nominal capacity with a ramp rate of $\pm$20\% of nominal capacity per hour \cite{Armijo2020}. Further, they conclude that this ramp rate is more than sufficient to not be a limiting factor, which is corroborated by Wang et al. \cite{Wang2023}. Another first-principle-based analysis by Lazouski et al. finds that the energy efficiency of the ammonia production reaction must be greater than 32\%, and energy efficiencies below 30\% dramatically increase energy costs \cite{Lazouski2022}.
+
+These studies primarily examine the technical capabilities of HB while forgoing economic feasibility evaluation. Analyses based on cost-effectiveness yield a smaller operable capacity range; a study by Onodera et al. found a cost-optimized capacity factor for HB of 73\% as part of a larger flexible AP system. Further, they found that a flexible production capacity was economically preferable to a battery buffer storage system \cite{Onodera2023}.
+
+Allowing for flexible HB operation involves weighing the costs and benefits of reduced electricity matching requirements against the obvious reduced production, but also the increased risk of damaging process equipment under non-optimal operating conditions \cite{Ostundi2011}. Flexibility in HB operation is a prominent cost driver as the CAPEX associated with supplementary renewable energy infrastructure is significantly larger than that of ammonia production or the generation of hydrogen. Oftentimes, the minimum load of a flexible HB process is more impactful on overall process system costs than HB CAPEX itself given the impact of minimum load on the sizing of supplementary power equipment \cite{Wang2023}. It was determined that a minimum HB load decrease from 60\% of nominal to 10\% supported by a hybrid renewable energy system (wind and PV) resulted in a 7.1\% and 3.9\% decrease in LCOA in two Australian locations for which simulations were conducted \cite{Wang2023}. Bose et al. study costs of a dynamic green ammonia production plant with green energy \cite{Bose2022}. They take into account the spatio-temporal variation of VRE resources. Bose et al. find that 50\% capacity flexibility in HB results in a 15\% decrease in LCOH \cite{Bose2022}. However, this LCOH is not competitive with the incumbent grid-connected technology (\$400 per t vs. \$800 per t). Bouaboula et al. performed a techno-economic analysis of a PEM AP system with storage to address steady-state HB constraints. The resulting LCOA in 2020 is \$780 per t, 2030 is \$400 per t, and 2050 is \$250 per t. LCOA reductions originate from solar, wind, and electrolysis equipment becoming more competitive. Like our study, Bouaboula et al. find the cost reductions are non-linear with time \cite{Bouaboula2023}.
+
+While flexibility in an HB loop is possible, research into its practical implementation and cost-effectiveness is in its early stages. The breadth of literature suggests the extent to which the HB process can be operated flexibly depends on the lens through which analysis is conducted. Multiple technical analyses and patents purport HB operating ranges down to 10\% of nominal capacity with ramp rates of $\pm$20\% per hr \cite{Ostundi2011}. That said, economic analyses find optimal performance within significantly more stringent constraints (between 70\% and 80\% capacity) \cite{Verleysen2023, Onodera2023}.
+
+There are groups working to better understand the state of flexible HB technology through more pragmatic implementation. A report for the British government introduces the Ammonia Synthesis Plant from Intermittent Renewable Energy (ASPIRE) project. This project proposes the use of seven synthesis reactors in parallel which can individually be powered on and off to achieve flexibility of down to 5\% of maximum capacity (0.5MW to 10MW), storing excess thermal energy to keep idle reactors up to operating temperature \cite{Davenne2022}. They also find that flexible HB design is preferable to either energy or hydrogen storage units due to significantly reduced CAPEX. They claim that the technology for this flexible design is commercially available, but even their model plant is still in the planning stages.
+
+The Danish green energy company Topsoe plans to pilot a 25 MT per day ammonia plant with 10\% to 100\% flexibility in early 2024, with further plans to upscale to 1800 MT per day by 2025 \cite{Rouwenhorst2023}. Even when process economics are considered, there is little research into how incorporation of flexibility into an HB process will affect CAPEX, making the overall value of such a development difficult to estimate. Even Topsoe acknowledges cost optimization has not been performed on the pilot plant due to small-scale process economics not being reflective of full scale. With the IRA expiring in 2035, there are economic incentives to utilize mature, available technologies to maximize the benefits of these policies \cite{Rouwenhorst2023}.
+
+\subsection{Convergence of Monte Carlo results}
+
+This study analyzed the variability of NPV values across total Monte Carlo simulations for SMR, CCS, BH2S, and AEC technologies. The primary objective was to assess the robustness of NPV values as they evolved with an increasing number of simulations, offering insights into their stability in response to varying levels of simulation intensity.
+
+For each technology, scenario, and year, we conducted simulations with 500, 1,000, 2,000, 4,000, and 8,000 iterations (see the annexed Excel file named \textit{AP\_NE\_Convergence\_On\_NPV.xlsx}). During these simulations, we collected statistical data, including maximum, minimum, P95, P5, mean, and median values. Based on these results, we selected 4,000 simulations as the optimal number for data collection, considering the balance between convergence and computational efficiency.
+
+At the beginning of our analysis, significant fluctuations in NPV values were observed during the initial 300 iterations, indicating a potential uncertainty in early simulations. However, beyond approximately 2,000 runs, NPV values began to stabilize, with fluctuations diminishing substantially. Across most scenarios, a clear convergence trend emerged after the 2,000-run mark, suggesting that further iterations had a minimal impact on NPV values. We determined that 4,000 simulations provided the right balance between ensuring convergence and maintaining computational tractability.
+
+\subsection{Comparison of SMR baseline to IEA}
+
+The IEA provides a detailed chart of a levelized cost analysis performed on various technologies. To validate our techno-economic methodology, we compare our AP SMR levelized cost to the AP SMR LCOA reported by the IEA (Figure 1.6, page 40) with the deterministic levelized cost from this study \cite{IEA2021}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/SI_G.png} 
+  \caption{
+    Deterministic levelized cost of ammonia technologies. This figure compares the deterministic levelized cost of ammonia from this study to the International Energy Agency’s (IEA) Ammonia Technology Roadmap report \cite{IEA2021}.
+  }
+  \label{fig:SI_EIA_vs_APIRA}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+We used the sensitivity inputs for natural gas and electricity from the IEA to obtain the range of LCOAs, as shown in supplementary table \ref{table:SI_EIA_vs_APIRA}. The IEA assumes a higher capacity factor of 95\% and smaller CAPEX heuristics, resulting in a reduced CAPEX compared to our study. supplementary figure \ref{fig:SI_EIA_vs_APIRA}  below illustrates this comparison. Additionally, the IEA assumes a smaller discount rate of 8\% (compared to our 9.3\%) and a shorter operating lifetime of 25 years versus 40 years. Consequently, their TEA is less sensitive to changes in OPEX due to the shorter operating lifetime, though the difference in discount rates may offset this effect.
+
+The deterministic LCOA is computed by setting the NPV to zero (similar to the LCOE, see SI D). The deterministic NPV is calculated by taking the average of all probabilistic inputs. The high and low error bars represent instances when the model takes the maximum and minimum probabilistic values, respectively. Furthermore, in the minimum and maximum scenarios, we take on the electricity and natural gas values that the IEA uses (see supplementary table \ref{table:SI_EIA_vs_APIRA}).
+
+In conclusion, the values we obtain are comparable to those reported by the IEA, despite the significant differences in input values. Our plant model shows greater sensitivity to fluctuations in natural gas, ammonia, and electricity markets, denoted as $P_i(T)$ in the supplementary methods section, than the IEA’s AP SMR model. Additionally, our conservative estimation of CAPEX, incorporating additional cost factors, leads to an upward shift in the LCOA compared to the IEA’s LCOA.
+
+\subsection{Sensitivity analysis of inputs}
+
+
+
+Ensuring the quality of our TEA through a sensitivity analysis will help us determine if directional changes in the inputs result in economically sensible shifts in the NPV of the technologies. We include an Excel file named \textit{AP\_NE\_Sensitivities.xlsx}, which shows the difference in NPV [\$/tNH\textsubscript{3}] between the deterministic baseline and the sensitivity analysis. The “input” column depicts the change in the input variables in the high and low scenarios. The sensitivities are ranked in descending order by the sum of the NPV shifts across technologies.
+
+We set the bounds of the sensitivity analysis to be the distribution limits for probabilistic values and $\pm$20\% for deterministic and composite values. Composite values are values that sit in between the outputs and inputs. For example, the OPEX is a composite value because it is not an input or an output.
+
+There are values in the file that do not contain the input bounds for the sensitivity analysis – namely, “AEC Stack Cost” and “Wind Turbine CAPEX.” This is because the bounds of these values change over time. To find the bounds, refer to the 2023 and 2030 costs we set for these costs in SI B and D.
+
+In the deterministic version of the AP model, we handled commodity prices differently from the probabilistic counterpart. We set the standard deviation of the GBM module to 0 to express linear changes in commodity prices across time. This slightly affects the sensitivity analysis results.
+
+\subsection{CAPEX-related sensitivities}
+
+We consider the AEC CAPEX, the total CAPEX, and the wind CAPEX for the sensitivity analysis. We do not consider the battery CAPEX since monthly matching has no allocated battery capacity.
+
+For validation, the wind and battery CAPEX have the same sign (negative) and are part of the same supplementary equation in the Python model. Hence, they behave similarly in the hourly matching sensitivity (where battery capacity is allocated).
+
+Varying the overall CAPEX (composite value) by $\pm$20\% has little effect on the NPV in scenario A. Less than \$1 per tNH\textsubscript{3} was recorded, so it was rounded to 0, as such a difference is statistically insignificant. In scenario B, the CAPEX disproportionately affects the AP CCS, AP BH2S, and AP AEC NPVs relative to AP SMR. This is caused by the additional cost of the hybrid wind farm, which increases the CAPEX for the low-carbon technologies. Consequently, changes by $\pm$20\% in the low-carbon CAPEX will also vary the CAPEX of the hybrid wind farm – thereby becoming a more sensitive parameter. AP AEC is the most sensitive because its CAPEX is the biggest (see \textit{AP\_NE\_CAPEX.xlsx}). In scenario C, the CAPEX sensitivity regresses to scenario A sensitivity because the only difference between scenario A and scenario C is the OPEX.
+
+This parameter is more sensitive than the CAPEX for the AEC stack CAPEX. This is because the range of variation, in terms of percentage points, is $\pm$33\%. Remember that the AEC stack CAPEX is a probabilistic parameter that varies according to its bounds.
+
+\subsection{OPEX-related sensitivities}
+
+We consider the process-related OPEX (MI OPEX) and market-dependent commodity prices (electricity and natural gas) for monthly matching.
+
+The process-related OPEX is the largest in scenario B because of the O\&M costs of the hybrid wind farm for low-carbon technologies and appears correlated with the electricity price. AP SMR only experiences a shift of \$6 per tNH\textsubscript{3} when decreasing the process-related OPEX by 20\%. Meanwhile, AP AEC experiences a change of \$65 per tNH\textsubscript{3} with the same change. This is due to the scale of the hybrid wind farm, which incurs severe O\&M costs. Note that the hybrid wind farm scale is directly proportional to the electricity demand of the AP technology. AP CCS and AP BH2S sit between AP SMR and AP AEC, with changes of \$19 per tNH\textsubscript{3} and \$25 per tNH\textsubscript{3} in scenario B, respectively.
+
+In scenarios A and C, the process OPEX is similar for all technologies. This is because the electricity price is not part of the process OPEX—the electricity price being the only difference between scenarios A and C in terms of OPEX. Hence, the cost drivers cause the same directional change. This change is less than in scenario B. AP SMR, AP CCS, AP BH2S, and AP AEC only incur shifts of \$6 per tNH\textsubscript{3}, \$8 per tNH\textsubscript{3}, \$15 per tNH\textsubscript{3}, and \$9 per tNH\textsubscript{3} with a 20\% decrease in the process OPEX, respectively.
+
+Natural gas and electricity prices were found to be significant cost drivers of the AP process. In the probabilistic model, we enforce a correlation between ammonia and natural gas prices through a bivariate distribution. In the deterministic model, we take the average markup from natural gas to ammonia prices and make the ammonia price dependent on the product of the natural gas price and the markup. We do this to capture the hedging effect observed in the probabilistic model.
+
+The natural gas price alone drives a large part of the NPV of AP SMR and AP CCS across all scenarios. We set a range of prices by taking the minimum and maximum natural gas prices from December 2014 until January 2023 (EIA, 2023b). Changing the natural gas price results in hedging, as seen when the price is set at \$2.58 per MMBtu. The NPV of AP SMR and AP CCS decreases by -\$42 per tNH\textsubscript{3} and -\$48 per tNH\textsubscript{3}, while AP BH2S and AP AEC decrease by -\$75 per tNH\textsubscript{3} and -\$84 per tNH\textsubscript{3}. At the high sensitivity (\$9.95 per MMBtu), the NPV of AP SMR and AP CCS decreases by \$90 per tNH\textsubscript{3} and \$91 per tNH\textsubscript{3}, while AP BH2S and AP AEC decrease by \$100 per tNH\textsubscript{3} and \$109 per tNH\textsubscript{3}. The hedging effects result in approximately twice the loss for non-hedged technologies (AP BH2S and AP AEC) when natural gas prices reduce (and hence ammonia prices). On the other hand, the potential gain from not hedging results in a 21\% higher increase in NPV for BH2S and 11\% for AP AEC.
+
+The markup between NH\textsubscript{3} and natural gas was also varied. The low is 58.96 \$NH\textsubscript{3} per \$NG and the high is 204 \$NH\textsubscript{3} per \$NG. Changing the markup directly changes the ammonia price without affecting the natural gas price. Consequently, both AP SMR and AP CCS increase by \$51 per tNH\textsubscript{3} when the markup is high. Similarly, AP BH2S and AP AEC increase by \$52 per tNH\textsubscript{3} and \$62 per tNH\textsubscript{3}. On the other hand, low markup results in a loss of -\$76 per tNH\textsubscript{3}, -\$86 per tNH\textsubscript{3}, -\$85 per tNH\textsubscript{3}, and -\$94 per tNH\textsubscript{3} for AP SMR, AP CCS, AP BH2S, and AP AEC, respectively. These results vary slightly across scenarios due to tax-credit and profitability effects (see section I). Nevertheless, the general trend holds.
+
+The electricity price is one of the foundations of the NPV difference between AP SMR and the low-carbon technologies (especially AP AEC). In scenario A, the electricity price affected AP SMR, AP CCS, and AP BH2S less than their feedstock cost—specifically by +/- \$1 per tNH\textsubscript{3}, \$3 per tNH\textsubscript{3}, and \$3 per tNH\textsubscript{3}, respectively. The effects of biomass feedstock on BH2S were +\$14 per tNH\textsubscript{3} and -\$15 per tNH\textsubscript{3} for a decrease to \$50.68 per dry tonne and an increase to \$118.24 per dry tonne, respectively. Meanwhile, AP AEC uses electricity to drive the energy input into the hydrogen product (given the delta in thermodynamic energy states of water and hydrogen gas), which results in a dramatic sensitivity of +/- \$29 per tNH\textsubscript{3} for a +/- 20\% change in the electricity price in scenario A.
+
+In scenario B, the electricity cost sensitivity goes to zero for the low-carbon technologies and remains at the same level for AP SMR. This is because the electricity costs are shifted to the hybrid wind farm CAPEX and O\&M costs.
+
+In scenario C, the electricity cost sensitivities are the same as in scenario A. Although AP AEC shows slightly less sensitivity at +/- \$28 per tNH\textsubscript{3}, this difference can be considered negligible.
+
+\subsection{Policy sensitivities}
+
+We consider sensitivity of $\pm$20\% for all programs except 48E, which was varied between 30\% and 40\% ITC. In scenario A, 45V credits are the only sensitive parameter. AP CCS can claim 45Q – however, this choice is suboptimal. In scenario A, AP CCS and AP BH2S are the only technologies receiving tax credits. Changing 45V credits by +20\% results in a change of \$4 per tNH\textsubscript{3} and \$3 per tNH\textsubscript{3} for AP CCS and AP BH2S, respectively.
+
+In scenario B, 45V and 48E credits are the only sensitive parameters. 48E credits are always preferred over 45Y credits given that the return on energy per \$ CAPEX invested in the wind farm is not high enough to make 45Y credits desirable. We find that 45V credits have a symmetric and similar effect for all three low-carbon AP technologies. The variation is $\pm$ \$12 per tNH\textsubscript{3} for AP CCS, AP BH2S, and AP AEC. 48E credits are symmetrical around the high and low sensitivities but not across technologies. The high electricity demand of AP AEC increases the scale of the hybrid wind farm – thereby increasing the amount of 48E credits awarded to AP AEC. We see AP AEC net an increase in NPV of $\pm$ \$13 per tNH\textsubscript{3}. AP CCS and AP BH2S only receive $\pm$\$2 per tNH\textsubscript{3}. Note that for the deterministic model, we took the inputs as the average of the probabilistic ranges, hence the baseline value for 48E credits is 35\% – which is technically not possible given the step-wise nature of the 48E program (either 30\% or 40\%). This discontinuity is expressed in the probabilistic model. If we were to set the 48E credits to 30\%, then the sensitivity would be \$0 per tNH\textsubscript{3} in the low scenario and twice the change in the high scenario.
+
+In scenario C, 45V credits have the same effect on the NPV as in scenario B. In scenario C, all other credits are not sensitive because (i) the hybrid wind farm is not part of the system and (ii) 48Q credits are not preferable to 45V credits in the case of AP AEC – these two conditions leave only 45V credits.
+
+\subsection{Conclusion on the sensitivity analysis}
+
+In conclusion, we find sensical changes in the NPV when varying the inputs. First, cost-side variables drive the prices down, and revenue-side variables drive prices up. Second, in areas related to asymmetric resource demand across technologies (i.e., electricity demand), we see unequal changes in the NPV per unit input. On the revenue side, we find the expected hedging that AP SMR and AP CCS have against ammonia and natural gas price movements. In cases where the carbon intensities are high, we see a decreased sensitivity in policy support – which is also expected. With these results, we find confidence in the formulation of the model.
+
+\section{Supplementary Figures}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/Hourly TC.png} 
+  \caption{
+    Hourly matched total policy support for ammonia technologies. This figure compares the total policy support (in \$ per kg H\textsubscript{2}) provided for various low-carbon ammonia production technologies across two main scenarios—Scenario A and Scenarios B/C—and two different electricity configurations: grid-based electricity and hybrid renewable electricity farms. Scenario A accounts for policy support related to emissions from the stack, feedstock, and electricity sources, while Scenarios B and C assume policy support for stack and feedstock emissions only, under the assumption of zero emissions from renewable energy sources. CCS refers to ammonia production with carbon capture, BH2S refers to ammonia production with biomass gasification, and AEC refers to ammonia production through alkaline electrolysis. The light blue boxes signify cash-equivalent tax credits discounted at 9.8\%, which are credits adjusted for income tax. The darker blue boxes represent the same tax credits discounted at the risk-free rate, while the gray boxes denote the same tax credits without accounting for income tax. Note that the Scenario B charts have a y-axis three times larger than those of Scenarios A and C to accommodate the range of policy support values.
+  }
+  \label{fig:SI_hourly_tc}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{si_figures/Yearly TC.png} 
+  \caption{
+    Yearly matched total policy support for ammonia technologies. This figure compares the total policy support (in \$ per kg H\textsubscript{2}) provided for various low-carbon ammonia production technologies across two main scenarios—Scenario A and Scenarios B/C—and two different electricity configurations: grid-based electricity and hybrid renewable electricity farms. Scenario A accounts for policy support related to emissions from the stack, feedstock, and electricity sources, while Scenarios B and C assume policy support for stack and feedstock emissions only, under the assumption of zero emissions from renewable energy sources. CCS refers to ammonia production with carbon capture, BH2S refers to ammonia production with biomass gasification, and AEC refers to ammonia production through alkaline electrolysis. The light blue boxes signify cash-equivalent tax credits discounted at 9.8\%, which are credits adjusted for income tax. The darker blue boxes represent the same tax credits discounted at the risk-free rate, while the gray boxes denote the same tax credits without accounting for income tax.
+  }
+  \label{fig:SI_yearly_tc}
+  \vspace{0.3cm}
+  \hspace*{0cm}\begin{minipage}{0.9\linewidth}
+  \end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+ 
+  \label{fig:si_electricity_price}
+  \includegraphics[width=1\linewidth]{si_figures/electricity.png} 
+   \caption{Mean electricity price over time. The GBM (geometric brownian motion) model collapses to a linear model across 4000 simulations.}
+\end{figure}
+
+\section{Supplementary Tables}
+
+\begin{table}[H]
+  \centering
+  \caption{Comparison of inputs of IEA versus this study.}
+  \label{table:SI_EIA_vs_APIRA} % Place the label immediately after the caption
+  \begin{threeparttable}
+    \begin{tabular}{@{}lcc@{}}
+      \toprule
+      \textbf{Inputs} & \textbf{IEA, 2021} & \textbf{This study} \\ \midrule
+      Electricity (cents per kWh) & 1.0 – 10 & 6.3 \\ 
+      Natural gas (\$ per MMBtu) & 2.8 – 7.765 & 2 \\ 
+      Availability (\%time) & 95 & 90 \\ 
+      Discount factor (\%\$) & 8 & 9.3 \\ 
+      CAPEX heuristics (\%PEC)\textsuperscript{a} & +70 & +100 \\ 
+      Lifetime (years) & 25 & 40 \\ \bottomrule
+    \end{tabular}
+\begin{tablenotes}
+  \small
+  \item Abbreviations: IEA, International Energy Agency; CAPEX, capital expenditure; PEC, purchased equipment cost; MMBtu, million British thermal units; kWh, kilowatt-hour. The table compares key input parameters between the IEA (2021) study and this study, highlighting differences in assumptions such as electricity costs, natural gas prices, availability, discount factors, CAPEX heuristics, and project lifetime.
+\end{tablenotes}
+
+  \end{threeparttable}
+\end{table}
+
+\renewcommand{\refname}{Supplementary References}
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
