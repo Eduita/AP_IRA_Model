@@ -32,8 +32,8 @@ packages = ["ap_ira_lib", "ap_ira_dagster"]
 [tool.dagster]
 module_name = "ap_ira_dagster"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "pytest>=8.2",
     "pytest-cov>=5.0",
     "ruff>=0.5",
