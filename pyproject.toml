@@ -50,16 +50,10 @@ dependencies = [
     "dagster-webserver>=1.9",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-# No installable Python packages at the workspace root.
-# ap_ira_lib and ap_ira_dagster are provided by the refactor/ member.
-only-include = []
-
 # ── uv workspace ─────────────────────────────────────────────────────────────
+[tool.uv]
+package = false   # workspace root has no Python source; don't build/install it
+
 [tool.uv.workspace]
 members = ["refactor"]
 
